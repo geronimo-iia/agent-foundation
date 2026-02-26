@@ -1,0 +1,33 @@
+name: Publish Index
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+
+      - name: Install agent-hub-indexer
+        run: uv tool install agent-hub-indexer
+
+      - name: Validate
+        run: agent-hub-indexer validate --type docs --path .
+
+      - name: Generate index.json
+        run: agent-hub-indexer generate --type docs --path . --output index.json
+
+      - name: Commit index.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.json
+          git diff --staged --quiet || git commit -m "chore: regenerate index.json [skip ci]"
+          git push
