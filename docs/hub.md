@@ -81,6 +81,8 @@ read_when:
 
 ### index.json schema
 
+Formal schema: [`schemas/docs-index.json`](../schemas/docs-index.json)
+
 ```json
 {
   "hub_id": "my-doc-hub",

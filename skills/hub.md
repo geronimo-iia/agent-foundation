@@ -54,6 +54,8 @@ my-hub/
 
 ### index.json schema
 
+Formal schema: [`schemas/skills-index.json`](../schemas/skills-index.json)
+
 ```json
 {
   "hub_id": "my-hub",
