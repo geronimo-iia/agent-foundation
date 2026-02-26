@@ -1,0 +1,144 @@
+{
+  "type": "docs",
+  "version": "1.0",
+  "entries": [
+    {
+      "title": "Bootstrap",
+      "summary": "Bootstrap guides for minimal setup of the agent development workspace with core repositories and tooling.",
+      "path": "bootstrap/definition.md",
+      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Setting up the agent workspace for the first time",
+        "Bootstrapping the agent development environment quickly",
+        "Getting minimal working setup with core repositories",
+        "Initial workspace configuration and IDE integration"
+      ]
+    },
+    {
+      "title": "Agent Workspace Setup",
+      "summary": "Minimal setup guide for bootstrapping agent workspace with core repositories, rule templates, and IDE integration.",
+      "path": "bootstrap/development-environment.md",
+      "commit_hash": "5ebd855d473b960aa7a2f0cec50698fc0d9cc851",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Setting up the agent workspace for the first time",
+        "Bootstrapping with core repositories and rule templates",
+        "Getting minimal working setup with Amazon Q integration",
+        "Initial workspace configuration from scratch"
+      ]
+    },
+    {
+      "title": "What are Documents?",
+      "summary": "Documents are markdown files with machine-readable frontmatter that provide knowledge to agents on demand.",
+      "path": "docs/definition.md",
+      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Understanding what documents are and how they work",
+        "Learning about the document format and structure",
+        "Implementing document support in an agent system"
+      ]
+    },
+    {
+      "title": "Documentation Hub",
+      "summary": "Multi-source documentation registry hub with Git repositories, CI pipelines, and index.json for on-demand knowledge loading.",
+      "path": "docs/hub.md",
+      "commit_hash": "595a01decacfc5d294c4c76c6d66ce7be57d32b3",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing the doc hub system or index.json contract",
+        "Evaluating whether a doc hub is useful for a specific domain or team",
+        "Comparing doc hub design to skill hub design"
+      ]
+    },
+    {
+      "title": "Specification Organization",
+      "summary": "Organizational principles for agent foundation specifications including domain grouping, naming conventions, and cross-reference standards.",
+      "path": "docs/organization.md",
+      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Deciding where to place a new specification document",
+        "Establishing naming conventions for specification files",
+        "Setting up cross-reference standards between specifications"
+      ]
+    },
+    {
+      "title": "Documentation Authoring",
+      "summary": "How to author documentation files with machine-readable YAML frontmatter for Agent Zero.",
+      "path": "docs/authoring-guide.md",
+      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Writing or reviewing a documentation file",
+        "Adding frontmatter to an existing doc",
+        "Designing the doc discovery or context-loading system",
+        "Understanding cross-reference fields between artifact types"
+      ]
+    },
+    {
+      "title": "What are Skills?",
+      "summary": "Skills are a lightweight, open format for extending AI agent capabilities with specialized knowledge and workflows.",
+      "path": "skills/definition.md",
+      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Understanding what skills are and how they work",
+        "Learning about the SKILL.md format and structure",
+        "Implementing skills support in an agent system"
+      ]
+    },
+    {
+      "title": "Skill Hub",
+      "summary": "Multi-source skill registry hub with Git repositories, CI pipelines, and index.json for skill distribution and management.",
+      "path": "skills/hub.md",
+      "commit_hash": "595a01decacfc5d294c4c76c6d66ce7be57d32b3",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing the hub system, the index.json contract, CI pipeline for a hub repo",
+        "Setting up multi-hub configuration model",
+        "Comparing skill hub design to doc hub design"
+      ]
+    },
+    {
+      "title": "Skills Knowledge Comparison",
+      "summary": "Comparative study of skills and knowledge systems between OpenClaw and Agent Zero, covering format, retrieval, and design principles.",
+      "path": "skills/knowledge-comparison.md",
+      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Comparing skill system designs between different agent frameworks",
+        "Understanding vector vs keyword retrieval approaches for skills",
+        "Evaluating load-time gating and injection models"
+      ]
+    },
+    {
+      "title": "Skill Authoring",
+      "summary": "How to author SKILL.md files with machine-readable YAML frontmatter for Agent Zero.",
+      "path": "skills/authoring-guide.md",
+      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Writing or reviewing a SKILL.md file",
+        "Implementing load-time gating or keyword scoring",
+        "Designing the requires block or description field"
+      ]
+    }
+  ],
+  "metadata": {
+    "generated_at": "2025-01-16T00:00:00Z",
+    "commit_hash": "595a01decacfc5d294c4c76c6d66ce7be57d32b3",
+    "total_entries": 10
+  }
+}
