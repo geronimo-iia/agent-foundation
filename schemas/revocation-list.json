@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://agent-foundation.org/schemas/revocation-list.json",
+  "title": "Agent Manifest Revocation List",
+  "description": "Schema for tracking revoked agent manifests and signing keys",
+  "type": "object",
+  "required": ["agents", "keys"],
+  "additionalProperties": false,
+  "properties": {
+    "agents": {
+      "type": "object",
+      "description": "Revoked agent IDs with revocation details",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["reason", "revoked_at"],
+        "additionalProperties": false,
+        "properties": {
+          "reason": {
+            "type": "string",
+            "description": "Reason for revocation",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "revoked_at": {
+            "type": "string",
+            "description": "Revocation timestamp",
+            "format": "date-time"
+          },
+          "revoked_by": {
+            "type": "string",
+            "description": "Authority that performed the revocation",
+            "maxLength": 64
+          }
+        }
+      }
+    },
+    "keys": {
+      "type": "array",
+      "description": "Revoked Ed25519 verifying keys",
+      "items": {
+        "type": "object",
+        "required": ["key", "revoked_at"],
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Revoked Ed25519 public key, hex-encoded",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason for key revocation",
+            "maxLength": 256
+          },
+          "revoked_at": {
+            "type": "string",
+            "description": "Key revocation timestamp",
+            "format": "date-time"
+          },
+          "revoked_by": {
+            "type": "string",
+            "description": "Authority that revoked the key",
+            "maxLength": 64
+          }
+        }
+      },
+      "uniqueItems": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Revocation list metadata",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "integer",
+          "description": "Revocation list version number",
+          "minimum": 1
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "Last update timestamp",
+          "format": "date-time"
+        },
+        "next_update": {
+          "type": "string",
+          "description": "Next scheduled update timestamp",
+          "format": "date-time"
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Authority that maintains this revocation list",
+          "maxLength": 64
+        }
+      }
+    }
+  }
+}

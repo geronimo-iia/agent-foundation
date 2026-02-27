@@ -1,0 +1,267 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://agent-foundation.org/schemas/agent-manifest.json",
+  "title": "Agent Manifest",
+  "description": "Schema for agent manifest declarations including identity, capabilities, runtime configuration, and security policies",
+  "type": "object",
+  "required": ["agent", "runtime", "capabilities"],
+  "additionalProperties": false,
+  "properties": {
+    "agent": {
+      "type": "object",
+      "description": "Agent identity and metadata",
+      "required": ["id", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique agent identifier",
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable display name",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.-]+)?(\\+[a-zA-Z0-9.-]+)?$"
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of agent purpose",
+          "maxLength": 512
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "description": "Runtime configuration and execution parameters",
+      "required": ["module"],
+      "additionalProperties": false,
+      "properties": {
+        "module": {
+          "type": "string",
+          "description": "Execution module type",
+          "pattern": "^(builtin:(chat|tool|reactive)|wasm:|python:|remote:|docker:|mcp:).+"
+        },
+        "provider": {
+          "type": "string",
+          "description": "LLM provider (required for builtin:chat)",
+          "enum": ["anthropic", "openai", "google", "azure", "aws", "local"]
+        },
+        "model": {
+          "type": "string",
+          "description": "Model identifier (required for builtin:chat)",
+          "minLength": 1
+        },
+        "max_tokens": {
+          "type": "integer",
+          "description": "Maximum tokens per LLM call",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "temperature": {
+          "type": "number",
+          "description": "Sampling temperature",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "entry": {
+          "type": "string",
+          "description": "Entry point for executable modules",
+          "minLength": 1
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Remote endpoint URL",
+          "format": "uri"
+        },
+        "image_pull": {
+          "type": "string",
+          "description": "Docker image pull policy",
+          "enum": ["always", "never", "if-not-present"]
+        },
+        "system_prompt": {
+          "type": "object",
+          "description": "System prompt configuration",
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to system prompt file",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "description": "Agent capabilities and permissions",
+      "additionalProperties": false,
+      "properties": {
+        "tools": {
+          "type": "array",
+          "description": "Tool names the agent may invoke",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "uniqueItems": true
+        },
+        "memory_read": {
+          "type": "array",
+          "description": "Memory namespaces for read access",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.*-]+$"
+          },
+          "uniqueItems": true
+        },
+        "memory_write": {
+          "type": "array",
+          "description": "Memory namespaces for write access",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.*-]+$"
+          },
+          "uniqueItems": true
+        },
+        "network": {
+          "type": "array",
+          "description": "Network hosts the agent may access",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.*:-]+$"
+          },
+          "uniqueItems": true
+        },
+        "agent_spawn": {
+          "type": "boolean",
+          "description": "Permission to spawn child agents",
+          "default": false
+        },
+        "agent_message": {
+          "type": "array",
+          "description": "Agent IDs this agent may message",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "description": "Resource limits and constraints",
+      "additionalProperties": false,
+      "properties": {
+        "max_continuations": {
+          "type": "integer",
+          "description": "Maximum conversation continuations",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 3
+        },
+        "max_tool_calls": {
+          "type": "integer",
+          "description": "Maximum tool calls per session",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 50
+        },
+        "tool_timeout_secs": {
+          "type": "integer",
+          "description": "Tool execution timeout in seconds",
+          "minimum": 1,
+          "maximum": 3600,
+          "default": 60
+        },
+        "context_window_pct": {
+          "type": "number",
+          "description": "Context window usage threshold",
+          "minimum": 0.1,
+          "maximum": 1.0,
+          "default": 0.8
+        },
+        "wasm_fuel": {
+          "type": "integer",
+          "description": "WASM execution fuel limit",
+          "minimum": 1,
+          "maximum": 100000000,
+          "default": 1000000
+        },
+        "wasm_epoch_deadline": {
+          "type": "integer",
+          "description": "WASM epoch timeout",
+          "minimum": 1,
+          "maximum": 60,
+          "default": 2
+        }
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "description": "Scheduling configuration",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Scheduling mode",
+          "enum": ["reactive", "proactive"],
+          "default": "reactive"
+        },
+        "cron": {
+          "type": "string",
+          "description": "Cron expression for proactive scheduling",
+          "pattern": "^(@(annually|yearly|monthly|weekly|daily|hourly|reboot))|(@every (\\d+(ns|us|µs|ms|s|m|h))+)|(((\\d+,)+\\d+|(\\d+([/-])\\d+)|\\d+|\\*) ?){5,7}$"
+        },
+        "trigger": {
+          "type": "string",
+          "description": "Trigger condition for reactive mode",
+          "enum": ["on_message", "on_event", "on_schedule"]
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Security and operational metadata",
+      "additionalProperties": false,
+      "properties": {
+        "author": {
+          "type": "string",
+          "description": "Manifest author identifier",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "tags": {
+          "type": "array",
+          "description": "Classification tags",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "maxLength": 32
+          },
+          "uniqueItems": true,
+          "maxItems": 10
+        },
+        "issued_at": {
+          "type": "string",
+          "description": "Manifest issuance timestamp",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "description": "Expiration timestamp",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

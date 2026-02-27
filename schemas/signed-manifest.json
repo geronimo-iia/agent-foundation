@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://agent-foundation.org/schemas/signed-manifest.json",
+  "title": "Signed Agent Manifest",
+  "description": "Schema for cryptographically signed agent manifests with Ed25519 signatures",
+  "type": "object",
+  "required": ["manifest", "signature", "verifying_key"],
+  "additionalProperties": false,
+  "properties": {
+    "manifest": {
+      "$ref": "agent-manifest.json",
+      "description": "The agent manifest being signed"
+    },
+    "signature": {
+      "type": "string",
+      "description": "Ed25519 signature over canonical JSON of manifest, hex-encoded",
+      "pattern": "^[0-9a-f]{128}$"
+    },
+    "verifying_key": {
+      "type": "string",
+      "description": "Ed25519 public key used for signature verification, hex-encoded",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
