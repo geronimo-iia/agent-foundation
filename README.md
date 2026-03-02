@@ -18,6 +18,7 @@ This repository contains stable specifications only — no implementation. It de
 ├── agents/         # Agent definitions, manifests, registry protocols
 ├── skills/         # Skill definitions, formats, hub protocols
 ├── docs/           # Documentation definitions, formats, hub protocols
+├── tools/          # Tool definitions, MCP protocol, execution policies
 ├── bootstrap/      # Workspace setup and bootstrap guides
 ├── schemas/        # JSON schemas for validation
 ```

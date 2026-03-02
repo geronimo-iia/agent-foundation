@@ -17,6 +17,20 @@
       ]
     },
     {
+      "title": "Tool Execution Policy",
+      "summary": "Execution model for agent tasks requiring all tool interactions through MCP protocol for security and auditability.",
+      "path": "tools/execution-policy.md",
+      "commit_hash": "",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing task execution systems",
+        "Implementing agent tool invocation",
+        "Establishing security policies for agent operations",
+        "Understanding tool execution constraints"
+      ]
+    },
+    {
       "title": "Model Context Protocol (MCP)",
       "summary": "Anthropic's standard protocol for connecting AI models to tools, resources, and data sources through a client-server architecture.",
       "path": "tools/mcp-protocol.md",
@@ -171,7 +185,7 @@
       "title": "What are Skills?",
       "summary": "Skills are a lightweight, open format for extending AI agent capabilities with specialized knowledge and workflows.",
       "path": "skills/definition.md",
-      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
+      "commit_hash": "3f1b46c73f0c3ff796be8e27db4fc73364ed9d54",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -236,7 +250,7 @@
   ],
   "metadata": {
     "generated_at": "2025-01-16T00:00:00Z",
-    "commit_hash": "ff676e9c4cf949142b73726a77e3d4f11b7dac24",
-    "total_entries": 17
+    "commit_hash": "3f1b46c73f0c3ff796be8e27db4fc73364ed9d54",
+    "total_entries": 18
   }
 }
