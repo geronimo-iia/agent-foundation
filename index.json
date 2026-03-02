@@ -34,7 +34,7 @@
       "title": "Agent Definition",
       "summary": "Foundational definition of agents - autonomous software entities with identity, capabilities, and security boundaries that operate within agent systems",
       "path": "agents/definition.md",
-      "commit_hash": "",
+      "commit_hash": "e4f8f41e5a9fd6ce951b77278fb7909acbfe26f9",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -48,7 +48,7 @@
       "title": "Agent Manifest Specification",
       "summary": "Authoritative specification for agent manifests - the declarative format for agent identity, capabilities, runtime configuration, and security policies",
       "path": "agents/agent-manifest-specification.md",
-      "commit_hash": "",
+      "commit_hash": "e4f8f41e5a9fd6ce951b77278fb7909acbfe26f9",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -62,7 +62,7 @@
       "title": "Agent Manifest Registry Specification",
       "summary": "Registry system for storing, versioning, and managing signed agent manifests with support for hot reload, revocation, and lifecycle operations",
       "path": "agents/agent-manifest-registry.md",
-      "commit_hash": "",
+      "commit_hash": "e4f8f41e5a9fd6ce951b77278fb7909acbfe26f9",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -89,7 +89,7 @@
       "title": "Documentation Hub",
       "summary": "Multi-source documentation registry hub with Git repositories, CI pipelines, and index.json for on-demand knowledge loading.",
       "path": "docs/hub.md",
-      "commit_hash": "595a01decacfc5d294c4c76c6d66ce7be57d32b3",
+      "commit_hash": "67459a97d59c2983828d3f2f1998b3a9fa5b6992",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -139,10 +139,24 @@
       ]
     },
     {
+      "title": "Skill Lifecycle Specification",
+      "summary": "Foundational specification for skill installation, versioning, updates, and removal in agent systems",
+      "path": "skills/lifecycle.md",
+      "commit_hash": "a4a776df91a671a2f5ab85032895b2f5de0c1cb0",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing skill management systems",
+        "Understanding skill lifecycle states and transitions",
+        "Implementing skill registries or package managers",
+        "Establishing skill versioning and conflict resolution policies"
+      ]
+    },
+    {
       "title": "Skill Hub",
       "summary": "Multi-source skill registry hub with Git repositories, CI pipelines, and index.json for skill distribution and management.",
       "path": "skills/hub.md",
-      "commit_hash": "595a01decacfc5d294c4c76c6d66ce7be57d32b3",
+      "commit_hash": "67459a97d59c2983828d3f2f1998b3a9fa5b6992",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -180,7 +194,7 @@
   ],
   "metadata": {
     "generated_at": "2025-01-16T00:00:00Z",
-    "commit_hash": "87e04d59ae0156f3c271bb69017d2230c24e6aa9",
-    "total_entries": 13
+    "commit_hash": "a4a776df91a671a2f5ab85032895b2f5de0c1cb0",
+    "total_entries": 14
   }
 }
