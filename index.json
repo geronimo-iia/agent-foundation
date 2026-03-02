@@ -20,7 +20,7 @@
       "title": "Model Context Protocol (MCP)",
       "summary": "Anthropic's standard protocol for connecting AI models to tools, resources, and data sources through a client-server architecture.",
       "path": "tools/mcp-protocol.md",
-      "commit_hash": "",
+      "commit_hash": "ff676e9c4cf949142b73726a77e3d4f11b7dac24",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -236,7 +236,7 @@
   ],
   "metadata": {
     "generated_at": "2025-01-16T00:00:00Z",
-    "commit_hash": "80a09d58b85f9cf89310e70aa50e54bdcd5ef90b",
+    "commit_hash": "ff676e9c4cf949142b73726a77e3d4f11b7dac24",
     "total_entries": 17
   }
 }

@@ -72,3 +72,23 @@ This simple format has some key advantages:
 
 - [authoring-guide.md](authoring-guide.md) — Detailed authoring standards and best practices
 - [hub.md](hub.md) — Multi-source skill registry and distribution system
+
+## Comparison to Other Formats
+
+**Anthropic AgentSkills**: Reference implementation for skill-like capabilities ([repository](https://github.com/anthropics/anthropic-tools/tree/main/agent-skills))
+
+This specification differs:
+
+**Format**: Single `SKILL.md` vs multiple files (`skill.py`, `requirements.txt`, `README.md`)
+
+**Distribution**: Hub-based with `index.json` vs local directory only
+
+**Discovery**: Progressive disclosure (index → full content) vs directory scan
+
+**Versioning**: Semantic versioning + lock file vs no version tracking
+
+**Execution**: Instructions only (tools provide execution) vs Python code execution
+
+**Dependencies**: `requires` block with load-time gating vs `requirements.txt`
+
+**Updates**: `agentctl skill update` with version comparison vs manual file replacement
