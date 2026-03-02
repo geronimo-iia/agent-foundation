@@ -1,11 +1,10 @@
 ---
 title: "Tool Execution Policy"
-summary: "Execution policy for autonomous agents: unrestricted by default with optional enforcement modes for bounded deployments."
+summary: "Autonomous agents execute tools with user authority. Security through transparency, logging, and user consent."
 read_when:
-  - Designing task execution systems
-  - Implementing agent tool invocation
-  - Establishing security policies for agent operations
-  - Understanding tool execution constraints
+  - Designing agent tool execution systems
+  - Understanding agent security model
+  - Implementing tool invocation and logging
 status: active
 last_updated: "2025-01-16"
 ---
@@ -14,25 +13,21 @@ last_updated: "2025-01-16"
 
 ## 1. Core Principle
 
-**Agents execute tools with user authority**. Enforcement is optional and deployment-specific.
+**Agents execute tools with user authority**. No restrictions, no sandboxing, no permission checks.
+
+### Rationale
+
+**Trust through transparency**: Autonomous agents act on behalf of users with user's authority. The user chose to run the agent and install skills (consent). Security comes from visibility and audit trails, not artificial restrictions.
+
+**Simplicity first**: Complex permission systems and enforcement layers add overhead without guaranteeing security. Start simple, add restrictions only when deployment context requires them.
+
+**User responsibility**: Users choose which skills to install and trust. The agent is an extension of the user, not a separate untrusted entity.
 
 ---
 
-## 2. Design Philosophy
+## 2. Execution Model
 
-**Trust through transparency**: Autonomous agents act on behalf of users. Security comes from visibility, audit trails, and user consent.
-
-**Optional enforcement**: Implementations MAY provide enforcement mechanisms. Deployments choose their security model.
-
-**No mandatory restrictions**: Specifications do not require MCP protocol or sandboxing.
-
----
-
-## 3. Execution Models
-
-### Unrestricted Execution
-
-**Model**: Agent executes tools directly with user privileges
+**Unrestricted execution**: Agent invokes tools directly with user privileges
 
 **Characteristics**:
 - No validation of tool calls
@@ -40,124 +35,69 @@ last_updated: "2025-01-16"
 - No capability restrictions
 - Full access to user resources
 
-**Security**: Transparency and audit logging
-
-**Suitable for**:
-- Single-user desktop environments
-- Trusted skill sources
-- Users accepting full risk
-
-### Enforced Execution
-
-**Model**: Agent validates tool calls against declared permissions
-
-**Characteristics**:
-- Tool calls validated against skill `allowed-tools` declaration
-- Unauthorized calls denied or logged
-- Optional process isolation (MCP, WASM, containers)
-- Explicit capability grants
-
-**Security**: Least privilege and isolation
-
-**Suitable for**:
-- Multi-user environments
-- Untrusted skill sources
-- Regulated deployments
+**Security model**: Trust through transparency
+- All tool executions logged
+- Audit trail accessible to user
+- User consent for skill installation
 
 ---
 
-## 4. Tool Declaration
+## 3. Logging Requirements
 
-Skills declare required tools in `allowed-tools` field:
-
-```yaml
-allowed-tools: Bash(ffmpeg:*) Read(*.pdf) Write(output/*) MCP(python-tools:*)
-```
-
-**Syntax**:
-- `Bash(command:args)`: Shell command with argument pattern
-- `Read(pattern)`: File read with glob pattern
-- `Write(pattern)`: File write with glob pattern  
-- `MCP(server:tool)`: MCP server and tool name
-- `*`: Wildcard matching
-
-**Purpose**: Informational for unrestricted mode, enforced in restricted mode
-
----
-
-## 5. Enforcement Specification
-
-### Enforcement Modes
-
-Implementations MAY support enforcement modes:
-
-**unrestricted**: No validation, all tools allowed
-**enforce**: Validate against `allowed-tools`, deny violations
-**audit**: Validate against `allowed-tools`, log violations but allow
-
-### Validation Rules
-
-When enforcement enabled:
-
-**Tool call allowed if**:
-1. Skill declares tool in `allowed-tools`, OR
-2. Agent manifest grants capability, OR  
-3. User grants permission interactively
-
-**Tool call denied if**:
-1. None of the above conditions met
-
-**Denied calls**:
-- MUST be logged with violation details
-- MUST return error to agent
-- MAY prompt user for permission
-
----
-
-## 6. Isolation Mechanisms
-
-Implementations MAY provide isolation:
-
-**MCP Protocol**: Tools execute in separate MCP server processes
-**WASM Sandboxing**: Skills bundle WASM modules with WASI capabilities
-**OS Sandboxing**: Platform-specific isolation (AppArmor, SELinux, macOS sandbox)
-**Container Isolation**: Docker/Podman with resource limits
-
-**Specification does not mandate isolation mechanism**.
-
----
-
-## 7. Logging Requirements
-
-Implementations MUST log tool executions:
+Implementations MUST log all tool executions:
 
 **Required fields**:
 - Timestamp
 - Tool name and arguments
-- Execution context (skill, agent, task)
+- Execution context (skill name, agent session)
 - Result or error
-- Enforcement decision (if applicable)
+- Exit code (for shell commands)
 
 **Log retention**: Implementation-specific
 
-**Audit trail**: MUST be accessible to user
+**Audit trail**: MUST be accessible to user for review
 
 ---
 
-## 8. Design Principles
+## 4. User Consent
 
-**Default to freedom**: Unrestricted execution is valid and supported
-**User choice**: Deployments choose their security model
-**Transparency first**: Logging before enforcement
-**Declarative policy**: Skills declare needs, runtime decides enforcement
-**Fail open**: Enforcement failures SHOULD log and allow, not break agent
-**Backward compatibility**: Enforcement is additive, not breaking
+**Skill installation**: User explicitly installs skills
+- Skills declare dependencies in `compatibility` field
+- Skills may include `lifecycle.yaml` with install commands
+- User approves all lifecycle commands individually
+
+**Tool execution**: No per-execution approval required
+- Agent executes tools as needed
+- User trusts installed skills
+- Logging provides audit trail
+
+---
+
+## 5. Design Principles
+
+**Transparency over restriction**: Log everything, restrict nothing
+
+**User responsibility**: User chooses which skills to install and trust
+
+**Simplicity**: No complex permission systems or enforcement layers
+
+**Auditability**: Complete record of agent actions
+
+---
+
+## 6. Future Considerations
+
+Enforcement mechanisms (sandboxing, permission checks, isolation) are possible future enhancements but not part of this specification.
+
+See agent-research for exploration of:
+- MCP protocol for tool isolation
+- WASM sandboxing for skills
+- Permission-based execution models
 
 ---
 
 ## Related Specifications
 
-- [MCP Protocol](mcp-protocol.md) - Optional tool execution protocol
-- [Tool Definition](definition.md) - What tools are
-- [Skill Authoring](../skills/authoring-guide.md) - How to declare allowed-tools
-- [Agent Manifest](../agents/agent-manifest-specification.md) - Agent capabilities
+- [Tool Definition](definition.md) — What tools are
+- [Skill Authoring](../skills/authoring-guide.md) — How to write skills
+- [Skill Lifecycle](../skills/lifecycle.md) — Skill installation and management

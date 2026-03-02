@@ -20,12 +20,11 @@ This specification defines how skills transition between states (available → i
 
 ## 2. Lifecycle States
 
-A skill exists in one of four states:
+A skill exists in one of three states:
 
 **Available**: Present in a hub index, not installed locally
 **Installed**: Present in local skills directory, tracked in lock file (hub skills) or detected by scan (local skills)
 **Outdated**: Installed hub skill with newer version available in hub
-**Gated**: Installed but `requires` conditions not met, excluded from agent context
 
 ### State Diagram
 
@@ -35,11 +34,8 @@ stateDiagram-v2
     Available --> Installed: install
     Installed --> Outdated: hub publishes new version
     Outdated --> Installed: update
-    Installed --> Gated: requires gate fails
-    Gated --> Installed: dependencies satisfied
     Installed --> [*]: uninstall
     Outdated --> [*]: uninstall
-    Gated --> [*]: uninstall
     
     note right of Available
         Hub skill not yet installed
@@ -47,16 +43,10 @@ stateDiagram-v2
     
     note right of Installed
         In lock file + directory exists
-        requires gate passes
     end note
     
     note right of Outdated
         Newer version available in hub
-    end note
-    
-    note right of Gated
-        Installed but unusable
-        (missing dependencies)
     end note
 ```
 
@@ -130,12 +120,9 @@ stateDiagram-v2
 
 **Actions**:
 1. Fetch skill directory from hub at pinned commit
-2. Copy to local skills directory (SKILL.md, references/, assets/ only)
-3. If skill includes `assets/*.wasm` files, register as MCP servers
-4. Add entry to lock file
-5. Validate `requires` gate (warn if fails, do not block)
-
-**No custom install scripts**: Skills are declarative. System dependencies in `requires` are checked but not installed.
+2. Copy to local skills directory (SKILL.md, lifecycle.yaml, scripts/, references/, assets/)
+3. Add entry to lock file
+4. If skill includes `lifecycle.yaml`, execute install commands with user approval
 
 **Postcondition**: Skill in lock file, directory exists
 
@@ -150,7 +137,8 @@ stateDiagram-v2
 **Actions**:
 1. Fetch new version from hub
 2. Replace directory contents
-3. Update lock file entry (version, commit, timestamp)
+3. If skill includes `lifecycle.yaml`, execute update commands with user approval
+4. Update lock file entry (version, commit, timestamp)
 
 **Postcondition**: Lock file reflects new version
 
@@ -159,11 +147,11 @@ stateDiagram-v2
 **Trigger**: User uninstalls skill
 
 **Actions**:
-1. Remove directory
-2. Unregister any bundled MCP servers (from `assets/*.wasm`)
+1. If skill includes `lifecycle.yaml`, execute uninstall commands with user approval
+2. Remove directory
 3. Remove lock file entry (if hub skill)
 
-**Postcondition**: Directory, MCP servers, and lock entry absent
+**Postcondition**: Directory and lock entry absent
 
 ---
 
@@ -201,10 +189,10 @@ stateDiagram-v2
 **Local skills**: Scan skills directory for entries not in lock file
 
 **For each skill**:
-1. Parse `SKILL.md` frontmatter
-2. Evaluate `requires` gate
-3. If gate passes: add to available skills (name + description only)
-4. If gate fails: mark as gated, exclude from context
+1. Parse `SKILL.md` frontmatter (name, description, compatibility)
+2. Add to available skills (name + description only)
+
+**Note**: The `compatibility` field is informational only. Skills are not automatically gated. The agent reads compatibility and may warn users about missing requirements.
 
 ### Activation Phase (Runtime)
 
@@ -250,36 +238,42 @@ stateDiagram-v2
 - Lock file records hub source and commit
 - User trusts hub, not individual skill authors
 
-**Isolation**: Skills are context only, not executable by default
-- `allowed-tools` field restricts tool access if enforced
-- `requires` gate prevents loading of unusable skills
+**Lifecycle commands**: If skill includes `lifecycle.yaml`
+- All install/update/uninstall commands require user approval
+- Commands are visible in lifecycle.yaml (auditable)
+- No hidden or obfuscated commands
 
 **Integrity**: Git commit hash ensures content matches expected state
 
 ---
 
-## 11. Bundled MCP Servers
+## 11. Lifecycle Commands
 
-**Skills may include MCP servers** as WASM modules in `assets/` directory:
+**Skills may include lifecycle.yaml** for agent-assisted dependency management:
 
 ```
 python-dev-skill/
 ├── SKILL.md
+├── lifecycle.yaml
 ├── scripts/
-└── assets/
-    └── python-tools.wasm
+└── references/
 ```
 
 **Installation behavior**:
-- WASM modules in `assets/*.wasm` registered as MCP servers
-- Server capabilities configured per skill metadata
-- Skill instructions reference bundled tools
+- If `lifecycle.yaml` exists, agent reads install commands
+- Agent presents commands to user for approval
+- User approves each command individually
+- Agent executes approved commands
+
+**Update behavior**:
+- Agent reads update commands from new version's `lifecycle.yaml`
+- User approval required for each command
 
 **Uninstallation behavior**:
-- Bundled MCP servers unregistered
-- WASM modules removed with skill directory
+- Agent reads uninstall commands from `lifecycle.yaml`
+- User approval required for cleanup commands
 
-**See**: [MCP WASM Deployment](../tools/mcp-wasm.md) for server specification
+**See**: [authoring-guide.md](authoring-guide.md) for lifecycle.yaml format
 
 ---
 

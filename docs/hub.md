@@ -9,7 +9,7 @@ status: active
 last_updated: "2025-01-16"
 ---
 
-# Documentation Registry Hub — Design Study
+# Documentation Registry Hub
 
 ---
 
@@ -185,11 +185,11 @@ No lock file needed — docs are read-only context, not installed artifacts.
 | --------------- | -------------------------------------- | --------------------------------- |
 | Unit            | Skill directory (`SKILL.md` + scripts) | Single `.md` file                 |
 | Effect          | Injected into system prompt            | Loaded into context on demand     |
-| Discovery field | `description` + `tags` + `triggers`    | `summary` + `read_when`           |
+| Discovery field | `description`    | `summary` + `read_when`           |
 | Install step    | Yes — copied to local skills folder    | No — fetched at load time         |
 | Lock file       | Yes — tracks installed version         | No                                |
 | Versioning      | Critical (behavior changes)            | Less critical (docs drift slowly) |
-| Validation      | Schema + `requires` gating             | Schema only                       |
+| Validation      | Schema + frontmatter validation             | Schema only                       |
 
 The two hubs are complementary: skills add capabilities, doc hubs add knowledge.
 

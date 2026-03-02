@@ -158,26 +158,11 @@ requires_skills:
 
 ---
 
-## 6. Difference from SKILL.md frontmatter
-
-|             | Doc frontmatter                 | SKILL.md frontmatter                      |
-| ----------- | ------------------------------- | ----------------------------------------- |
-| Consumed by | Doc system / context loader     | Agent runtime (`skills.py`)               |
-| Key fields  | `title`, `summary`, `read_when` | `name`, `description`, `tags`, `requires` |
-| Purpose     | Doc discovery, context loading  | Skill discovery, gating, injection        |
-| File        | Any `.md` doc file              | `SKILL.md` inside a skill directory       |
-
-Never mix the two schemas. A `SKILL.md` with `read_when` will confuse the skill parser.
-A doc with `name` + `requires` will confuse the doc loader.
-
----
-
-## 7. Authoring checklist
+## 6. Authoring checklist
 
 - [ ] `title` is present and matches the H1 heading
 - [ ] `summary` is one sentence describing scope, not restating the title
 - [ ] `read_when` entries are specific, actionable conditions (2–4 entries)
 - [ ] Plan/experiment docs include `status`, `owner`, `last_updated`
 - [ ] `requires_skills` lists only skills whose absence makes the doc non-actionable
-- [ ] No SKILL.md fields (`name`, `description`, `tags`, `requires`) in doc frontmatter
 - [ ] No `description` field — use `summary` instead

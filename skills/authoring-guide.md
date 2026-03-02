@@ -21,15 +21,53 @@ Every frontmatter field must be parseable and actionable by code.
 
 ```
 my-skill/                  ← directory name must match `name` field exactly
-├── SKILL.md               ← required
+├── SKILL.md               ← required: name, description, instructions
+├── lifecycle.yaml         ← optional: install/update/uninstall commands
+├── scripts/               ← optional: executable scripts
 ├── references/            ← optional: docs loaded on demand
-└── assets/                ← optional: templates, WASM modules
-    └── my-tools.wasm      ← optional: bundled MCP server
+└── assets/                ← optional: templates, resources
 ```
 
-**No custom install scripts**: Skills are declarative only. System dependencies declared in `requires` block are checked at load time but not installed automatically.
+---
 
-**Bundled MCP servers**: Skills can include WASM-based MCP servers in `assets/*.wasm` for tool execution. See [MCP WASM specification](../tools/mcp-wasm.md).
+## 1a. Skill locations and priority
+
+### Skill directories
+
+Skills are loaded from multiple locations:
+
+```
+~/.agent/skills/                    # Global skills (all modes)
+~/.agent/skills-code/               # Global code mode only
+~/.agent/skills-architect/          # Global architect mode only
+
+<project>/.agent/skills/            # Project skills (all modes)
+<project>/.agent/skills-code/       # Project code mode only
+<project>/.agent/skills-architect/  # Project architect mode only
+```
+
+**Mode-specific directories**: Use `skills-{mode-slug}/` pattern where `{mode-slug}` matches the agent mode identifier (e.g., `code`, `architect`, `debug`, `test`).
+
+### Priority rules
+
+When multiple skills share the same `name`, resolution follows these rules:
+
+1. **Project skills override global skills** — A skill in `<project>/.agent/skills/` takes precedence over `~/.agent/skills/`
+2. **Mode-specific skills override generic skills** — A skill in `skills-code/` overrides the same skill in `skills/` when in code mode
+
+Combined priority (highest to lowest):
+
+```
+1. <project>/.agent/skills-{mode}/my-skill/     # Project + mode-specific
+2. <project>/.agent/skills/my-skill/            # Project + generic
+3. ~/.agent/skills-{mode}/my-skill/             # Global + mode-specific
+4. ~/.agent/skills/my-skill/                    # Global + generic
+```
+
+**Use cases**:
+- Define global skills for personal use across all projects
+- Override them per-project when project-specific behavior is needed
+- Customize skills per mode (e.g., different code review rules for code vs architect mode)
 
 ---
 
@@ -40,54 +78,11 @@ my-skill/                  ← directory name must match `name` field exactly
 # ── Identity ─────────────────────────────────────────────────────────────────
 name: my-skill
 description: >
-  What this skill does and when to use it. Must contain the vocabulary
-  the agent will use when searching. Use when the user needs to [task].
+  What this skill does and when to use it. Write descriptions that match
+  how users phrase requests. Use when the user needs to [task].
 
-# ── Discovery / scoring ───────────────────────────────────────────────────────
-tags:
-  - category
-  - domain
-triggers:
-  - keyword1
-  - keyword2
-
-# ── Runtime gating ────────────────────────────────────────────────────────────
-requires:
-  bins:
-    - ffmpeg
-  env:
-    - OPENAI_API_KEY
-  mcp_servers:
-    - my-tools        # bundled MCP server in assets/my-tools.wasm
-
-# ── Lifecycle management ────────────────────────────────────────────────────
-lifecycle:
-  variables:
-    SKILL_PATH: ${HOME}/.local/share/skills/${SKILL_NAME}
-    VENV_PATH: ${SKILL_PATH}/.venv
-    PYTHON_BIN: ${VENV_PATH}/bin/python
-  install:
-    - command: uv venv ${VENV_PATH} && uv pip install --python ${PYTHON_BIN} my-package
-      description: Create venv and install my-package with uv
-      platform: all
-      requires_approval: true
-  update:
-    - command: uv pip install --python ${PYTHON_BIN} --upgrade my-package
-      description: Update my-package to latest version
-      platform: all
-      requires_approval: true
-  uninstall:
-    - command: rm -rf ${VENV_PATH}
-      description: Remove virtual environment
-      platform: all
-      requires_approval: true
-    - command: rm -rf ~/.cache/my-package
-      description: Remove cached data
-      platform: all
-      requires_approval: true
-
-# ── Tool permissions ──────────────────────────────────────────────────────────
-allowed-tools: Bash(ffmpeg:*) Read Write MCP(my-tools:*)
+# ── Compatibility ────────────────────────────────────────────────────────────
+compatibility: Requires ffmpeg, OPENAI_API_KEY environment variable, network access
 
 # ── Publishing metadata ───────────────────────────────────────────────────────
 license: MIT
@@ -103,78 +98,77 @@ metadata:
 | Field | Required | Machine-readable | Purpose |
 |---|---|---|---|
 | `name` | Yes | ✅ | Identity, must match directory name |
-| `description` | Yes | ✅ (keyword scoring) | Discovery + activation signal |
-| `tags` | No | ✅ list | Keyword scorer (+1/term) |
-| `triggers` | No | ✅ list | Vocabulary checklist (see §4) |
-| `requires` | No | ✅ nested map | Load-time gating (bins, env, mcp_servers) |
-| `lifecycle` | No | ✅ nested map | Agent-assisted install/update/uninstall commands |
-| `allowed-tools` | No | ✅ | Tool allowlist |
+| `description` | Yes | ✅ | Discovery + activation signal |
+| `compatibility` | No | ❌ | Human-readable environment requirements (1-500 chars) |
 | `license` | No | ✅ | License identifier |
 | `metadata` | No | ✅ key-value map | Author, version, homepage |
 
 ---
 
-## 3. The `requires` block — load-time gating
+## 3. The `compatibility` field
 
-Skills that fail the gate are never injected into the system prompt.
-The agent never sees a skill it cannot use.
-
-**This is declarative checking, not installation**: The system checks if dependencies exist but does not install them. Users must install dependencies manually or via their system's package manager.
+The `compatibility` field describes environment requirements in human-readable text. The agent reads this to determine if the skill can be used.
 
 ```yaml
-requires:
-  bins:
-    - ffmpeg          # must exist on PATH
-    - jq
-  env:
-    - OPENAI_API_KEY  # must be set in environment
-  mcp_servers:
-    - python-tools    # bundled MCP server (assets/python-tools.wasm)
-  config:
-    - browser.enabled # must be truthy in agent config
+compatibility: Requires ffmpeg, OPENAI_API_KEY environment variable, macOS 12+, network access
 ```
 
-**MCP server requirements**:
-- `mcp_servers`: List of bundled MCP server names (matches `assets/<name>.wasm`)
-- Skill gates if bundled WASM file is missing
+**Guidelines**:
+- Keep it 1-500 characters
+- List required binaries, environment variables, OS requirements, network access, etc.
+- Be specific but concise
+- The agent will read this and use `lifecycle.install` to fix missing dependencies
 
-See [MCP WASM specification](../tools/mcp-wasm.md) for server packaging.
+**Examples**:
+
+```yaml
+# Good - specific and actionable
+compatibility: Requires ffmpeg, pdfplumber Python package, 2GB disk space
+
+# Good - OS and network requirements
+compatibility: macOS 12+, requires network access for model downloads
+
+# Too vague
+compatibility: Needs some tools installed
+```
 
 ---
 
-## 4. The `lifecycle` block — agent-assisted management
+## 4. The `lifecycle.yaml` file — agent-assisted management
 
-Skills declare commands for installation, updates, and uninstallation in a single `lifecycle` block. The agent executes these with user approval.
+Skills can include an optional `lifecycle.yaml` file with install/update/uninstall commands. This file is only loaded when the user runs lifecycle operations, keeping SKILL.md lightweight.
 
 ```yaml
-lifecycle:
-  variables:
-    SKILL_PATH: ${HOME}/.local/share/skills/${SKILL_NAME}
-    VENV_PATH: ${SKILL_PATH}/.venv
-    PYTHON_BIN: ${VENV_PATH}/bin/python
-  install:
-    - command: uv venv ${VENV_PATH} && uv pip install --python ${PYTHON_BIN} marker-pdf[full]
-      description: Create venv and install marker-pdf with all dependencies
-      platform: all
-      requires_approval: true
-    - command: brew install ffmpeg
-      description: Install ffmpeg via Homebrew
-      platform: macos
-      requires_approval: true
-  update:
-    - command: uv pip install --python ${PYTHON_BIN} --upgrade marker-pdf
-      description: Update marker-pdf to latest version
-      platform: all
-      requires_approval: true
-  uninstall:
-    - command: rm -rf ${VENV_PATH}
-      description: Remove virtual environment
-      platform: all
-      requires_approval: true
-    - command: rm -rf ~/Library/Caches/datalab
-      description: Remove cached models (macOS)
-      platform: macos
-      requires_approval: true
+variables:
+  SKILL_PATH: ${HOME}/.local/share/skills/${SKILL_NAME}
+  VENV_PATH: ${SKILL_PATH}/.venv
+  PYTHON_BIN: ${VENV_PATH}/bin/python
+
+install:
+  - command: uv venv ${VENV_PATH} && uv pip install --python ${PYTHON_BIN} marker-pdf[full]
+    description: Create venv and install marker-pdf with all dependencies
+    platform: all
+    requires_approval: true
+  - command: brew install ffmpeg
+    description: Install ffmpeg via Homebrew
+    platform: macos
+    requires_approval: true
+
+update:
+  - command: uv pip install --python ${PYTHON_BIN} --upgrade marker-pdf
+    description: Update marker-pdf to latest version
+    platform: all
+    requires_approval: true
+
+uninstall:
+  - command: rm -rf ${VENV_PATH}
+    description: Remove virtual environment
+    platform: all
+    requires_approval: true
+  - command: rm -rf ~/Library/Caches/datalab
+    description: Remove cached models (macOS)
+    platform: macos
+    requires_approval: true
 ```
 
 **Variables**:
@@ -241,9 +235,10 @@ Variables are evaluated in this order:
 - Unknown variables left as-is (e.g., `${UNKNOWN}` stays `${UNKNOWN}`)
 
 **Structure**:
-- `lifecycle.install`: Commands to install missing dependencies
-- `lifecycle.update`: Commands to update to newer versions
-- `lifecycle.uninstall`: Commands to clean up dependencies and caches
+- `variables`: Define custom variables with default values
+- `install`: Commands to install missing dependencies
+- `update`: Commands to update to newer versions
+- `uninstall`: Commands to clean up dependencies and caches
 
 **Command fields**:
 - `command`: Shell command to execute
@@ -261,61 +256,31 @@ Variables are evaluated in this order:
 
 ## 5. The `description` field
 
-The description serves two roles:
+The description serves two purposes:
 
-1. **The model** — decides whether to activate the skill based on this text
-2. **The keyword scorer** — tokenizes and scores against `name`, `description`, `tags`
+1. **Discovery**: Helps users and agents understand what the skill does
+2. **Activation**: The agent decides whether to use the skill based on this text
 
 ```yaml
-# Bad — vague, no activation signal, no searchable vocabulary
+# Bad — vague, no activation signal
 description: Helps with PDFs.
 
-# Good — specific capability + explicit trigger condition + searchable terms
+# Good — specific capability + explicit trigger condition
 description: >
   Extract text and tables from PDF files, fill PDF forms, and merge multiple PDFs.
   Use when the user needs to work with PDF documents, extract content, fill forms,
   or combine files.
 ```
 
-YAML block scalar (`>`) folds newlines into spaces — use it for long descriptions.
+**Writing tips**:
+- Write descriptions that match how users phrase requests
+- Be specific about capabilities and when to use the skill
+- Explicit invocation always works (e.g., "use the pdf-processing skill")
+- Use YAML block scalar (`>`) to fold newlines into spaces for long descriptions
 
 ---
 
-## 6. `tags` and `triggers`
-
-Scorer weights:
-
-```
-name match:        +3 per term
-description match: +2 per term
-tag match:         +1 per term
-```
-
-`triggers` are a **vocabulary checklist** — every trigger term must appear in `description`
-or `name`. If it doesn't, the description is missing that vocabulary.
-
-```yaml
-description: >
-  Process and resize images, convert between formats (JPEG, PNG, WebP, AVIF),
-  apply filters. Use when the user needs to edit, convert, or optimize images.
-tags:
-  - image
-  - media
-triggers:
-  - image
-  - photo
-  - resize
-  - convert
-  - jpeg
-  - png
-  - webp
-  - filter
-  - optimize
-```
-
----
-
-## 7. Progressive disclosure
+## 6. Progressive disclosure
 
 ```
 Tier 1 — Discovery  (~100 tokens):  name + description, loaded at startup for ALL skills
@@ -342,7 +307,7 @@ Keep body under 500 lines. Move large reference tables and full API docs to `ref
 
 ---
 
-## 8. Complete example
+## 7. Complete example
 
 ```markdown
 ---
@@ -351,40 +316,7 @@ description: >
   Extract text and tables from PDF files, fill PDF forms, and merge multiple PDFs.
   Use when the user needs to work with PDF documents, extract content, fill forms,
   or combine files.
-tags:
-  - pdf
-  - document
-triggers:
-  - pdf
-  - extract
-  - table
-  - form
-  - merge
-requires:
-  bins:
-    - pdfplumber
-    - pypdf
-lifecycle:
-  variables:
-    SKILL_PATH: ${HOME}/.local/share/skills/${SKILL_NAME}
-    VENV_PATH: ${SKILL_PATH}/.venv
-    PYTHON_BIN: ${VENV_PATH}/bin/python
-  install:
-    - command: uv venv ${VENV_PATH} && uv pip install --python ${PYTHON_BIN} pdfplumber pypdf
-      description: Create venv and install PDF processing libraries
-      platform: all
-      requires_approval: true
-  update:
-    - command: uv pip install --python ${PYTHON_BIN} --upgrade pdfplumber pypdf
-      description: Update PDF libraries to latest versions
-      platform: all
-      requires_approval: true
-  uninstall:
-    - command: rm -rf ${VENV_PATH}
-      description: Remove virtual environment
-      platform: all
-      requires_approval: true
-allowed-tools: Bash(python:*) Read Write
+compatibility: Requires pdfplumber and pypdf Python packages
 license: MIT
 metadata:
   author: my-org
@@ -422,15 +354,42 @@ Example: `python -c "from pypdf import PdfWriter; w=PdfWriter(); [w.append(f) fo
 For the full API reference, see [references/api.md](references/api.md).
 ```
 
+**lifecycle.yaml**:
+
+```yaml
+variables:
+  SKILL_PATH: ${HOME}/.local/share/skills/${SKILL_NAME}
+  VENV_PATH: ${SKILL_PATH}/.venv
+  PYTHON_BIN: ${VENV_PATH}/bin/python
+
+install:
+  - command: uv venv ${VENV_PATH} && uv pip install --python ${PYTHON_BIN} pdfplumber pypdf
+    description: Create venv and install PDF processing libraries
+    platform: all
+    requires_approval: true
+
+update:
+  - command: uv pip install --python ${PYTHON_BIN} --upgrade pdfplumber pypdf
+    description: Update PDF libraries to latest versions
+    platform: all
+    requires_approval: true
+
+uninstall:
+  - command: rm -rf ${VENV_PATH}
+    description: Remove virtual environment
+    platform: all
+    requires_approval: true
+```
+
 ---
 
-## 9. Authoring checklist
+## 8. Authoring checklist
 
 - [ ] Directory name matches `name` exactly (lowercase, hyphens only)
-- [ ] `description` answers *what* + *when* in ≤1024 chars
-- [ ] Every `triggers` term appears in `description` or `name`
-- [ ] `requires` lists all runtime dependencies (bins, env, mcp_servers)
-- [ ] `lifecycle` block provided with install/update/uninstall commands (if applicable)
-- [ ] `lifecycle.variables` defined for reusable paths
+- [ ] Skill placed in correct directory (`skills/` for generic, `skills-{mode}/` for mode-specific)
+- [ ] `description` answers *what* + *when* in ≤1024 chars, matches how users phrase requests
+- [ ] `compatibility` lists environment requirements in 1-500 chars (if applicable)
+- [ ] `lifecycle.yaml` provided with install/update/uninstall commands (if applicable)
+- [ ] `lifecycle.yaml` variables defined for reusable paths
 - [ ] Body is under 500 lines; large reference material in `references/`
-- [ ] If bundling MCP servers, include `assets/*.wasm` and declare in `requires.mcp_servers`
+- [ ] If creating mode-specific variant, verify it overrides correctly

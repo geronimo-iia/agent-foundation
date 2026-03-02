@@ -20,7 +20,7 @@ This repository contains stable specifications only — no implementation. It de
 ├── docs/           # Documentation definitions, formats, hub protocols
 ├── tools/          # Tool definitions, MCP protocol, execution policies
 ├── bootstrap/      # Workspace setup and bootstrap guides
-├── schemas/        # JSON schemas for validation
+├── schemas/        # JSON schemas for validation (see schemas/README.md)
 ```
 
 ## Contents
@@ -30,4 +30,5 @@ This repository contains stable specifications only — no implementation. It de
 - **Documentation Specifications** — Document format, hub protocols, organization standards
 - **Tool Specifications** — Tool definitions, MCP protocol, execution policies
 - **Bootstrap Guides** — Minimal setup procedures for agent workspaces
+- **JSON Schemas** — Validation schemas for all formats (see [schemas/README.md](schemas/README.md))
 - **Stable Specifications** — Concrete schemas, contracts, and protocols

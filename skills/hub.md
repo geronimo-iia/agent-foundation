@@ -9,7 +9,7 @@ status: active
 last_updated: "2025-01-16"
 ---
 
-# Skill Registry Hub — Design Study
+# Skill Registry Hub
 
 ---
 
@@ -45,7 +45,7 @@ my-hub/
 
 ### CI pipeline responsibilities
 
-1. **Validate** each `SKILL.md` against the skill spec (e.g. using `skills-ref` or a custom validator)
+1. **Validate** each `SKILL.md` against the skill spec
 2. **Reject** skills that fail validation — the push fails, `index.json` is not updated
 3. **Generate** `index.json` from all valid skills' frontmatter
 4. **Publish** `index.json` to the hub's stable URL
@@ -68,8 +68,7 @@ Formal schema: [`schemas/skills-index.json`](../schemas/skills-index.json)
       "name": "python-developer",
       "description": "Expert Python developer with modern practices.",
       "version": "1.2.0",
-      "tags": ["python", "development"],
-      "triggers": ["python", "fastapi", "pytest"],
+      "compatibility": "Requires Python 3.10+, uv package manager",
       "license": "MIT",
       "git_url": "https://github.com/myorg/my-hub",
       "path": "skills/python-developer",
@@ -152,12 +151,9 @@ compatible hubs by adding a CI step that generates `index.json` in this schema.
 
 ## 6. Search across hubs
 
-Search fetches the cached index from each enabled hub and scores entries with the same keyword
-scorer used for local skills (name +3, description +2, tags +1, triggers +1). Results from
-all hubs are merged and ranked together.
+Search fetches the cached index from each enabled hub and scores entries by matching against `name` and `description` fields. Results from all hubs are merged and ranked together.
 
-For a unified local + hub search: local results (already installed) rank higher, then hub
-results not yet installed, deduplicated by slug within each hub.
+For a unified local + hub search: local results (already installed) rank higher, then hub results not yet installed, deduplicated by slug within each hub.
 
 ---
 
@@ -193,23 +189,24 @@ Update = compare `version` in lock vs current `index.json`; re-install if newer.
 
 ## 8. Security
 
-1. **Validated at source** — `index.json` only contains skills that passed CI. The agent
-   trusts the hub operator's CI, not individual skill authors.
+1. **Validated at source** — `index.json` only contains skills that passed CI. The agent trusts the hub operator's CI, not individual skill authors.
 2. **Git integrity** — sparse clone over HTTPS; Git object hashing ensures file integrity.
-3. **Load-time gating** — installed skills still pass the local `requires` gate before
-   injection. A hub skill requiring `ffmpeg` is invisible until `ffmpeg` is present.
-4. **No auto-install** — the agent can suggest a hub install, but execution requires explicit
-   user confirmation.
+3. **Compatibility check** — the agent reads the `compatibility` field and can warn users about missing requirements before installation.
+4. **No auto-install** — the agent can suggest a hub install, but execution requires explicit user confirmation.
 5. **Pinned by commit** — the lock stores the exact commit; updates are explicit.
+6. **Lifecycle approval** — if a skill includes `lifecycle.yaml`, all install/update/uninstall commands require user approval.
 
 ---
 
 ## 9. Setting up a hub
 
 1. Create a Git repo with a `skills/` directory
-2. Add skills as `skills/<slug>/SKILL.md`
+2. Add skills as `skills/<slug>/SKILL.md` (optionally with `lifecycle.yaml`)
 3. Add a CI workflow that validates skills and generates `index.json`
 4. Publish `index.json` at a stable URL
 
-The CI validator can be adapted from `skills-ref` (Anthropic's reference SDK for AgentSkills
-format) or implemented as a standalone CLI against any skill spec.
+The CI validator should check:
+- Required frontmatter fields (`name`, `description`)
+- Directory name matches `name` field
+- Valid YAML frontmatter syntax
+- Optional: `lifecycle.yaml` syntax if present

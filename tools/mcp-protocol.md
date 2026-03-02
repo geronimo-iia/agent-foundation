@@ -118,10 +118,14 @@ last_updated: "2025-01-16"
 
 ## 5. Security Model
 
+MCP provides security capabilities through its architecture:
+
 **Sandboxing**: Servers run in isolated processes
-**Permissions**: Host controls which servers can run
-**User consent**: Explicit approval for tool invocations
-**Audit logging**: All tool calls logged
+**Permissions**: Host can control which servers run
+**User consent**: Host can require approval for tool invocations
+**Audit logging**: Protocol supports logging all tool calls
+
+**Note**: These are MCP capabilities. The [execution policy](execution-policy.md) for this specification uses unrestricted execution with logging only
 
 ---
 

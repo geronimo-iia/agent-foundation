@@ -11,14 +11,23 @@ last_updated: "2025-01-16"
 
 # What are Skills?
 
-At its core, a skill is a folder containing a `SKILL.md` file. This file includes metadata (`name` and `description`, at minimum) and instructions that tell an agent how to perform a specific task. Skills can also bundle scripts, templates, and reference materials.
+Skills package domain expertise, new capabilities, and repeatable workflows that agents can use. At its core, a skill is a folder containing a `SKILL.md` file with metadata and instructions that tell an agent how to perform a specific task.
 
 ```
 my-skill/
-├── SKILL.md          # Required: instructions + metadata
+├── SKILL.md          # Required: name, description, instructions
+├── lifecycle.yaml    # Optional: install/update/uninstall commands
+├── scripts/          # Optional: executable scripts
 ├── references/       # Optional: documentation
-└── assets/           # Optional: templates, WASM modules
+└── assets/           # Optional: templates, resources
 ```
+
+## Key benefits
+
+- **Self-documenting**: A skill author or user can read a `SKILL.md` and understand what it does, making skills easy to audit and improve
+- **Interoperable**: Skills work across any agent that implements the Agent Skills specification
+- **Extensible**: Skills can range in complexity from simple text instructions to bundled scripts, templates, and reference materials
+- **Shareable**: Skills are portable and can be easily shared between projects and developers
 
 ## How skills work
 
@@ -61,33 +70,25 @@ The following frontmatter is required at the top of `SKILL.md`:
 
 The Markdown body contains the actual instructions and has no specific restrictions on structure or content.
 
-This simple format has some key advantages:
+## Format compatibility
 
-- **Self-documenting**: A skill author or user can read a `SKILL.md` and understand what it does, making skills easy to audit and improve.
-- **Declarative**: Skills contain only instructions and assets, no executable install logic.
-- **Portable**: Skills are just files, so they're easy to edit, version, and share across platforms.
+This specification is compatible with the [Agent Skills](https://agentskills.io) format, with extensions:
+
+**Core compatibility** (shared with agentskills.io):
+- SKILL.md file with YAML frontmatter
+- Required fields: `name`, `description`
+- Optional fields: `license`, `compatibility`, `metadata`
+- Directory structure with optional `scripts/`, `references/`, `assets/`
+
+**Extensions** (this specification):
+- `lifecycle.yaml` file for agent-assisted install/update/uninstall
+- Mode-specific skills (`skills-{mode}/` directories) — from [Kilo](https://kilo.ai/docs/customize/skills)
+- Priority/override rules (project > global, mode-specific > generic) — from [Kilo](https://kilo.ai/docs/customize/skills)
+- Variable substitution in lifecycle commands
+
+Basic Agent Skills will work without modification. The extensions are optional and backward-compatible.
 
 ## Related specifications
 
 - [authoring-guide.md](authoring-guide.md) — Detailed authoring standards and best practices
 - [hub.md](hub.md) — Multi-source skill registry and distribution system
-
-## Comparison to Other Formats
-
-**Anthropic AgentSkills**: Reference implementation for skill-like capabilities ([repository](https://github.com/anthropics/anthropic-tools/tree/main/agent-skills))
-
-This specification differs:
-
-**Format**: Single `SKILL.md` vs multiple files (`skill.py`, `requirements.txt`, `README.md`)
-
-**Distribution**: Hub-based with `index.json` vs local directory only
-
-**Discovery**: Progressive disclosure (index → full content) vs directory scan
-
-**Versioning**: Semantic versioning + lock file vs no version tracking
-
-**Execution**: Instructions only (tools provide execution) vs Python code execution
-
-**Dependencies**: `requires` block with load-time gating vs `requirements.txt`
-
-**Updates**: `agentctl skill update` with version comparison vs manual file replacement
