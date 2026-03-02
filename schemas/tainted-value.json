@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/geronimo-iia/agent-foundation/schemas/tainted-value.json",
+  "title": "Tainted Value",
+  "description": "Schema for a value wrapped with its taint set",
+  "type": "object",
+  "required": ["value", "taint"],
+  "properties": {
+    "value": {
+      "description": "The actual data (can be any JSON type)"
+    },
+    "taint": {
+      "$ref": "taint-set.json",
+      "description": "The set of taint labels carried by this value"
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "value": "search results for X",
+      "taint": [
+        {"kind": "UserInput", "source": "user:alice"},
+        {"kind": "ExternalFetch", "source": "url:https://news.com"}
+      ]
+    },
+    {
+      "value": {"key": "sk-1234567890"},
+      "taint": [
+        {"kind": "Secret", "source": "vault:openai-key"}
+      ]
+    },
+    {
+      "value": "clean data",
+      "taint": []
+    }
+  ]
+}

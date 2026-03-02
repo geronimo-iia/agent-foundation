@@ -54,6 +54,33 @@ JSON schemas for validating agent-foundation formats.
 **Purpose**: List of revoked agents and signing keys  
 **Used by**: Agent kernels, security systems
 
+## Information Flow Schemas
+
+### Taint Label
+**File**: [taint-label.json](taint-label.json)  
+**Purpose**: Schema for taint tracking labels with kind and optional source  
+**Used by**: Information flow tracking systems, taint propagation implementations
+
+### Taint Set
+**File**: [taint-set.json](taint-set.json)  
+**Purpose**: Schema for a set of taint labels  
+**Used by**: Taint propagation, merge operations, policy enforcement
+
+### Tainted Value
+**File**: [tainted-value.json](tainted-value.json)  
+**Purpose**: Schema for a value wrapped with its taint set  
+**Used by**: Cross-language data exchange, persistence, audit logs
+
+### Taint Audit Event
+**File**: [taint-audit-event.json](taint-audit-event.json)  
+**Purpose**: Schema for taint tracking audit log events (Ingest, SinkCheck, Merge, PolicyChange)  
+**Used by**: Audit log systems, compliance tools, anomaly detection
+
+### TSL Policy
+**File**: [tsl-policy.json](tsl-policy.json)  
+**Purpose**: Schema for TSL Core v1.0 policy files (YAML)  
+**Used by**: Policy validators, taint supervisors, policy management tools
+
 ## Tool Schemas
 
 ### Agentctl Configuration

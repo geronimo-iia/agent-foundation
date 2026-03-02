@@ -3,6 +3,61 @@
   "version": "1.0",
   "entries": [
     {
+      "title": "Information Flow Tracking",
+      "summary": "Track data origin and sensitivity through agent systems using taint labels to prevent information leakage and enforce security policies",
+      "path": "information-flow/definition.md",
+      "commit_hash": "",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing security controls for agent systems handling mixed-sensitivity data",
+        "Implementing data flow tracking and taint analysis",
+        "Preventing information leakage in multi-agent systems",
+        "Understanding information flow security patterns"
+      ]
+    },
+    {
+      "title": "Taint Audit Log Events",
+      "summary": "Event schema for taint tracking audit logs - structured records of taint operations for compliance and analysis",
+      "path": "information-flow/audit-events.md",
+      "commit_hash": "",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Implementing taint supervisor audit logging",
+        "Building audit log analysis tools",
+        "Designing compliance and monitoring systems",
+        "Understanding taint tracking observability"
+      ]
+    },
+    {
+      "title": "Taint Specification Language (TSL) Core",
+      "summary": "Declarative YAML format for specifying taint policies - sources, sinks, and basic propagation rules",
+      "path": "information-flow/tsl-core.md",
+      "commit_hash": "",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Defining taint policies declaratively for agent systems",
+        "Creating portable taint specifications across implementations",
+        "Implementing policy-as-code for information flow tracking"
+      ]
+    },
+    {
+      "title": "Taint Supervisor Pattern",
+      "summary": "Centralized architecture for managing taint assignment, policy enforcement, and audit logging in information flow tracking systems",
+      "path": "information-flow/taint-supervisor.md",
+      "commit_hash": "",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing centralized taint management for agent systems",
+        "Implementing audit trails for information flow tracking",
+        "Refactoring scattered taint assignment into a unified system",
+        "Building policy management for data flow controls"
+      ]
+    },
+    {
       "title": "What are Tools?",
       "summary": "Tools are executable capabilities that agents can invoke to interact with systems, APIs, and external resources beyond text generation.",
       "path": "tools/definition.md",
@@ -20,7 +75,7 @@
       "title": "Tool Execution Policy",
       "summary": "Autonomous agents execute tools with user authority. Security through transparency, logging, and user consent.",
       "path": "tools/execution-policy.md",
-      "commit_hash": "2717b6ebbaedf941895e890226b5f0e0b4f681d6",
+      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -33,7 +88,7 @@
       "title": "Model Context Protocol (MCP)",
       "summary": "Anthropic's standard protocol for connecting AI models to tools, resources, and data sources through a client-server architecture.",
       "path": "tools/mcp-protocol.md",
-      "commit_hash": "ff676e9c4cf949142b73726a77e3d4f11b7dac24",
+      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -130,7 +185,7 @@
       "title": "Documentation Hub",
       "summary": "Multi-source documentation registry hub with Git repositories, CI pipelines, and index.json for on-demand knowledge loading.",
       "path": "docs/hub.md",
-      "commit_hash": "67459a97d59c2983828d3f2f1998b3a9fa5b6992",
+      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -170,7 +225,7 @@
       "title": "Documentation Authoring",
       "summary": "How to author documentation files with machine-readable YAML frontmatter for Agent Zero.",
       "path": "docs/authoring-guide.md",
-      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
+      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -184,7 +239,7 @@
       "title": "What are Skills?",
       "summary": "Skills are a lightweight, open format for extending AI agent capabilities with specialized knowledge and workflows.",
       "path": "skills/definition.md",
-      "commit_hash": "fe0f678a463a3baba732544b83e877dc26b3462a",
+      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -197,7 +252,7 @@
       "title": "Skill Lifecycle Specification",
       "summary": "Foundational specification for skill installation, versioning, updates, and removal in agent systems",
       "path": "skills/lifecycle.md",
-      "commit_hash": "fe0f678a463a3baba732544b83e877dc26b3462a",
+      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -211,7 +266,7 @@
       "title": "Skill Hub",
       "summary": "Multi-source skill registry hub with Git repositories, CI pipelines, and index.json for skill distribution and management.",
       "path": "skills/hub.md",
-      "commit_hash": "67459a97d59c2983828d3f2f1998b3a9fa5b6992",
+      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -224,7 +279,7 @@
       "title": "Skill Authoring",
       "summary": "How to author SKILL.md files with machine-readable YAML frontmatter.",
       "path": "skills/authoring-guide.md",
-      "commit_hash": "fe0f678a463a3baba732544b83e877dc26b3462a",
+      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -236,7 +291,7 @@
   ],
   "metadata": {
     "generated_at": "2025-01-16T00:00:00Z",
-    "commit_hash": "2717b6ebbaedf941895e890226b5f0e0b4f681d6",
-    "total_entries": 17
+    "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
+    "total_entries": 21
   }
 }

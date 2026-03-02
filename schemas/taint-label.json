@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/geronimo-iia/agent-foundation/schemas/taint-label.json",
+  "title": "Taint Label",
+  "description": "Schema for taint tracking labels used in information flow tracking",
+  "type": "object",
+  "required": ["kind"],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": ["UserInput", "ExternalFetch", "LlmGenerated", "Secret", "PII"],
+      "description": "The category of taint"
+    },
+    "source": {
+      "type": "string",
+      "description": "Optional unique identifier for the data origin (e.g., 'user:alice', 'url:https://...', 'agent:coder')"
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "kind": "UserInput",
+      "source": "user:alice"
+    },
+    {
+      "kind": "ExternalFetch",
+      "source": "url:https://news.com"
+    },
+    {
+      "kind": "Secret"
+    }
+  ]
+}

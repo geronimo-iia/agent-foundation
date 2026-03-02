@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/geronimo-iia/agent-foundation/schemas/taint-set.json",
+  "title": "Taint Set",
+  "description": "Schema for a set of taint labels",
+  "type": "array",
+  "items": {
+    "$ref": "taint-label.json"
+  },
+  "uniqueItems": true,
+  "description": "Array of unique taint labels representing all taints carried by a value",
+  "examples": [
+    [
+      {"kind": "UserInput", "source": "user:alice"},
+      {"kind": "ExternalFetch", "source": "url:https://news.com"}
+    ],
+    [
+      {"kind": "Secret", "source": "vault:api-key"}
+    ],
+    []
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/geronimo-iia/agent-foundation/schemas/tsl-policy.json",
+  "title": "TSL Core Policy",
+  "description": "Schema for Taint Specification Language (TSL) Core v1.0 policies",
+  "type": "object",
+  "required": ["version", "metadata", "taint_kinds", "sources", "sinks"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "TSL Core version"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Policy name"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Policy version (semantic versioning)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Policy description"
+        },
+        "author": {
+          "type": "string",
+          "description": "Policy author"
+        }
+      },
+      "additionalProperties": false
+    },
+    "taint_kinds": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "object",
+          "required": ["description"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Human-readable description of this taint kind"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "description": "Taint kind definitions"
+    },
+    "sources": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "object",
+          "required": ["taints", "description"],
+          "properties": {
+            "taints": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Array of taint kinds assigned to data from this source"
+            },
+            "pattern": {
+              "type": "string",
+              "description": "Glob pattern for source identifiers"
+            },
+            "description": {
+              "type": "string",
+              "description": "Human-readable description of this source"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "description": "Source definitions"
+    },
+    "sinks": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "object",
+          "required": ["description", "blocked_taints", "reason"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Human-readable description of this sink"
+            },
+            "blocked_taints": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Array of taint kinds blocked at this sink"
+            },
+            "reason": {
+              "type": "string",
+              "description": "Rationale for the policy"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "description": "Sink definitions"
+    }
+  },
+  "additionalProperties": false
+}
