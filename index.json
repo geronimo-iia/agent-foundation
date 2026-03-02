@@ -3,6 +3,20 @@
   "version": "1.0",
   "entries": [
     {
+      "title": "What are Tools?",
+      "summary": "Tools are executable capabilities that agents can invoke to interact with systems, APIs, and external resources beyond text generation.",
+      "path": "tools/definition.md",
+      "commit_hash": "",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Understanding what tools are and how they work",
+        "Designing tool systems for agents",
+        "Implementing tool execution and security",
+        "Establishing tool specifications and contracts"
+      ]
+    },
+    {
       "title": "Bootstrap",
       "summary": "Bootstrap guides for minimal setup of the agent development workspace with core repositories and tooling.",
       "path": "bootstrap/definition.md",
@@ -102,7 +116,7 @@
       "title": "Hub Configuration",
       "summary": "Unified configuration format for managing both skill and documentation hub sources in agent systems",
       "path": "docs/hub-configuration.md",
-      "commit_hash": "",
+      "commit_hash": "96acd43430ea803d1bbe7208123a61a767af036e",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -208,7 +222,7 @@
   ],
   "metadata": {
     "generated_at": "2025-01-16T00:00:00Z",
-    "commit_hash": "cf96eca42e915b5703ad4beed55ca10fe9cfa3ee",
-    "total_entries": 15
+    "commit_hash": "96acd43430ea803d1bbe7208123a61a767af036e",
+    "total_entries": 16
   }
 }
