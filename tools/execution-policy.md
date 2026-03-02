@@ -1,6 +1,6 @@
 ---
 title: "Tool Execution Policy"
-summary: "Execution model for agent tasks requiring all tool interactions through MCP protocol for security and auditability."
+summary: "Execution policy for autonomous agents: unrestricted by default with optional enforcement modes for bounded deployments."
 read_when:
   - Designing task execution systems
   - Implementing agent tool invocation
@@ -14,150 +14,150 @@ last_updated: "2025-01-16"
 
 ## 1. Core Principle
 
-**All tool interactions MUST go through MCP protocol**. No direct command execution.
+**Agents execute tools with user authority**. Enforcement is optional and deployment-specific.
 
 ---
 
-## 2. Rationale
+## 2. Design Philosophy
 
-### Security
-- **Process isolation**: Tools run in separate MCP server processes
-- **Permission control**: Host controls which MCP servers are enabled
-- **Sandboxing**: No direct shell access from agent
+**Trust through transparency**: Autonomous agents act on behalf of users. Security comes from visibility, audit trails, and user consent.
 
-### Auditability
-- **Logging**: All tool calls logged through MCP protocol
-- **Traceability**: Clear record of what tools were invoked with what parameters
-- **Compliance**: Audit trail for regulated environments
+**Optional enforcement**: Implementations MAY provide enforcement mechanisms. Deployments choose their security model.
 
-### Portability
-- **Reusability**: Same MCP servers work across different agents
-- **Standardization**: MCP protocol is vendor-neutral
-- **Interoperability**: Tools work with any MCP-compatible host
+**No mandatory restrictions**: Specifications do not require MCP protocol or sandboxing.
 
 ---
 
-## 3. Execution Model
+## 3. Execution Models
 
-### Agent Task Flow
+### Unrestricted Execution
 
-```mermaid
-flowchart TD
-    A[Agent receives task] --> B[Consults skills for instructions]
-    B --> C[Identifies required tools]
-    C --> D[Invokes tools via MCP protocol]
-    D --> E[Processes tool results]
-    E --> F[Returns task result]
+**Model**: Agent executes tools directly with user privileges
+
+**Characteristics**:
+- No validation of tool calls
+- No process isolation
+- No capability restrictions
+- Full access to user resources
+
+**Security**: Transparency and audit logging
+
+**Suitable for**:
+- Single-user desktop environments
+- Trusted skill sources
+- Users accepting full risk
+
+### Enforced Execution
+
+**Model**: Agent validates tool calls against declared permissions
+
+**Characteristics**:
+- Tool calls validated against skill `allowed-tools` declaration
+- Unauthorized calls denied or logged
+- Optional process isolation (MCP, WASM, containers)
+- Explicit capability grants
+
+**Security**: Least privilege and isolation
+
+**Suitable for**:
+- Multi-user environments
+- Untrusted skill sources
+- Regulated deployments
+
+---
+
+## 4. Tool Declaration
+
+Skills declare required tools in `allowed-tools` field:
+
+```yaml
+allowed-tools: Bash(ffmpeg:*) Read(*.pdf) Write(output/*) MCP(python-tools:*)
 ```
 
-### No Direct Execution
+**Syntax**:
+- `Bash(command:args)`: Shell command with argument pattern
+- `Read(pattern)`: File read with glob pattern
+- `Write(pattern)`: File write with glob pattern  
+- `MCP(server:tool)`: MCP server and tool name
+- `*`: Wildcard matching
 
-**Prohibited**:
-- Direct shell commands (`subprocess`, `os.system`)
-- Direct file operations (except reading own config)
-- Direct network requests (except MCP communication)
-
-**Required**:
-- File operations → MCP filesystem server
-- Git operations → MCP git server
-- HTTP requests → MCP http server
-- Database queries → MCP database server
+**Purpose**: Informational for unrestricted mode, enforced in restricted mode
 
 ---
 
-## 4. Tool Discovery
+## 5. Enforcement Specification
 
-**MCP servers declare available tools**:
-```json
-{
-  "tools": [
-    {
-      "name": "read_file",
-      "description": "Read file contents",
-      "inputSchema": { ... }
-    }
-  ]
-}
-```
+### Enforcement Modes
 
-**Agent queries available tools** via `tools/list` before task execution
+Implementations MAY support enforcement modes:
 
----
+**unrestricted**: No validation, all tools allowed
+**enforce**: Validate against `allowed-tools`, deny violations
+**audit**: Validate against `allowed-tools`, log violations but allow
 
-## 5. Tool Invocation
+### Validation Rules
 
-**Request** (agent → MCP server):
-```json
-{
-  "method": "tools/call",
-  "params": {
-    "name": "read_file",
-    "arguments": {
-      "path": "/path/to/file"
-    }
-  }
-}
-```
+When enforcement enabled:
 
-**Response** (MCP server → agent):
-```json
-{
-  "result": {
-    "content": "file contents..."
-  }
-}
-```
+**Tool call allowed if**:
+1. Skill declares tool in `allowed-tools`, OR
+2. Agent manifest grants capability, OR  
+3. User grants permission interactively
+
+**Tool call denied if**:
+1. None of the above conditions met
+
+**Denied calls**:
+- MUST be logged with violation details
+- MUST return error to agent
+- MAY prompt user for permission
 
 ---
 
-## 6. Error Handling
+## 6. Isolation Mechanisms
 
-**Tool errors returned via MCP**:
-```json
-{
-  "error": {
-    "code": -32000,
-    "message": "File not found"
-  }
-}
-```
+Implementations MAY provide isolation:
 
-**Agent responsibility**: Handle errors gracefully, retry if appropriate
+**MCP Protocol**: Tools execute in separate MCP server processes
+**WASM Sandboxing**: Skills bundle WASM modules with WASI capabilities
+**OS Sandboxing**: Platform-specific isolation (AppArmor, SELinux, macOS sandbox)
+**Container Isolation**: Docker/Podman with resource limits
+
+**Specification does not mandate isolation mechanism**.
 
 ---
 
-## 7. Exceptions
+## 7. Logging Requirements
 
-**Allowed direct operations**:
-- Reading agent's own configuration files
-- Logging to agent's log files
-- Internal state management
+Implementations MUST log tool executions:
 
-**Everything else**: MCP protocol
+**Required fields**:
+- Timestamp
+- Tool name and arguments
+- Execution context (skill, agent, task)
+- Result or error
+- Enforcement decision (if applicable)
 
----
+**Log retention**: Implementation-specific
 
-## 8. Security Benefits
-
-**Attack surface reduction**: No shell injection vulnerabilities
-**Least privilege**: Each MCP server has limited permissions
-**Audit compliance**: Complete tool usage logs
-**Revocation**: Disable MCP servers without code changes
+**Audit trail**: MUST be accessible to user
 
 ---
 
-## 9. Performance Considerations
+## 8. Design Principles
 
-**Overhead**: MCP adds process communication overhead
-**Mitigation**: Batch operations when possible
-**Trade-off**: Security and auditability worth the cost
-
-**Not suitable for**: Tight loops, high-frequency operations (use built-in functions)
+**Default to freedom**: Unrestricted execution is valid and supported
+**User choice**: Deployments choose their security model
+**Transparency first**: Logging before enforcement
+**Declarative policy**: Skills declare needs, runtime decides enforcement
+**Fail open**: Enforcement failures SHOULD log and allow, not break agent
+**Backward compatibility**: Enforcement is additive, not breaking
 
 ---
 
 ## Related Specifications
 
-- [MCP Protocol](../tools/mcp-protocol.md) - Tool execution protocol
-- [Tool Definition](../tools/definition.md) - What tools are
-- [Skill Definition](../skills/definition.md) - Skills provide instructions, tools provide execution
+- [MCP Protocol](mcp-protocol.md) - Optional tool execution protocol
+- [Tool Definition](definition.md) - What tools are
+- [Skill Authoring](../skills/authoring-guide.md) - How to declare allowed-tools
+- [Agent Manifest](../agents/agent-manifest-specification.md) - Agent capabilities
