@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/geronimo-iia/agent-foundation/schemas/agentctl-config.json",
+  "title": "Agent Hub Configuration",
+  "description": "Configuration schema for agent hub sources (skills and docs)",
+  "type": "object",
+  "properties": {
+    "skill_hubs": {
+      "type": "array",
+      "description": "Configured skill hub sources",
+      "items": {
+        "$ref": "#/$defs/hub_config"
+      }
+    },
+    "doc_hubs": {
+      "type": "array",
+      "description": "Configured documentation hub sources",
+      "items": {
+        "$ref": "#/$defs/hub_config"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "hub_config": {
+      "type": "object",
+      "required": ["id", "index_url"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique hub identifier",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "index_url": {
+          "type": "string",
+          "description": "URL to hub's index.json",
+          "format": "uri"
+        },
+        "git_url": {
+          "type": "string",
+          "description": "Git repository URL for sparse cloning",
+          "format": "uri"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether hub is active",
+          "default": true
+        },
+        "ttl_hours": {
+          "type": "integer",
+          "description": "Cache TTL in hours",
+          "minimum": 1,
+          "default": 6
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

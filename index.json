@@ -99,6 +99,20 @@
       ]
     },
     {
+      "title": "Hub Configuration",
+      "summary": "Unified configuration format for managing both skill and documentation hub sources in agent systems",
+      "path": "docs/hub-configuration.md",
+      "commit_hash": "",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Implementing hub source management in agent systems",
+        "Designing agent configuration files",
+        "Understanding hub discovery and caching mechanisms",
+        "Configuring multiple skill and doc hubs"
+      ]
+    },
+    {
       "title": "Specification Organization",
       "summary": "Organizational principles for agent foundation specifications including domain grouping, naming conventions, and cross-reference standards.",
       "path": "docs/organization.md",
@@ -194,7 +208,7 @@
   ],
   "metadata": {
     "generated_at": "2025-01-16T00:00:00Z",
-    "commit_hash": "a4a776df91a671a2f5ab85032895b2f5de0c1cb0",
-    "total_entries": 14
+    "commit_hash": "cf96eca42e915b5703ad4beed55ca10fe9cfa3ee",
+    "total_entries": 15
   }
 }
