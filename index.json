@@ -6,7 +6,7 @@
       "title": "What are Tools?",
       "summary": "Tools are executable capabilities that agents can invoke to interact with systems, APIs, and external resources beyond text generation.",
       "path": "tools/definition.md",
-      "commit_hash": "",
+      "commit_hash": "80a09d58b85f9cf89310e70aa50e54bdcd5ef90b",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -14,6 +14,20 @@
         "Designing tool systems for agents",
         "Implementing tool execution and security",
         "Establishing tool specifications and contracts"
+      ]
+    },
+    {
+      "title": "Model Context Protocol (MCP)",
+      "summary": "Anthropic's standard protocol for connecting AI models to tools, resources, and data sources through a client-server architecture.",
+      "path": "tools/mcp-protocol.md",
+      "commit_hash": "",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Implementing tool servers for agents",
+        "Integrating external tools and resources",
+        "Understanding MCP architecture and capabilities",
+        "Building MCP-compatible systems"
       ]
     },
     {
@@ -222,7 +236,7 @@
   ],
   "metadata": {
     "generated_at": "2025-01-16T00:00:00Z",
-    "commit_hash": "96acd43430ea803d1bbe7208123a61a767af036e",
-    "total_entries": 16
+    "commit_hash": "80a09d58b85f9cf89310e70aa50e54bdcd5ef90b",
+    "total_entries": 17
   }
 }
