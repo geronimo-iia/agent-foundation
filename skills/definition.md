@@ -16,9 +16,8 @@ At its core, a skill is a folder containing a `SKILL.md` file. This file include
 ```
 my-skill/
 ├── SKILL.md          # Required: instructions + metadata
-├── scripts/          # Optional: executable code
 ├── references/       # Optional: documentation
-└── assets/           # Optional: templates, resources
+└── assets/           # Optional: templates, WASM modules
 ```
 
 ## How skills work
@@ -65,8 +64,8 @@ The Markdown body contains the actual instructions and has no specific restricti
 This simple format has some key advantages:
 
 - **Self-documenting**: A skill author or user can read a `SKILL.md` and understand what it does, making skills easy to audit and improve.
-- **Extensible**: Skills can range in complexity from just text instructions to executable code, assets, and templates.
-- **Portable**: Skills are just files, so they're easy to edit, version, and share.
+- **Declarative**: Skills contain only instructions and assets, no executable install logic.
+- **Portable**: Skills are just files, so they're easy to edit, version, and share across platforms.
 
 ## Related specifications
 

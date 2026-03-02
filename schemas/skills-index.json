@@ -29,6 +29,48 @@
           "tags": {
             "type": "array",
             "items": { "type": "string" }
+          },
+          "mcp_servers": {
+            "type": "array",
+            "description": "Bundled MCP servers in assets/ directory",
+            "items": {
+              "type": "object",
+              "required": ["wasm_file", "wasm_hash"],
+              "properties": {
+                "wasm_file": {
+                  "type": "string",
+                  "description": "Relative path to WASM file (e.g., assets/tools.wasm)"
+                },
+                "wasm_hash": {
+                  "type": "string",
+                  "description": "SHA256 hash of WASM module",
+                  "pattern": "^sha256:[a-f0-9]{64}$"
+                },
+                "capabilities": {
+                  "type": "object",
+                  "description": "Required WASI capabilities",
+                  "properties": {
+                    "filesystem": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "network": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "env": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                },
+                "tools": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "List of tool names provided"
+                }
+              }
+            }
           }
         },
         "additionalProperties": false

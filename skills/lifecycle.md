@@ -130,9 +130,12 @@ stateDiagram-v2
 
 **Actions**:
 1. Fetch skill directory from hub at pinned commit
-2. Copy to local skills directory
-3. Add entry to lock file
-4. Validate `requires` gate (warn if fails, do not block)
+2. Copy to local skills directory (SKILL.md, references/, assets/ only)
+3. If skill includes `assets/*.wasm` files, register as MCP servers
+4. Add entry to lock file
+5. Validate `requires` gate (warn if fails, do not block)
+
+**No custom install scripts**: Skills are declarative. System dependencies in `requires` are checked but not installed.
 
 **Postcondition**: Skill in lock file, directory exists
 
@@ -157,9 +160,10 @@ stateDiagram-v2
 
 **Actions**:
 1. Remove directory
-2. Remove lock file entry (if hub skill)
+2. Unregister any bundled MCP servers (from `assets/*.wasm`)
+3. Remove lock file entry (if hub skill)
 
-**Postcondition**: Directory and lock entry absent
+**Postcondition**: Directory, MCP servers, and lock entry absent
 
 ---
 
@@ -254,7 +258,32 @@ stateDiagram-v2
 
 ---
 
-## 11. Design Principles
+## 11. Bundled MCP Servers
+
+**Skills may include MCP servers** as WASM modules in `assets/` directory:
+
+```
+python-dev-skill/
+├── SKILL.md
+├── scripts/
+└── assets/
+    └── python-tools.wasm
+```
+
+**Installation behavior**:
+- WASM modules in `assets/*.wasm` registered as MCP servers
+- Server capabilities configured per skill metadata
+- Skill instructions reference bundled tools
+
+**Uninstallation behavior**:
+- Bundled MCP servers unregistered
+- WASM modules removed with skill directory
+
+**See**: [MCP WASM Deployment](../tools/mcp-wasm.md) for server specification
+
+---
+
+## 12. Design Principles
 
 **Explicit over implicit**: User initiates all installs, updates, removals
 

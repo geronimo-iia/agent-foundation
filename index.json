@@ -236,7 +236,7 @@
     },
     {
       "title": "Skill Authoring",
-      "summary": "How to author SKILL.md files with machine-readable YAML frontmatter for Agent Zero.",
+      "summary": "How to author SKILL.md files with machine-readable YAML frontmatter.",
       "path": "skills/authoring-guide.md",
       "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
       "last_updated": "2025-01-16",

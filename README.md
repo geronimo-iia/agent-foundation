@@ -26,7 +26,8 @@ This repository contains stable specifications only — no implementation. It de
 ## Contents
 
 - **Agent Specifications** — Agent definitions, manifest formats, registry protocols
-- **Stable Specifications** — Concrete schemas, contracts, and protocols
-- **Foundational Patterns** — Core design patterns for agent systems
+- **Skill Specifications** — Skill format, lifecycle, hub protocols, authoring standards
+- **Documentation Specifications** — Document format, hub protocols, organization standards
+- **Tool Specifications** — Tool definitions, MCP protocol, execution policies
 - **Bootstrap Guides** — Minimal setup procedures for agent workspaces
-- **Reference Material** — Implementation-ready documentation
+- **Stable Specifications** — Concrete schemas, contracts, and protocols
