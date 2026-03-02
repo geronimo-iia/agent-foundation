@@ -56,6 +56,8 @@ my-hub/
 
 Formal schema: [`schemas/skills-index.json`](../schemas/skills-index.json)
 
+**Naming convention**: Use `index.json` for skill-only repos. If a repo contains both skills and docs, use `skills.json` and `docs.json` to avoid conflicts.
+
 ```json
 {
   "hub_id": "my-hub",

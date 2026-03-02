@@ -83,6 +83,8 @@ read_when:
 
 Formal schema: [`schemas/docs-index.json`](../schemas/docs-index.json)
 
+**Naming convention**: Use `index.json` for doc-only repos. If a repo contains both skills and docs, use `skills.json` and `docs.json` to avoid conflicts.
+
 ```json
 {
   "hub_id": "my-doc-hub",
