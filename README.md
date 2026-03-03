@@ -1,3 +1,9 @@
+---
+layout: home
+title: Home
+nav_order: 1
+---
+
 # Agent Foundation
 
 Final specifications and foundational patterns for multi-agent systems.

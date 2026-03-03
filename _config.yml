@@ -1,0 +1,32 @@
+title: Agent Foundation
+description: Specifications for secure, composable multi-agent systems
+url: https://geronimo-iia.github.io
+baseurl: /agent-foundation
+
+remote_theme: just-the-docs/just-the-docs
+
+# Enable search
+search_enabled: true
+search:
+  heading_level: 2
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+
+# Navigation
+nav_sort: case_insensitive
+
+# Footer
+footer_content: 'Copyright &copy; 2025. Distributed under the <a href="https://github.com/geronimo-iia/agent-foundation/blob/main/LICENSE">MIT License</a>.'
+
+# Color scheme
+color_scheme: light
+
+# Enable mermaid diagrams
+mermaid:
+  version: "10.6.1"
+
+# Aux links (top right)
+aux_links:
+  "GitHub":
+    - "https://github.com/geronimo-iia/agent-foundation"
