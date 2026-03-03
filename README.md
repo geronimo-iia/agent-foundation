@@ -1,9 +1,3 @@
----
-layout: home
-title: Home
-nav_order: 1
----
-
 # Agent Foundation
 
 Final specifications and foundational patterns for multi-agent systems.
@@ -14,7 +8,9 @@ This repository contains stable specifications only — no implementation. It de
 
 - Multi-agent system architecture and protocols
 - Agent identity, capabilities, and security models
+- Skill format, lifecycle, and hub protocols
 - Documentation standards and organization
+- Information flow tracking and taint analysis
 - Workspace bootstrap and setup procedures
 
 ## Structure
@@ -30,13 +26,12 @@ This repository contains stable specifications only — no implementation. It de
 ├── schemas/        # JSON schemas for validation (see schemas/README.md)
 ```
 
-## Contents
+## Key Specifications
 
-- **Agent Specifications** — Agent definitions, manifest formats, registry protocols
-- **Skill Specifications** — Skill format, lifecycle, hub protocols, authoring standards
-- **Documentation Specifications** — Document format, hub protocols, organization standards
-- **Tool Specifications** — Tool definitions, MCP protocol, execution policies
-- **Information Flow Tracking** — Taint tracking, TSL policy language, audit logging, data flow analysis
-- **Bootstrap Guides** — Minimal setup procedures for agent workspaces
-- **JSON Schemas** — Validation schemas for all formats (see [schemas/README.md](schemas/README.md))
-- **Stable Specifications** — Concrete schemas, contracts, and protocols
+- **[Skills](skills/)** — Skill format, lifecycle, hub protocols, authoring guide
+- **[Information Flow Tracking](information-flow/)** — Taint tracking, TSL policy language, audit events
+- **[Documentation](docs/)** — Document format, hub protocols, organization standards
+- **[Agents](agents/)** — Agent definitions, manifest formats, registry protocols
+- **[Tools](tools/)** — Tool definitions, MCP protocol, execution policies
+- **[Bootstrap](bootstrap/)** — Minimal setup procedures for agent workspaces
+- **[Schemas](schemas/)** — JSON schemas for validation (see [schemas/README.md](schemas/README.md))
