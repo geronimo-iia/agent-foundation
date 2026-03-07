@@ -13,18 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: astral-sh/setup-uv@v3
-
-      - name: Install agent-hub-indexer
-        run: uv tool install agent-hub-indexer
+      - name: Install agentctl
+        run: |
+          curl -sSL https://github.com/geronimo-iia/agentctl/releases/latest/download/x86_64-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin
 
       - name: Validate
-        run: agent-hub-indexer validate --type docs --path .
+        run: agentctl hub validate --type docs --path .
 
       - name: Generate index.json
-        run: agent-hub-indexer generate --type docs --path . --output index.json
+        run: agentctl hub generate --type docs --path . --hub-id agent-foundation --output index.json
 
       - name: Commit index.json
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
