@@ -243,6 +243,8 @@ stateDiagram-v2
 - Commands are visible in lifecycle.yaml (auditable)
 - No hidden or obfuscated commands
 
+**See**: [lifecycle-format.md](lifecycle-format.md) for complete lifecycle.yaml specification
+
 **Integrity**: Git commit hash ensures content matches expected state
 
 ---
@@ -273,7 +275,12 @@ python-dev-skill/
 - Agent reads uninstall commands from `lifecycle.yaml`
 - User approval required for cleanup commands
 
-**See**: [authoring-guide.md](authoring-guide.md) for lifecycle.yaml format
+**See**: [lifecycle-format.md](lifecycle-format.md) for complete lifecycle.yaml specification including:
+- Built-in variables (`${SKILL_NAME}`, `${SKILL_PATH}`, `${HOME}`, `${PLATFORM}`)
+- Custom variable definitions
+- Command format and fields
+- Common patterns (Python venv, config files, platform-specific commands)
+- Security and validation rules
 
 ---
 
