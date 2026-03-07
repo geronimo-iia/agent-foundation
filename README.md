@@ -35,3 +35,15 @@ This repository contains stable specifications only — no implementation. It de
 - **[Tools](tools/)** — Tool definitions, MCP protocol, execution policies
 - **[Bootstrap](bootstrap/)** — Minimal setup procedures for agent workspaces
 - **[Schemas](schemas/)** — JSON schemas for validation (see [schemas/README.md](schemas/README.md))
+
+## Maturity
+
+| Domain           | Spec     | Tooling                                                                            |
+| ---------------- | -------- | ---------------------------------------------------------------------------------- |
+| Skills           | ✅ stable | ✅ [agentctl](https://github.com/geronimo-iia/agentctl) validates + generates index |
+| Docs             | ✅ stable | ✅ [agentctl](https://github.com/geronimo-iia/agentctl) validates + generates index |
+| Schemas          | ✅ stable | ✅ used by agentctl                                                                 |
+| Bootstrap        | ✅ stable | —                                                                                  |
+| Agents           | ✅ stable | ⬜ no implementation yet                                                            |
+| Tools / MCP      | ✅ stable | ⬜ no implementation yet                                                            |
+| Information Flow | ✅ stable | ⬜ no implementation yet                                                            |
