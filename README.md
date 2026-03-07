@@ -1,6 +1,6 @@
 # Agent Foundation
 
-Final specifications and foundational patterns for multi-agent systems.
+Specifications and foundational patterns for multi-agent systems.
 
 ## Purpose
 
