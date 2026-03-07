@@ -7,7 +7,7 @@ read_when:
   - Getting minimal working setup with Amazon Q integration
   - Initial workspace configuration from scratch
 status: active
-last_updated: "2025-01-16"
+last_updated: "2026-07-15"
 ---
 
 # Agent Workspace Setup
@@ -21,6 +21,19 @@ This guide provides minimal steps for bootstrapping the agent development worksp
 - Git installed and configured
 - Code editor with Amazon Q plugin (VS Code, Zed, etc.)
 - Terminal/command line access
+- `agentctl` installed (see below)
+
+## Install agentctl
+
+```bash
+# macOS/Linux
+brew tap geronimo-iia/agent && brew install agentctl
+
+# or via cargo
+cargo install agent-ctl
+```
+
+Verify: `agentctl --version`
 
 ## Installation Process
 
@@ -36,9 +49,8 @@ cd agent-workspace
 
 ```bash
 # Clone core agent repositories
-git clone <agent-foundation-url> agent-foundation
-git clone <agent-software-url> agent-software
-git clone <agent-software-engineering-url> agent-software-engineering
+git clone https://github.com/geronimo-iia/agent-foundation.git agent-foundation
+git clone https://github.com/geronimo-iia/agent-skills.git agent-skills
 ```
 
 ### Step 3: Configure IDE Integration
@@ -54,8 +66,8 @@ git clone <agent-software-engineering-url> agent-software-engineering
 
 The workspace is now ready for development:
 - **agent-foundation/** - Reference stable specifications
-- **agent-software/** - Use development standards and tooling
-- **agent-software-engineering/** - Apply engineering practices
+- **agent-skills/** - Available skills for agent use
+- **agentctl** - Validate and generate hub indexes
 - **Workspace rules** - Automatically enforce standards through Amazon Q
 
 For detailed usage, explore the specifications in each repository.
