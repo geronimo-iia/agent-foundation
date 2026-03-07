@@ -6,7 +6,7 @@
       "title": "Information Flow Tracking",
       "summary": "Track data origin and sensitivity through agent systems using taint labels to prevent information leakage and enforce security policies",
       "path": "information-flow/definition.md",
-      "commit_hash": "",
+      "commit_hash": "c7ec64d0d117128849cc215dc2a07a408eca350e",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -20,7 +20,7 @@
       "title": "Taint Audit Log Events",
       "summary": "Event schema for taint tracking audit logs - structured records of taint operations for compliance and analysis",
       "path": "information-flow/audit-events.md",
-      "commit_hash": "",
+      "commit_hash": "c7ec64d0d117128849cc215dc2a07a408eca350e",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -34,7 +34,7 @@
       "title": "Taint Specification Language (TSL) Core",
       "summary": "Declarative YAML format for specifying taint policies - sources, sinks, and basic propagation rules",
       "path": "information-flow/tsl-core.md",
-      "commit_hash": "",
+      "commit_hash": "c7ec64d0d117128849cc215dc2a07a408eca350e",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -47,7 +47,7 @@
       "title": "Taint Supervisor Pattern",
       "summary": "Centralized architecture for managing taint assignment, policy enforcement, and audit logging in information flow tracking systems",
       "path": "information-flow/taint-supervisor.md",
-      "commit_hash": "",
+      "commit_hash": "c7ec64d0d117128849cc215dc2a07a408eca350e",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -239,8 +239,8 @@
       "title": "What are Skills?",
       "summary": "Skills are a lightweight, open format for extending AI agent capabilities with specialized knowledge and workflows.",
       "path": "skills/definition.md",
-      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
-      "last_updated": "2025-01-16",
+      "commit_hash": "506187ca1a04c76f8e8c52c2ea6fd31afa91184d",
+      "last_updated": "2025-07-14",
       "status": "active",
       "read_when": [
         "Understanding what skills are and how they work",
@@ -263,6 +263,19 @@
       ]
     },
     {
+      "title": "Lifecycle YAML Format",
+      "summary": "Complete specification for lifecycle.yaml format - agent-assisted skill dependency management with install, update, and uninstall commands",
+      "path": "skills/lifecycle-format.md",
+      "commit_hash": "",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Writing lifecycle.yaml for a skill",
+        "Implementing lifecycle command execution in an agent",
+        "Understanding skill dependency management"
+      ]
+    },
+    {
       "title": "Skill Hub",
       "summary": "Multi-source skill registry hub with Git repositories, CI pipelines, and index.json for skill distribution and management.",
       "path": "skills/hub.md",
@@ -279,8 +292,8 @@
       "title": "Skill Authoring",
       "summary": "How to author SKILL.md files with machine-readable YAML frontmatter.",
       "path": "skills/authoring-guide.md",
-      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
-      "last_updated": "2025-01-16",
+      "commit_hash": "506187ca1a04c76f8e8c52c2ea6fd31afa91184d",
+      "last_updated": "2025-07-14",
       "status": "active",
       "read_when": [
         "Writing or reviewing a SKILL.md file",
@@ -291,7 +304,7 @@
   ],
   "metadata": {
     "generated_at": "2025-01-16T00:00:00Z",
-    "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
-    "total_entries": 21
+    "commit_hash": "506187ca1a04c76f8e8c52c2ea6fd31afa91184d",
+    "total_entries": 22
   }
 }
