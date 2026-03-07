@@ -6,7 +6,7 @@ read_when:
   - Learning about the SKILL.md format and structure
   - Implementing skills support in an agent system
 status: active
-last_updated: "2025-01-16"
+last_updated: "2025-07-14"
 ---
 
 # What are Skills?
@@ -85,6 +85,14 @@ This specification is compatible with the [Agent Skills](https://agentskills.io)
 - Mode-specific skills (`skills-{mode}/` directories) — from [Kilo](https://kilo.ai/docs/customize/skills)
 - Priority/override rules (project > global, mode-specific > generic) — from [Kilo](https://kilo.ai/docs/customize/skills)
 - Variable substitution in lifecycle commands
+
+**Authoring best practices** (incorporated from [mgechev/skills-best-practices](https://github.com/mgechev/skills-best-practices)):
+- Negative triggers in descriptions to prevent false activations
+- Third-person imperative tone in skill body
+- No human-oriented prose in skill body
+- Flat hierarchy rule (one level deep)
+- Scripts stdout/stderr contract
+- LLM validation workflow
 
 Basic Agent Skills will work without modification. The extensions are optional and backward-compatible.
 

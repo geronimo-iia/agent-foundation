@@ -6,7 +6,7 @@ read_when:
   - Implementing load-time gating or keyword scoring
   - Designing the requires block or description field
 status: active
-last_updated: "2025-01-16"
+last_updated: "2025-07-14"
 ---
 
 # How to Write Skills — Machine-Readable YAML Frontmatter
@@ -27,6 +27,8 @@ my-skill/                  ← directory name must match `name` field exactly
 ├── references/            ← optional: docs loaded on demand
 └── assets/                ← optional: templates, resources
 ```
+
+**Flat hierarchy rule**: Skills must be exactly one level deep — `my-skill/SKILL.md`. Nested skill directories (e.g., `my-skill/sub-skill/SKILL.md`) are not supported and will not be discovered.
 
 ---
 
@@ -140,7 +142,6 @@ Skills can include an optional `lifecycle.yaml` file with install/update/uninsta
 
 ```yaml
 variables:
-  SKILL_PATH: ${HOME}/.local/share/skills/${SKILL_NAME}
   VENV_PATH: ${SKILL_PATH}/.venv
   PYTHON_BIN: ${VENV_PATH}/bin/python
 
@@ -177,11 +178,12 @@ uninstall:
 - Evaluated in order of declaration
 
 **Built-in variables**:
-- `${SKILL_NAME}`: Skill name from frontmatter (e.g., `datalab-marker`)
+- `${SKILL_NAME}`: Skill name from frontmatter (e.g., `marker-pdf`)
+- `${SKILL_PATH}`: Absolute path to skill installation directory (set by agent)
 - `${HOME}`: User home directory
 - `${PLATFORM}`: Current platform (`linux`, `macos`, `windows`)
 
-**Custom variables**: Defined in `lifecycle.variables` block with defaults
+**Custom variables**: Defined in `lifecycle.variables` block
 
 ### Variable Evaluation
 
@@ -189,7 +191,8 @@ Variables are evaluated in this order:
 
 1. **Built-in variables** are initialized first:
    ```python
-   SKILL_NAME = "datalab-marker"  # from frontmatter
+   SKILL_NAME = "marker-pdf"       # from frontmatter
+   SKILL_PATH = "~/.agent/skills/marker-pdf"  # from agent
    HOME = "/Users/username"        # from system
    PLATFORM = "macos"              # from system
    ```
@@ -197,24 +200,19 @@ Variables are evaluated in this order:
 2. **Custom variables** are evaluated in declaration order:
    ```yaml
    variables:
-     SKILL_PATH: ${HOME}/.local/share/skills/${SKILL_NAME}
      VENV_PATH: ${SKILL_PATH}/.venv
      PYTHON_BIN: ${VENV_PATH}/bin/python
    ```
    
    Evaluation:
    ```python
-   # Step 1: SKILL_PATH
-   SKILL_PATH = "${HOME}/.local/share/skills/${SKILL_NAME}"
-   SKILL_PATH = "/Users/username/.local/share/skills/datalab-marker"
-   
-   # Step 2: VENV_PATH (can use SKILL_PATH)
+   # Step 1: VENV_PATH (uses built-in SKILL_PATH)
    VENV_PATH = "${SKILL_PATH}/.venv"
-   VENV_PATH = "/Users/username/.local/share/skills/datalab-marker/.venv"
+   VENV_PATH = "~/.agent/skills/marker-pdf/.venv"
    
-   # Step 3: PYTHON_BIN (can use VENV_PATH)
+   # Step 2: PYTHON_BIN (can use VENV_PATH)
    PYTHON_BIN = "${VENV_PATH}/bin/python"
-   PYTHON_BIN = "/Users/username/.local/share/skills/datalab-marker/.venv/bin/python"
+   PYTHON_BIN = "~/.agent/skills/marker-pdf/.venv/bin/python"
    ```
 
 3. **Commands** are evaluated with all variables:
@@ -224,8 +222,8 @@ Variables are evaluated in this order:
    
    Result:
    ```bash
-   uv venv /Users/username/.local/share/skills/datalab-marker/.venv && \
-   uv pip install --python /Users/username/.local/share/skills/datalab-marker/.venv/bin/python marker-pdf
+   uv venv ~/.agent/skills/marker-pdf/.venv && \
+   uv pip install --python ~/.agent/skills/marker-pdf/.venv/bin/python marker-pdf
    ```
 
 **Rules**:
@@ -262,25 +260,72 @@ The description serves two purposes:
 2. **Activation**: The agent decides whether to use the skill based on this text
 
 ```yaml
-# Bad — vague, no activation signal
+# Bad — vague, no activation signal, no negative triggers
 description: Helps with PDFs.
 
-# Good — specific capability + explicit trigger condition
+# Good — specific capability, positive triggers, negative triggers
 description: >
   Extract text and tables from PDF files, fill PDF forms, and merge multiple PDFs.
   Use when the user needs to work with PDF documents, extract content, fill forms,
-  or combine files.
+  or combine files. Do not use for image files, Word documents, or plain text files.
 ```
 
 **Writing tips**:
 - Write descriptions that match how users phrase requests
 - Be specific about capabilities and when to use the skill
+- Include **negative triggers**: explicitly state what the skill does NOT handle ("Do not use for…") — this prevents false activations
 - Explicit invocation always works (e.g., "use the pdf-processing skill")
 - Use YAML block scalar (`>`) to fold newlines into spaces for long descriptions
 
 ---
 
-## 6. Progressive disclosure
+## 6. Skill body tone
+
+The SKILL.md body is instructions for the agent, not documentation for humans.
+
+- **Use third-person imperative**: Write steps as direct commands — "Extract the text", "Return the result", "Call the API"
+- **No human-oriented prose**: Omit introductions, explanations of why, and background context — the agent needs what to do, not why it exists
+- **No human docs in body**: Do not include usage examples written for human readers, README-style overviews, or marketing copy — move those to `references/` if needed
+
+```markdown
+# Bad — human-oriented prose
+This skill helps you work with PDFs. PDFs are a common format and...
+You can use this skill to extract text by following these steps:
+
+# Good — third-person imperative
+## Extract text
+1. Open the PDF with pdfplumber.
+2. Iterate pages and call `page.extract_text()`.
+3. Return the concatenated result.
+```
+
+---
+
+## 7. Scripts contract
+
+Scripts in `scripts/` must follow this stdout/stderr contract so the agent can parse results reliably:
+
+- **stdout**: Machine-readable output only — the result the agent will consume (JSON, plain value, file path)
+- **stderr**: Human-readable status, progress messages, warnings, and errors
+- **Exit codes**: `0` for success, non-zero for failure
+
+```bash
+#!/usr/bin/env bash
+# Good — result on stdout, status on stderr
+echo "Processing..." >&2
+result=$(do_work "$1")
+if [ $? -ne 0 ]; then
+  echo "Failed to process $1" >&2
+  exit 1
+fi
+echo "$result"   # stdout: agent reads this
+```
+
+Never mix status messages into stdout — the agent treats all stdout as the result.
+
+---
+
+## 8. Progressive disclosure
 
 ```
 Tier 1 — Discovery  (~100 tokens):  name + description, loaded at startup for ALL skills
@@ -307,7 +352,23 @@ Keep body under 500 lines. Move large reference tables and full API docs to `ref
 
 ---
 
-## 7. Complete example
+## 9. LLM validation workflow
+
+Before publishing a skill, validate it with an LLM using this four-phase workflow:
+
+**Phase 1 — Activation test**: Give the LLM only the `name` and `description`. Ask: "Would you activate this skill for the request: [sample request]?" Verify it activates on positive triggers and does NOT activate on negative trigger phrases.
+
+**Phase 2 — Instruction clarity**: Give the LLM the full SKILL.md body. Ask it to follow the instructions for a sample task. If it asks clarifying questions or misinterprets steps, the instructions need revision.
+
+**Phase 3 — Negative trigger coverage**: Give the LLM a set of requests that should NOT activate the skill. Confirm it correctly declines each one based on the negative triggers in the description.
+
+**Phase 4 — Edge case handling**: Give the LLM the edge cases section and ask it to handle each scenario. Verify the instructions produce correct behavior.
+
+A skill passes validation when all four phases complete without ambiguity or incorrect activation.
+
+---
+
+## 10. Complete example
 
 ```markdown
 ---
@@ -358,7 +419,6 @@ For the full API reference, see [references/api.md](references/api.md).
 
 ```yaml
 variables:
-  SKILL_PATH: ${HOME}/.local/share/skills/${SKILL_NAME}
   VENV_PATH: ${SKILL_PATH}/.venv
   PYTHON_BIN: ${VENV_PATH}/bin/python
 
@@ -383,13 +443,25 @@ uninstall:
 
 ---
 
-## 8. Authoring checklist
+## 11. Authoring checklist
 
 - [ ] Directory name matches `name` exactly (lowercase, hyphens only)
 - [ ] Skill placed in correct directory (`skills/` for generic, `skills-{mode}/` for mode-specific)
 - [ ] `description` answers *what* + *when* in ≤1024 chars, matches how users phrase requests
+- [ ] `description` includes negative triggers ("Do not use for…") to prevent false activations
+- [ ] Skill body uses third-person imperative tone; no human-oriented prose or README-style content
+- [ ] Scripts follow stdout/stderr contract: stdout is machine-readable result only, stderr is status/errors
+- [ ] Skill validated with LLM using the four-phase workflow (activation, clarity, negative triggers, edge cases)
 - [ ] `compatibility` lists environment requirements in 1-500 chars (if applicable)
 - [ ] `lifecycle.yaml` provided with install/update/uninstall commands (if applicable)
 - [ ] `lifecycle.yaml` variables defined for reusable paths
 - [ ] Body is under 500 lines; large reference material in `references/`
+- [ ] Skill directory is exactly one level deep (flat hierarchy — no nested skill dirs)
 - [ ] If creating mode-specific variant, verify it overrides correctly
+
+---
+
+## Sources
+
+- [agentskills.io](https://agentskills.io) — Base Agent Skills format specification
+- [mgechev/skills-best-practices](https://github.com/mgechev/skills-best-practices) — Negative triggers, third-person imperative tone, no-human-docs rule, flat hierarchy rule, scripts stdout/stderr contract, LLM validation workflow
