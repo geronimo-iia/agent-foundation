@@ -29,14 +29,21 @@ This repository contains stable specifications only — no implementation. It de
 
 ## Key Specifications
 
-- **[Rules](rules/)** — Workspace rules best practices and templates for AI behavior enforcement
+### Mature specifications & Tooling
+
 - **[Skills](skills/)** — Skill format, lifecycle, hub protocols, authoring guide
-- **[Information Flow Tracking](information-flow/)** — Taint tracking, TSL policy language, audit events
 - **[Documentation](docs/)** — Document format, hub protocols, organization standards
+- **[Schemas](schemas/)** — JSON schemas for validation (see [schemas/README.md](schemas/README.md))
+- **[Bootstrap](bootstrap/)** — Minimal setup procedures for agent workspaces
+- **[Rules](rules/)** — Workspace rules best practices and templates for AI behavior enforcement
+
+### Specification only
+
+> These specifications are stable but have no tooling implementation yet. They may benefit from further refinement as implementation experience is gained.
+
 - **[Agents](agents/)** — Agent definitions, manifest formats, registry protocols
 - **[Tools](tools/)** — Tool definitions, MCP protocol, execution policies
-- **[Bootstrap](bootstrap/)** — Minimal setup procedures for agent workspaces
-- **[Schemas](schemas/)** — JSON schemas for validation (see [schemas/README.md](schemas/README.md))
+- **[Information Flow Tracking](information-flow/)** — Taint tracking, TSL policy language, audit events
 
 ## Tooling
 
