@@ -59,7 +59,9 @@ git clone https://github.com/geronimo-iia/agent-software.git agent-software
 #### Amazon Q Plugin
 1. Install Amazon Q plugin in your IDE
 2. Open the agent-workspace directory
-3. Copy rule templates from `agent-foundation/rules/templates/` to `.amazonq/rules/`
+3. Copy rule templates to `.amazonq/rules/` for automatic context activation:
+   - From `agent-foundation/rules/templates/` (documentation and workspace standards)
+   - From `agent-software/rules/templates/` (development standards)
 4. Customize the templates for your workspace structure
 5. The `.amazonq/rules/` directory will automatically apply workspace standards
 
