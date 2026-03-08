@@ -28,6 +28,7 @@ This repository contains stable specifications only — no implementation. It de
 
 ## Key Specifications
 
+- **[Rules](rules/)** — Workspace rules best practices and templates for AI behavior enforcement
 - **[Skills](skills/)** — Skill format, lifecycle, hub protocols, authoring guide
 - **[Information Flow Tracking](information-flow/)** — Taint tracking, TSL policy language, audit events
 - **[Documentation](docs/)** — Document format, hub protocols, organization standards
