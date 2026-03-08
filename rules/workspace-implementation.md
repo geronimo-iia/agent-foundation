@@ -1,13 +1,13 @@
 ---
 title: "Workspace Rule Implementation"
-summary: "Implementation patterns for workspace-level AI behavior rules using .amazonq/rules/ directory structure."
+summary: "Implementation patterns for workspace-level AI behavior rules, portable across Amazon Q, Cursor, Copilot, and other AI systems."
 read_when:
   - Implementing workspace rules in new projects
   - Setting up AI behavior enforcement systems
-  - Adapting rule patterns to different workspaces
+  - Adapting rule patterns to different workspaces or AI systems
   - Understanding rule implementation architecture
 status: active
-last_updated: "2025-01-16"
+last_updated: "2026-07-15"
 ---
 
 # Workspace Rule Implementation
@@ -73,3 +73,21 @@ Separate template files for easy copying:
 - Specifications → contain detailed knowledge  
 - Tooling → implements standards
 - Processes → documented in engineering specs
+
+## Adapting for Other AI Systems
+
+The four-rule structure and content patterns are portable across AI systems. Only the rules directory location changes:
+
+| AI System | Rules Directory |
+|---|---|
+| Amazon Q | `.amazonq/rules/*.md` |
+| Cursor | `.cursor/rules/*.md` |
+| GitHub Copilot | `.github/copilot-instructions.md` |
+| Claude (Anthropic) | `CLAUDE.md` (single file) |
+| OpenAI Codex | `AGENTS.md` (single file) |
+
+For single-file systems (Claude, Codex), concatenate the four rule files into one, preserving the section structure.
+
+**What transfers unchanged**: rule categories, reference pattern, enforcement language, maintenance pattern.
+
+**What needs adapting**: directory path in `documentation-standards.md` and `semantic-commits.md` references, project structure diagram in `project-organization.md`.
