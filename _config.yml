@@ -6,9 +6,10 @@ baseurl: /agent-foundation
 remote_theme: just-the-docs/just-the-docs
 
 # Plugins for automatic navigation
-plugins:
-  - jekyll-optional-front-matter
-  - jekyll-default-layout
+# Note: GitHub Pages has limited plugin support
+# plugins:
+#   - jekyll-optional-front-matter
+#   - jekyll-default-layout
 
 # Enable search
 search_enabled: true
