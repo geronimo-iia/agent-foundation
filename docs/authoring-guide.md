@@ -23,6 +23,8 @@ for Agent Zero.
 
 ## 1. Schema
 
+> **Scope**: Frontmatter is required on all `.md` files that are part of the doc corpus — i.e., indexed by `agentctl` and loaded by the agent. The following files are excluded and must **not** have frontmatter: `README.md`, `CHANGELOG.md`, `CONTRIBUTING.md`, `ARCHIVED.md`.
+
 Core fields (all docs):
 
 ```yaml
@@ -160,6 +162,7 @@ requires_skills:
 
 ## 6. Authoring checklist
 
+- [ ] File is not `README.md`, `CHANGELOG.md`, `CONTRIBUTING.md`, or `ARCHIVED.md` (those must not have frontmatter)
 - [ ] `title` is present and matches the H1 heading
 - [ ] `summary` is one sentence describing scope, not restating the title
 - [ ] `read_when` entries are specific, actionable conditions (2–4 entries)
