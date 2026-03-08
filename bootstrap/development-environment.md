@@ -51,6 +51,7 @@ cd agent-workspace
 # Clone core agent repositories
 git clone https://github.com/geronimo-iia/agent-foundation.git agent-foundation
 git clone https://github.com/geronimo-iia/agent-skills.git agent-skills
+git clone https://github.com/geronimo-iia/agent-software.git agent-software
 ```
 
 ### Step 3: Configure IDE Integration
@@ -58,7 +59,7 @@ git clone https://github.com/geronimo-iia/agent-skills.git agent-skills
 #### Amazon Q Plugin
 1. Install Amazon Q plugin in your IDE
 2. Open the agent-workspace directory
-3. Copy rule templates from `agent-software-engineering/rules/templates/` to `.amazonq/rules/`
+3. Copy rule templates from `agent-software/rules/templates/` to `.amazonq/rules/`
 4. Customize the templates for your workspace structure
 5. The `.amazonq/rules/` directory will automatically apply workspace standards
 
@@ -67,6 +68,7 @@ git clone https://github.com/geronimo-iia/agent-skills.git agent-skills
 The workspace is now ready for development:
 - **agent-foundation/** - Reference stable specifications
 - **agent-skills/** - Available skills for agent use
+- **agent-software/** - Software development standards and engineering practices
 - **agentctl** - Validate and generate hub indexes
 - **Workspace rules** - Automatically enforce standards through Amazon Q
 
