@@ -47,3 +47,11 @@ This repository contains stable specifications only — no implementation. It de
 | Agents           | ✅ stable | ⬜ no implementation yet                                                            |
 | Tools / MCP      | ✅ stable | ⬜ no implementation yet                                                            |
 | Information Flow | ✅ stable | ⬜ no implementation yet                                                            |
+
+## License
+
+[MIT](LICENSE)
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
