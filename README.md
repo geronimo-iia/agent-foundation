@@ -23,6 +23,7 @@ This repository contains stable specifications only — no implementation. It de
 ├── tools/          # Tool definitions, MCP protocol, execution policies
 ├── information-flow/ # Information flow tracking and taint analysis
 ├── bootstrap/      # Workspace setup and bootstrap guides
+├── rules/          # Workspace rules best practices and templates
 ├── schemas/        # JSON schemas for validation (see schemas/README.md)
 ```
 
