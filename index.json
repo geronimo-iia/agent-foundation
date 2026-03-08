@@ -3,189 +3,52 @@
   "version": "1.0",
   "entries": [
     {
-      "title": "Information Flow Tracking",
-      "summary": "Track data origin and sensitivity through agent systems using taint labels to prevent information leakage and enforce security policies",
-      "path": "information-flow/definition.md",
-      "commit_hash": "c7ec64d0d117128849cc215dc2a07a408eca350e",
-      "last_updated": "2025-01-16",
+      "title": "Workspace Rule Implementation",
+      "summary": "Implementation patterns for workspace-level AI behavior rules, portable across Amazon Q, Cursor, Copilot, and other AI systems.",
+      "path": "rules/workspace-implementation.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2026-07-15",
       "status": "active",
       "read_when": [
-        "Designing security controls for agent systems handling mixed-sensitivity data",
-        "Implementing data flow tracking and taint analysis",
-        "Preventing information leakage in multi-agent systems",
-        "Understanding information flow security patterns"
+        "Implementing workspace rules in new projects",
+        "Setting up AI behavior enforcement systems",
+        "Adapting rule patterns to different workspaces or AI systems",
+        "Understanding rule implementation architecture"
       ]
     },
     {
-      "title": "Taint Audit Log Events",
-      "summary": "Event schema for taint tracking audit logs - structured records of taint operations for compliance and analysis",
-      "path": "information-flow/audit-events.md",
-      "commit_hash": "c7ec64d0d117128849cc215dc2a07a408eca350e",
+      "title": "Rule Creation Best Practices",
+      "summary": "Software engineering principles and patterns for creating maintainable workspace rules.",
+      "path": "rules/best-practices.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
-        "Implementing taint supervisor audit logging",
-        "Building audit log analysis tools",
-        "Designing compliance and monitoring systems",
-        "Understanding taint tracking observability"
+        "Creating new workspace rules",
+        "Refactoring existing rule architecture",
+        "Designing rule systems for AI behavior enforcement",
+        "Applying software engineering principles to rule design"
       ]
     },
     {
-      "title": "Taint Specification Language (TSL) Core",
-      "summary": "Declarative YAML format for specifying taint policies - sources, sinks, and basic propagation rules",
-      "path": "information-flow/tsl-core.md",
-      "commit_hash": "c7ec64d0d117128849cc215dc2a07a408eca350e",
+      "title": "Rules",
+      "summary": "Best practices for creating and managing workspace rules for AI behavior enforcement.",
+      "path": "rules/definition.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
-        "Defining taint policies declaratively for agent systems",
-        "Creating portable taint specifications across implementations",
-        "Implementing policy-as-code for information flow tracking"
-      ]
-    },
-    {
-      "title": "Taint Supervisor Pattern",
-      "summary": "Centralized architecture for managing taint assignment, policy enforcement, and audit logging in information flow tracking systems",
-      "path": "information-flow/taint-supervisor.md",
-      "commit_hash": "c7ec64d0d117128849cc215dc2a07a408eca350e",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Designing centralized taint management for agent systems",
-        "Implementing audit trails for information flow tracking",
-        "Refactoring scattered taint assignment into a unified system",
-        "Building policy management for data flow controls"
-      ]
-    },
-    {
-      "title": "What are Tools?",
-      "summary": "Tools are executable capabilities that agents can invoke to interact with systems, APIs, and external resources beyond text generation.",
-      "path": "tools/definition.md",
-      "commit_hash": "80a09d58b85f9cf89310e70aa50e54bdcd5ef90b",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Understanding what tools are and how they work",
-        "Designing tool systems for agents",
-        "Implementing tool execution and security",
-        "Establishing tool specifications and contracts"
-      ]
-    },
-    {
-      "title": "Tool Execution Policy",
-      "summary": "Autonomous agents execute tools with user authority. Security through transparency, logging, and user consent.",
-      "path": "tools/execution-policy.md",
-      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Designing agent tool execution systems",
-        "Understanding agent security model",
-        "Implementing tool invocation and logging"
-      ]
-    },
-    {
-      "title": "Model Context Protocol (MCP)",
-      "summary": "Anthropic's standard protocol for connecting AI models to tools, resources, and data sources through a client-server architecture.",
-      "path": "tools/mcp-protocol.md",
-      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Implementing tool servers for agents",
-        "Integrating external tools and resources",
-        "Understanding MCP architecture and capabilities",
-        "Building MCP-compatible systems"
-      ]
-    },
-    {
-      "title": "Bootstrap",
-      "summary": "Bootstrap guides for minimal setup of the agent development workspace with core repositories and tooling.",
-      "path": "bootstrap/definition.md",
-      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Setting up the agent workspace for the first time",
-        "Bootstrapping the agent development environment quickly",
-        "Getting minimal working setup with core repositories",
-        "Initial workspace configuration and IDE integration"
-      ]
-    },
-    {
-      "title": "Agent Workspace Setup",
-      "summary": "Minimal setup guide for bootstrapping agent workspace with core repositories, rule templates, and IDE integration.",
-      "path": "bootstrap/development-environment.md",
-      "commit_hash": "5ebd855d473b960aa7a2f0cec50698fc0d9cc851",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Setting up the agent workspace for the first time",
-        "Bootstrapping with core repositories and rule templates",
-        "Getting minimal working setup with Amazon Q integration",
-        "Initial workspace configuration from scratch"
-      ]
-    },
-    {
-      "title": "Agent Definition",
-      "summary": "Foundational definition of agents - autonomous software entities with identity, capabilities, and security boundaries that operate within agent systems",
-      "path": "agents/definition.md",
-      "commit_hash": "e4f8f41e5a9fd6ce951b77278fb7909acbfe26f9",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Understanding the fundamental concept of agents in agent systems",
-        "Designing agent architectures and interaction patterns",
-        "Planning agent security and capability models",
-        "Establishing agent system terminology and concepts"
-      ]
-    },
-    {
-      "title": "Agent Manifest Specification",
-      "summary": "Authoritative specification for agent manifests - the declarative format for agent identity, capabilities, runtime configuration, and security policies",
-      "path": "agents/agent-manifest-specification.md",
-      "commit_hash": "e4f8f41e5a9fd6ce951b77278fb7909acbfe26f9",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Designing agent systems that require capability-based security",
-        "Planning agent identity and authorization mechanisms",
-        "Architecting agent registries and management systems",
-        "Creating agent manifest authoring and validation tools"
-      ]
-    },
-    {
-      "title": "Agent Manifest Registry Specification",
-      "summary": "Registry system for storing, versioning, and managing signed agent manifests with support for hot reload, revocation, and lifecycle operations",
-      "path": "agents/agent-manifest-registry.md",
-      "commit_hash": "e4f8f41e5a9fd6ce951b77278fb7909acbfe26f9",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Designing agent manifest storage and versioning systems",
-        "Building agent registry services and management APIs",
-        "Planning manifest distribution and synchronization mechanisms",
-        "Creating manifest lifecycle management tools"
-      ]
-    },
-    {
-      "title": "What are Documents?",
-      "summary": "Documents are markdown files with machine-readable frontmatter that provide knowledge to agents on demand.",
-      "path": "docs/definition.md",
-      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Understanding what documents are and how they work",
-        "Learning about the document format and structure",
-        "Implementing document support in an agent system"
+        "Creating new workspace rules for AI behavior",
+        "Designing rule architecture and organization",
+        "Maintaining existing rule sets",
+        "Understanding rule vs prompt differences"
       ]
     },
     {
       "title": "Documentation Hub",
       "summary": "Multi-source documentation registry hub with Git repositories, CI pipelines, and index.json for on-demand knowledge loading.",
       "path": "docs/hub.md",
-      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -195,24 +58,10 @@
       ]
     },
     {
-      "title": "Hub Configuration",
-      "summary": "Unified configuration format for managing both skill and documentation hub sources in agent systems",
-      "path": "docs/hub-configuration.md",
-      "commit_hash": "96acd43430ea803d1bbe7208123a61a767af036e",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Implementing hub source management in agent systems",
-        "Designing agent configuration files",
-        "Understanding hub discovery and caching mechanisms",
-        "Configuring multiple skill and doc hubs"
-      ]
-    },
-    {
       "title": "Specification Organization",
       "summary": "Organizational principles for agent foundation specifications including domain grouping, naming conventions, and cross-reference standards.",
       "path": "docs/organization.md",
-      "commit_hash": "0b8b23118b0e28595cda2a6d38d004ff46367967",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -225,7 +74,7 @@
       "title": "Documentation Authoring",
       "summary": "How to author documentation files with machine-readable YAML frontmatter for Agent Zero.",
       "path": "docs/authoring-guide.md",
-      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -236,23 +85,160 @@
       ]
     },
     {
-      "title": "What are Skills?",
-      "summary": "Skills are a lightweight, open format for extending AI agent capabilities with specialized knowledge and workflows.",
-      "path": "skills/definition.md",
-      "commit_hash": "506187ca1a04c76f8e8c52c2ea6fd31afa91184d",
-      "last_updated": "2025-07-14",
+      "title": "What are Documents?",
+      "summary": "Documents are markdown files with machine-readable frontmatter that provide knowledge to agents on demand.",
+      "path": "docs/definition.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
-        "Understanding what skills are and how they work",
-        "Learning about the SKILL.md format and structure",
-        "Implementing skills support in an agent system"
+        "Understanding what documents are and how they work",
+        "Learning about the document format and structure",
+        "Implementing document support in an agent system"
+      ]
+    },
+    {
+      "title": "Hub Configuration",
+      "summary": "Unified configuration format for managing both skill and documentation hub sources in agent systems",
+      "path": "docs/hub-configuration.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Implementing hub source management in agent systems",
+        "Designing agent configuration files",
+        "Understanding hub discovery and caching mechanisms",
+        "Configuring multiple skill and doc hubs"
+      ]
+    },
+    {
+      "title": "Taint Supervisor Pattern",
+      "summary": "Centralized architecture for managing taint assignment, policy enforcement, and audit logging in information flow tracking systems",
+      "path": "information-flow/taint-supervisor.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing centralized taint management for agent systems",
+        "Implementing audit trails for information flow tracking",
+        "Refactoring scattered taint assignment into a unified system",
+        "Building policy management for data flow controls"
+      ]
+    },
+    {
+      "title": "Taint Audit Log Events",
+      "summary": "Event schema for taint tracking audit logs - structured records of taint operations for compliance and analysis",
+      "path": "information-flow/audit-events.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Implementing taint supervisor audit logging",
+        "Building audit log analysis tools",
+        "Designing compliance and monitoring systems",
+        "Understanding taint tracking observability"
+      ]
+    },
+    {
+      "title": "Information Flow Tracking",
+      "summary": "Track data origin and sensitivity through agent systems using taint labels to prevent information leakage and enforce security policies",
+      "path": "information-flow/definition.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing security controls for agent systems handling mixed-sensitivity data",
+        "Implementing data flow tracking and taint analysis",
+        "Preventing information leakage in multi-agent systems",
+        "Understanding information flow security patterns"
+      ]
+    },
+    {
+      "title": "Taint Specification Language (TSL) Core",
+      "summary": "Declarative YAML format for specifying taint policies - sources, sinks, and basic propagation rules",
+      "path": "information-flow/tsl-core.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Defining taint policies declaratively for agent systems",
+        "Creating portable taint specifications across implementations",
+        "Implementing policy-as-code for information flow tracking"
+      ]
+    },
+    {
+      "title": "Agent Manifest Specification",
+      "summary": "Authoritative specification for agent manifests - the declarative format for agent identity, capabilities, runtime configuration, and security policies",
+      "path": "agents/agent-manifest-specification.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing agent systems that require capability-based security",
+        "Planning agent identity and authorization mechanisms",
+        "Architecting agent registries and management systems",
+        "Creating agent manifest authoring and validation tools"
+      ]
+    },
+    {
+      "title": "Agent Definition",
+      "summary": "Foundational definition of agents - autonomous software entities with identity, capabilities, and security boundaries that operate within agent systems",
+      "path": "agents/definition.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Understanding the fundamental concept of agents in agent systems",
+        "Designing agent architectures and interaction patterns",
+        "Planning agent security and capability models",
+        "Establishing agent system terminology and concepts"
+      ]
+    },
+    {
+      "title": "Agent Manifest Registry Specification",
+      "summary": "Registry system for storing, versioning, and managing signed agent manifests with support for hot reload, revocation, and lifecycle operations",
+      "path": "agents/agent-manifest-registry.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing agent manifest storage and versioning systems",
+        "Building agent registry services and management APIs",
+        "Planning manifest distribution and synchronization mechanisms",
+        "Creating manifest lifecycle management tools"
+      ]
+    },
+    {
+      "title": "Skill Hub",
+      "summary": "Multi-source skill registry hub with Git repositories, CI pipelines, and index.json for skill distribution and management.",
+      "path": "skills/hub.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing the hub system, the index.json contract, CI pipeline for a hub repo",
+        "Setting up multi-hub configuration model",
+        "Comparing skill hub design to doc hub design"
+      ]
+    },
+    {
+      "title": "Lifecycle YAML Format",
+      "summary": "Complete specification for lifecycle.yaml format - agent-assisted skill dependency management with install, update, and uninstall commands",
+      "path": "skills/lifecycle-format.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Writing lifecycle.yaml for a skill",
+        "Implementing lifecycle command execution in an agent",
+        "Understanding skill dependency management"
       ]
     },
     {
       "title": "Skill Lifecycle Specification",
       "summary": "Foundational specification for skill installation, versioning, updates, and removal in agent systems",
       "path": "skills/lifecycle.md",
-      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -263,36 +249,10 @@
       ]
     },
     {
-      "title": "Lifecycle YAML Format",
-      "summary": "Complete specification for lifecycle.yaml format - agent-assisted skill dependency management with install, update, and uninstall commands",
-      "path": "skills/lifecycle-format.md",
-      "commit_hash": "",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Writing lifecycle.yaml for a skill",
-        "Implementing lifecycle command execution in an agent",
-        "Understanding skill dependency management"
-      ]
-    },
-    {
-      "title": "Skill Hub",
-      "summary": "Multi-source skill registry hub with Git repositories, CI pipelines, and index.json for skill distribution and management.",
-      "path": "skills/hub.md",
-      "commit_hash": "fa479d4cd89ece0d5c679e14f5ae658916947f52",
-      "last_updated": "2025-01-16",
-      "status": "active",
-      "read_when": [
-        "Designing the hub system, the index.json contract, CI pipeline for a hub repo",
-        "Setting up multi-hub configuration model",
-        "Comparing skill hub design to doc hub design"
-      ]
-    },
-    {
       "title": "Skill Authoring",
       "summary": "How to author SKILL.md files with machine-readable YAML frontmatter.",
       "path": "skills/authoring-guide.md",
-      "commit_hash": "506187ca1a04c76f8e8c52c2ea6fd31afa91184d",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
       "last_updated": "2025-07-14",
       "status": "active",
       "read_when": [
@@ -300,11 +260,93 @@
         "Implementing load-time gating or keyword scoring",
         "Designing the requires block or description field"
       ]
+    },
+    {
+      "title": "What are Skills?",
+      "summary": "Skills are a lightweight, open format for extending AI agent capabilities with specialized knowledge and workflows.",
+      "path": "skills/definition.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-07-14",
+      "status": "active",
+      "read_when": [
+        "Understanding what skills are and how they work",
+        "Learning about the SKILL.md format and structure",
+        "Implementing skills support in an agent system"
+      ]
+    },
+    {
+      "title": "Agent Workspace Setup",
+      "summary": "Minimal setup guide for bootstrapping agent workspace with core repositories, rule templates, and IDE integration.",
+      "path": "bootstrap/development-environment.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2026-07-15",
+      "status": "active",
+      "read_when": [
+        "Setting up the agent workspace for the first time",
+        "Bootstrapping with core repositories and rule templates",
+        "Getting minimal working setup with Amazon Q integration",
+        "Initial workspace configuration from scratch"
+      ]
+    },
+    {
+      "title": "Bootstrap",
+      "summary": "Bootstrap guides for minimal setup of the agent development workspace with core repositories and tooling.",
+      "path": "bootstrap/definition.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Setting up the agent workspace for the first time",
+        "Bootstrapping the agent development environment quickly",
+        "Getting minimal working setup with core repositories",
+        "Initial workspace configuration and IDE integration"
+      ]
+    },
+    {
+      "title": "Model Context Protocol (MCP)",
+      "summary": "Anthropic's standard protocol for connecting AI models to tools, resources, and data sources through a client-server architecture.",
+      "path": "tools/mcp-protocol.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Implementing tool servers for agents",
+        "Integrating external tools and resources",
+        "Understanding MCP architecture and capabilities",
+        "Building MCP-compatible systems"
+      ]
+    },
+    {
+      "title": "Tool Execution Policy",
+      "summary": "Autonomous agents execute tools with user authority. Security through transparency, logging, and user consent.",
+      "path": "tools/execution-policy.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Designing agent tool execution systems",
+        "Understanding agent security model",
+        "Implementing tool invocation and logging"
+      ]
+    },
+    {
+      "title": "What are Tools?",
+      "summary": "Tools are executable capabilities that agents can invoke to interact with systems, APIs, and external resources beyond text generation.",
+      "path": "tools/definition.md",
+      "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+      "last_updated": "2025-01-16",
+      "status": "active",
+      "read_when": [
+        "Understanding what tools are and how they work",
+        "Designing tool systems for agents",
+        "Implementing tool execution and security",
+        "Establishing tool specifications and contracts"
+      ]
     }
   ],
   "metadata": {
-    "generated_at": "2025-01-16T00:00:00Z",
-    "commit_hash": "506187ca1a04c76f8e8c52c2ea6fd31afa91184d",
-    "total_entries": 22
+    "generated_at": "2026-03-08T23:01:23.662222517+00:00",
+    "commit_hash": "a822f52f3264c41c557e26be99d0def718e4f4a8",
+    "total_entries": 25
   }
 }
