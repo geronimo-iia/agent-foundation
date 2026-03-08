@@ -1,0 +1,10 @@
+[hub]
+id = "geronimo-iia/agent-foundation"
+
+[generate]
+ignore = [
+  "README.md",
+  "CHANGELOG.md",
+  "CONTRIBUTING.md",
+  "ARCHIVED.md",
+]
