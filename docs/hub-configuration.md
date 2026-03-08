@@ -26,6 +26,7 @@ Agents configure multiple hub sources for both skills and documentation using a 
 
 ```json
 {
+  "skills_root": "~/.agent/skills",
   "skill_hubs": [
     {
       "id": "official",
@@ -64,6 +65,12 @@ Agents configure multiple hub sources for both skills and documentation using a 
 - Used for hub discovery and search
 
 ### Optional Fields
+
+**`skills_root`**: Root directory for installed skills
+- Default: `~/.agent/skills`
+- Supports `~` expansion
+- Skills installed to `<skills_root>/<name>/` or `<skills_root>-<mode>/<name>/`
+- Recorded in lock file `installed_path` — AI clients read this to locate skills
 
 **`git_url`**: Git repository URL
 - Used for sparse cloning during skill installation

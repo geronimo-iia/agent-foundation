@@ -5,6 +5,10 @@
   "description": "Configuration schema for agent hub sources (skills and docs)",
   "type": "object",
   "properties": {
+    "skills_root": {
+      "type": "string",
+      "description": "Root directory for installed skills. Default: ~/.agent/skills. Supports ~ expansion."
+    },
     "skill_hubs": {
       "type": "array",
       "description": "Configured skill hub sources",
