@@ -6,6 +6,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- GitHub Pages navigation structure improved with automatic folder-based organization
+- Added logical nav_order for sections: Bootstrap → Documentation → Skills → Agents → Tools → Information Flow → Rules → Schemas
+- Enabled jekyll plugins for better automatic navigation
+
 ## [0.2.0] - 2026-07-15
 
 ### Added
