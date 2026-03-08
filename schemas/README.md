@@ -6,7 +6,7 @@ read_when:
   - Integrating with hubs and registries
   - Understanding available schemas
 status: active
-last_updated: "2025-01-16"
+last_updated: "2026-07-16"
 ---
 
 # Schema Index
@@ -96,4 +96,4 @@ All schemas use JSON Schema Draft 2020-12 and can be referenced by URL:
 https://github.com/geronimo-iia/agent-foundation/schemas/{schema-name}.json
 ```
 
-For validation tooling, see [agent-hub-indexer](../../agent-hub-indexer/).
+For validation and hub management tooling, see [agentctl](https://github.com/geronimo-iia/agentctl).

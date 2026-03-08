@@ -27,6 +27,22 @@ This repository contains stable specifications only — no implementation. It de
 ├── schemas/        # JSON schemas for validation (see schemas/README.md)
 ```
 
+## Getting Started
+
+See [bootstrap/development-environment.md](bootstrap/development-environment.md) for the full setup guide.
+
+To bootstrap your workspace, paste this prompt into Amazon Q, Cursor, Zed, or any AI-enabled IDE:
+
+> Bootstrap my agent workspace following @agent-foundation/bootstrap/development-environment.md. Install agentctl, clone the required repositories, register the agent-skills hub, and install the agentctl skill.
+
+### Essential reading
+
+- [bootstrap/development-environment.md](bootstrap/development-environment.md) — full workspace setup guide
+- [rules/best-practices.md](rules/best-practices.md) — how to write workspace rules for AI behavior
+- [skills/authoring-guide.md](skills/authoring-guide.md) — how to write and publish skills
+- [docs/authoring-guide.md](docs/authoring-guide.md) — documentation format and frontmatter standards
+- [skills/hub.md](skills/hub.md) — hub protocol and index format
+
 ## Key Specifications
 
 ### Mature specifications & Tooling
@@ -59,18 +75,6 @@ brew tap geronimo-iia/agent && brew install agentctl
 # or
 cargo install agent-ctl
 ```
-
-## Maturity
-
-| Domain           | Spec     | Tooling                                                                                                          |
-| ---------------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
-| Skills           | ✅ stable | ✅ [agentctl](https://github.com/geronimo-iia/agentctl) validates, generates index, installs/updates/removes skills |
-| Docs             | ✅ stable | ✅ [agentctl](https://github.com/geronimo-iia/agentctl) validates + generates index                               |
-| Schemas          | ✅ stable | ✅ used by agentctl                                                                                               |
-| Bootstrap        | ✅ stable | ✅ [agentctl](https://github.com/geronimo-iia/agentctl) manages hub registry and local config                    |
-| Agents           | ✅ stable | ⬜ no implementation yet                                                                                          |
-| Tools / MCP      | ✅ stable | ⬜ no implementation yet                                                                                          |
-| Information Flow | ✅ stable | ⬜ no implementation yet                                                                                          |
 
 ## License
 
