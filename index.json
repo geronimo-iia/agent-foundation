@@ -6,7 +6,7 @@
       "title": "Workspace Rule Implementation",
       "summary": "Implementation patterns for workspace-level AI behavior rules, portable across Amazon Q, Cursor, Copilot, and other AI systems.",
       "path": "rules/workspace-implementation.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2026-07-15",
       "status": "active",
       "read_when": [
@@ -20,7 +20,7 @@
       "title": "Rule Creation Best Practices",
       "summary": "Software engineering principles and patterns for creating maintainable workspace rules.",
       "path": "rules/best-practices.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -34,7 +34,7 @@
       "title": "Rules",
       "summary": "Best practices for creating and managing workspace rules for AI behavior enforcement.",
       "path": "rules/definition.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -48,7 +48,7 @@
       "title": "Documentation Hub",
       "summary": "Multi-source documentation registry hub with Git repositories, CI pipelines, and index.json for on-demand knowledge loading.",
       "path": "docs/hub.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -61,7 +61,7 @@
       "title": "Specification Organization",
       "summary": "Organizational principles for agent foundation specifications including domain grouping, naming conventions, and cross-reference standards.",
       "path": "docs/organization.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -74,7 +74,7 @@
       "title": "Documentation Authoring",
       "summary": "How to author documentation files with machine-readable YAML frontmatter for Agent Zero.",
       "path": "docs/authoring-guide.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -88,7 +88,7 @@
       "title": "What are Documents?",
       "summary": "Documents are markdown files with machine-readable frontmatter that provide knowledge to agents on demand.",
       "path": "docs/definition.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -101,7 +101,7 @@
       "title": "Hub Configuration",
       "summary": "Unified configuration format for managing both skill and documentation hub sources in agent systems",
       "path": "docs/hub-configuration.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -115,7 +115,7 @@
       "title": "Taint Supervisor Pattern",
       "summary": "Centralized architecture for managing taint assignment, policy enforcement, and audit logging in information flow tracking systems",
       "path": "information-flow/taint-supervisor.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -129,7 +129,7 @@
       "title": "Taint Audit Log Events",
       "summary": "Event schema for taint tracking audit logs - structured records of taint operations for compliance and analysis",
       "path": "information-flow/audit-events.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -143,7 +143,7 @@
       "title": "Information Flow Tracking",
       "summary": "Track data origin and sensitivity through agent systems using taint labels to prevent information leakage and enforce security policies",
       "path": "information-flow/definition.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -157,7 +157,7 @@
       "title": "Taint Specification Language (TSL) Core",
       "summary": "Declarative YAML format for specifying taint policies - sources, sinks, and basic propagation rules",
       "path": "information-flow/tsl-core.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -170,7 +170,7 @@
       "title": "Agent Manifest Specification",
       "summary": "Authoritative specification for agent manifests - the declarative format for agent identity, capabilities, runtime configuration, and security policies",
       "path": "agents/agent-manifest-specification.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -184,7 +184,7 @@
       "title": "Agent Definition",
       "summary": "Foundational definition of agents - autonomous software entities with identity, capabilities, and security boundaries that operate within agent systems",
       "path": "agents/definition.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -198,7 +198,7 @@
       "title": "Agent Manifest Registry Specification",
       "summary": "Registry system for storing, versioning, and managing signed agent manifests with support for hot reload, revocation, and lifecycle operations",
       "path": "agents/agent-manifest-registry.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -212,7 +212,7 @@
       "title": "Skill Hub",
       "summary": "Multi-source skill registry hub with Git repositories, CI pipelines, and index.json for skill distribution and management.",
       "path": "skills/hub.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -225,7 +225,7 @@
       "title": "Lifecycle YAML Format",
       "summary": "Complete specification for lifecycle.yaml format - agent-assisted skill dependency management with install, update, and uninstall commands",
       "path": "skills/lifecycle-format.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -238,7 +238,7 @@
       "title": "Skill Lifecycle Specification",
       "summary": "Foundational specification for skill installation, versioning, updates, and removal in agent systems",
       "path": "skills/lifecycle.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -252,7 +252,7 @@
       "title": "Skill Authoring",
       "summary": "How to author SKILL.md files with machine-readable YAML frontmatter.",
       "path": "skills/authoring-guide.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-07-14",
       "status": "active",
       "read_when": [
@@ -265,7 +265,7 @@
       "title": "What are Skills?",
       "summary": "Skills are a lightweight, open format for extending AI agent capabilities with specialized knowledge and workflows.",
       "path": "skills/definition.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-07-14",
       "status": "active",
       "read_when": [
@@ -278,7 +278,7 @@
       "title": "Agent Workspace Setup",
       "summary": "Minimal setup guide for bootstrapping agent workspace with core repositories, rule templates, and IDE integration.",
       "path": "bootstrap/development-environment.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2026-07-15",
       "status": "active",
       "read_when": [
@@ -292,7 +292,7 @@
       "title": "Bootstrap",
       "summary": "Bootstrap guides for minimal setup of the agent development workspace with core repositories and tooling.",
       "path": "bootstrap/definition.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -306,7 +306,7 @@
       "title": "Model Context Protocol (MCP)",
       "summary": "Anthropic's standard protocol for connecting AI models to tools, resources, and data sources through a client-server architecture.",
       "path": "tools/mcp-protocol.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -320,7 +320,7 @@
       "title": "Tool Execution Policy",
       "summary": "Autonomous agents execute tools with user authority. Security through transparency, logging, and user consent.",
       "path": "tools/execution-policy.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -333,7 +333,7 @@
       "title": "What are Tools?",
       "summary": "Tools are executable capabilities that agents can invoke to interact with systems, APIs, and external resources beyond text generation.",
       "path": "tools/definition.md",
-      "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+      "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
       "last_updated": "2025-01-16",
       "status": "active",
       "read_when": [
@@ -345,8 +345,8 @@
     }
   ],
   "metadata": {
-    "generated_at": "2026-03-09T10:13:41.228931830+00:00",
-    "commit_hash": "26c19dad0af13bd6a951eea1668d5836f923f263",
+    "generated_at": "2026-03-09T10:17:38.881736844+00:00",
+    "commit_hash": "e6d6ec75dd4e69337d055834a836fc168951569f",
     "total_entries": 25
   }
 }
