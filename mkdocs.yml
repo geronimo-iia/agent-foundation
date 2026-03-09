@@ -4,6 +4,9 @@ site_url: https://geronimo-iia.github.io/agent-foundation/
 repo_url: https://github.com/geronimo-iia/agent-foundation
 repo_name: geronimo-iia/agent-foundation
 
+# Tell MkDocs to use the root directory as docs directory
+docs_dir: .
+
 theme:
   name: material
   palette:
