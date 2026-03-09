@@ -1,0 +1,50 @@
+site_name: Agent Foundation
+site_description: Specifications for secure, composable multi-agent systems
+site_url: https://geronimo-iia.github.io/agent-foundation/
+repo_url: https://github.com/geronimo-iia/agent-foundation
+repo_name: geronimo-iia/agent-foundation
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - search.highlight
+    - search.share
+    - content.code.copy
+
+plugins:
+  - search
+  - mermaid2
+
+markdown_extensions:
+  - pymdownx.mermaid
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - Home: README.md
+  - Bootstrap: bootstrap/
+  - Documentation: docs/
+  - Skills: skills/
+  - Agents: agents/
+  - Tools: tools/
+  - Information Flow: information-flow/
+  - Rules: rules/
+  - Schemas: schemas/
+  - Changelog: CHANGELOG.md
+  - Contributing: CONTRIBUTING.md
+  - License: LICENSE
+
+copyright: Copyright &copy; 2026 Jerome Guibert
