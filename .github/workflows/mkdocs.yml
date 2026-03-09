@@ -29,7 +29,7 @@ jobs:
           
       - name: Install dependencies
         run: |
-          pip install mkdocs-material
+          pip install "mkdocs-material<9.0"
           pip install mkdocs-mermaid2-plugin
           
       - name: Build site
@@ -38,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site
+          path: ./_site
 
   deploy:
     if: github.ref == 'refs/heads/main'
