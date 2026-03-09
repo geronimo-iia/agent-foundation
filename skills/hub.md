@@ -52,6 +52,8 @@ my-hub/
 
 `index.json` is always a snapshot of validated skills only.
 
+**Implementation**: The [`agentctl`](https://github.com/geronimo-iia/agentctl) CLI provides `hub validate` and `hub generate` commands for CI pipeline integration.
+
 ### index.json schema
 
 Formal schema: [`schemas/skills-index.json`](../schemas/skills-index.json)
@@ -210,3 +212,5 @@ The CI validator should check:
 - Directory name matches `name` field
 - Valid YAML frontmatter syntax
 - Optional: `lifecycle.yaml` syntax if present
+
+**Implementation**: Use [`agentctl hub validate`](https://github.com/geronimo-iia/agentctl) to validate skills and [`agentctl hub generate`](https://github.com/geronimo-iia/agentctl) to create the index.json file.

@@ -79,6 +79,8 @@ read_when:
 3. **Generate** `index.json` from all valid docs' frontmatter
 4. **Publish** `index.json` to the hub's stable URL
 
+**Implementation**: The [`agentctl`](https://github.com/geronimo-iia/agentctl) CLI provides `hub validate` and `hub generate` commands for CI pipeline integration.
+
 ### index.json schema
 
 Formal schema: [`schemas/docs-index.json`](../schemas/docs-index.json)
@@ -213,3 +215,5 @@ The two hubs are complementary: skills add capabilities, doc hubs add knowledge.
 4. Publish `index.json` at a stable URL
 
 For detailed frontmatter requirements and document formatting standards, see [authoring-guide.md](authoring-guide.md).
+
+**Implementation**: Use [`agentctl hub validate`](https://github.com/geronimo-iia/agentctl) to validate documentation frontmatter and [`agentctl hub generate`](https://github.com/geronimo-iia/agentctl) to create the index.json file.
