@@ -1,0 +1,7 @@
+_site/
+.git/
+.github/
+mkdocs.yml
+agentctl.toml
+index.json
+*.json

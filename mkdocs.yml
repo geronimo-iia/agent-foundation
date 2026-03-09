@@ -6,6 +6,7 @@ repo_name: geronimo-iia/agent-foundation
 
 # Use current directory structure
 site_dir: _site
+docs_dir: .
 
 theme:
   name: material
