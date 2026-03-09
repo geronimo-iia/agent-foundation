@@ -323,13 +323,13 @@ TSL Core v1.0 does NOT support:
 - Sensitivity levels
 - Conditional policies
 
-These features are experimental and documented in [agent-research/information-flow-tracking/](../../agent-research/information-flow-tracking/).
+These features are experimental and need to be documented.
 
 ## Related Specifications
 
 - [Information Flow Tracking](definition.md) - Core taint tracking concepts
 - [Taint Supervisor](taint-supervisor.md) - Centralized taint management pattern
-- [JSON Schemas](../schemas/) - Validation schemas for taint data
+- [JSON Schemas](../schemas/README.md) - Validation schemas for taint data
 
 ## References
 

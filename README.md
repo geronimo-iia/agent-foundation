@@ -78,7 +78,7 @@ cargo install agent-ctl
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE.md)
 
 ## Contributing
 
