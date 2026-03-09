@@ -12,6 +12,8 @@ last_updated: "2025-01-16"
 
 # What are Tools?
 
+> **Specification only**: This specification is stable but has no tooling implementation yet. It may benefit from further refinement as implementation experience is gained.
+
 Tools are executable capabilities that extend agent functionality beyond text generation. They enable agents to interact with systems, APIs, files, databases, and external resources through well-defined interfaces.
 
 ## Core Concept

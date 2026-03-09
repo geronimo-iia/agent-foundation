@@ -13,6 +13,8 @@ last_updated: "2025-01-16"
 
 # Agent Definition
 
+> **Specification only**: This specification is stable but has no tooling implementation yet. It may benefit from further refinement as implementation experience is gained.
+
 ## What is an Agent?
 
 An **agent** is an autonomous software entity with:

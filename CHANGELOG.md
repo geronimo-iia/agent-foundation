@@ -6,6 +6,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- MkDocs Material navigation with domain-based submenus
+- Specification-only status notes for agents, tools, and information-flow domains
+
+### Changed
+- Organized navigation structure following agent-foundation domain organization
+- Fixed bullet point formatting in tools/definition.md
+- Updated README.md links to point to definition.md files
+- Removed broken agent-research link from tsl-core.md
+- Added LICENSE.md to agentctl ignore list
+
 ## [0.2.1] - 2026-07-16
 
 ### Changed

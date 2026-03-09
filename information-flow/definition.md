@@ -12,6 +12,8 @@ last_updated: "2025-01-16"
 
 # Information Flow Tracking
 
+> **Specification only**: This specification is stable but has no tooling implementation yet. It may benefit from further refinement as implementation experience is gained.
+
 Information flow tracking enables agents to track the origin and sensitivity of data as it flows through the system, preventing sensitive data leakage and enforcing security policies at output boundaries.
 
 ## The Problem
