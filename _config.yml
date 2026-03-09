@@ -3,87 +3,32 @@ description: Specifications for secure, composable multi-agent systems
 url: https://geronimo-iia.github.io
 baseurl: /agent-foundation
 
-remote_theme: just-the-docs/just-the-docs
+remote_theme: jekyll/minima
 
-# Plugins for automatic navigation
-# Note: GitHub Pages has limited plugin support
-# plugins:
-#   - jekyll-optional-front-matter
-#   - jekyll-default-layout
+# Plugins
+plugins:
+  - jekyll-mermaid
 
-# Enable search
-search_enabled: true
-search:
-  heading_level: 2
-  previews: 3
-  preview_words_before: 5
-  preview_words_after: 10
+# Minima theme settings
+minima:
+  nav_pages:
+    - bootstrap/definition.md
+    - docs/definition.md
+    - skills/definition.md
+    - agents/definition.md
+    - tools/definition.md
+    - information-flow/definition.md
+    - rules/definition.md
+    - schemas/README.md
+  social_links:
+    github: geronimo-iia
 
-# Navigation
-nav_sort: case_insensitive
+# Author information
+author:
+  name: Jerome Guibert
+  email: "jerome.guibert@gmail.com"
 
-# Automatic folder-based navigation
-defaults:
-  - scope:
-      path: "bootstrap"
-    values:
-      layout: default
-      parent: "Bootstrap"
-      nav_order: 1
-  - scope:
-      path: "docs"
-    values:
-      layout: default
-      parent: "Documentation"
-      nav_order: 2
-  - scope:
-      path: "skills"
-    values:
-      layout: default
-      parent: "Skills"
-      nav_order: 3
-  - scope:
-      path: "agents"
-    values:
-      layout: default
-      parent: "Agents"
-      nav_order: 4
-  - scope:
-      path: "tools"
-    values:
-      layout: default
-      parent: "Tools"
-      nav_order: 5
-  - scope:
-      path: "information-flow"
-    values:
-      layout: default
-      parent: "Information Flow"
-      nav_order: 6
-  - scope:
-      path: "rules"
-    values:
-      layout: default
-      parent: "Rules"
-      nav_order: 7
-  - scope:
-      path: "schemas"
-    values:
-      layout: default
-      parent: "Schemas"
-      nav_order: 8
+# Show excerpts on home page
+show_excerpts: true
 
-# Footer
-footer_content: 'Copyright &copy; 2026. Distributed under the <a href="https://github.com/geronimo-iia/agent-foundation/blob/main/LICENSE">MIT License</a>.'
 
-# Color scheme
-color_scheme: light
-
-# Enable mermaid diagrams
-mermaid:
-  version: "10.6.1"
-
-# Aux links (top right)
-aux_links:
-  "GitHub":
-    - "https://github.com/geronimo-iia/agent-foundation"
