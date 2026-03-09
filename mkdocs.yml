@@ -56,24 +56,25 @@ nav:
     - Hub: skills/hub.md
     - Lifecycle: skills/lifecycle.md
     - Lifecycle Format: skills/lifecycle-format.md
-  - Agents:
-    - Definition: agents/definition.md
-    - Manifest Specification: agents/agent-manifest-specification.md
-    - Manifest Registry: agents/agent-manifest-registry.md
-  - Tools:
-    - Definition: tools/definition.md
-    - Execution Policy: tools/execution-policy.md
-    - MCP Protocol: tools/mcp-protocol.md
-  - Information Flow:
-    - Definition: information-flow/definition.md
-    - TSL Core: information-flow/tsl-core.md
-    - Taint Supervisor: information-flow/taint-supervisor.md
-    - Audit Events: information-flow/audit-events.md
   - Rules:
     - Definition: rules/definition.md
     - Best Practices: rules/best-practices.md
     - Workspace Implementation: rules/workspace-implementation.md
   - Schemas: schemas/README.md
+  - Draft Specifications:
+    - Agents:
+      - Definition: agents/definition.md
+      - Manifest Specification: agents/agent-manifest-specification.md
+      - Manifest Registry: agents/agent-manifest-registry.md
+    - Tools:
+      - Definition: tools/definition.md
+      - Execution Policy: tools/execution-policy.md
+      - MCP Protocol: tools/mcp-protocol.md
+    - Information Flow:
+      - Definition: information-flow/definition.md
+      - TSL Core: information-flow/tsl-core.md
+      - Taint Supervisor: information-flow/taint-supervisor.md
+      - Audit Events: information-flow/audit-events.md
   - Reference:
     - Changelog: CHANGELOG.md
     - Contributing: CONTRIBUTING.md
