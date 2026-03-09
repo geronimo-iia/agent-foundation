@@ -47,19 +47,19 @@ To bootstrap your workspace, paste this prompt into Amazon Q, Cursor, Zed, or an
 
 ### Mature specifications & Tooling
 
-- **[Skills](skills/)** — Skill format, lifecycle, hub protocols, authoring guide
-- **[Documentation](docs/)** — Document format, hub protocols, organization standards
+- **[Skills](skills/definition.md)** — Skill format, lifecycle, hub protocols, authoring guide
+- **[Documentation](docs/definition.md)** — Document format, hub protocols, organization standards
 - **[Schemas](schemas/)** — JSON schemas for validation (see [schemas/README.md](schemas/README.md))
-- **[Bootstrap](bootstrap/)** — Minimal setup procedures for agent workspaces
-- **[Rules](rules/)** — Workspace rules best practices and templates for AI behavior enforcement
+- **[Bootstrap](bootstrap/definition.md)** — Minimal setup procedures for agent workspaces
+- **[Rules](rules/definition.md)** — Workspace rules best practices and templates for AI behavior enforcement
 
 ### Specification only
 
 > These specifications are stable but have no tooling implementation yet. They may benefit from further refinement as implementation experience is gained.
 
-- **[Agents](agents/)** — Agent definitions, manifest formats, registry protocols
-- **[Tools](tools/)** — Tool definitions, MCP protocol, execution policies
-- **[Information Flow Tracking](information-flow/)** — Taint tracking, TSL policy language, audit events
+- **[Agents](agents/definition.md)** — Agent definitions, manifest formats, registry protocols
+- **[Tools](tools/definition.md)** — Tool definitions, MCP protocol, execution policies
+- **[Information Flow Tracking](information-flow/definition.md)** — Taint tracking, TSL policy language, audit events
 
 ## Tooling
 

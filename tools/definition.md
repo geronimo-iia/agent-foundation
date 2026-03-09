@@ -17,6 +17,7 @@ Tools are executable capabilities that extend agent functionality beyond text ge
 ## Core Concept
 
 A tool is a **named function** with:
+
 - **Input schema**: Parameters the tool accepts
 - **Output schema**: Data the tool returns
 - **Execution logic**: Code that performs the action
@@ -47,6 +48,7 @@ Tools provide **capabilities**, skills provide **knowledge**.
 ## Related Specifications
 
 This topic will cover:
+
 - Tool specification format
 - Tool execution model
 - Security and permissions
