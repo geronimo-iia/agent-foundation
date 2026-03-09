@@ -38,14 +38,14 @@ markdown_extensions:
 
 nav:
   - Home: README.md
-  - Bootstrap: bootstrap/
-  - Documentation: docs/
-  - Skills: skills/
-  - Agents: agents/
-  - Tools: tools/
-  - Information Flow: information-flow/
-  - Rules: rules/
-  - Schemas: schemas/
+  - Bootstrap: bootstrap/definition.md
+  - Documentation: docs/definition.md
+  - Skills: skills/definition.md
+  - Agents: agents/definition.md
+  - Tools: tools/definition.md
+  - Information Flow: information-flow/definition.md
+  - Rules: rules/definition.md
+  - Schemas: schemas/README.md
   - Changelog: CHANGELOG.md
   - Contributing: CONTRIBUTING.md
   - License: LICENSE
