@@ -29,8 +29,10 @@ jobs:
           
       - name: Setup docs structure
         run: |
-          # Copy all files to temp directory
-          cp -r . docs_temp
+          # Copy all files to temp directory (excluding docs_temp itself)
+          mkdir docs_temp
+          cp -r * docs_temp/ 2>/dev/null || true
+          cp -r .[^.]* docs_temp/ 2>/dev/null || true
           # Remove existing docs folder to avoid conflicts
           rm -rf docs
           # Move temp to docs directory for MkDocs
