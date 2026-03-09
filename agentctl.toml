@@ -7,5 +7,6 @@ ignore = [
   "CHANGELOG.md",
   "CONTRIBUTING.md",
   "ARCHIVED.md",
+  "LICENSE.md",
   "rules/templates/",
 ]
