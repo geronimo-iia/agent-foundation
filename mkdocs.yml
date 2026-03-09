@@ -4,10 +4,6 @@ site_url: https://geronimo-iia.github.io/agent-foundation/
 repo_url: https://github.com/geronimo-iia/agent-foundation
 repo_name: geronimo-iia/agent-foundation
 
-# Use current directory structure
-site_dir: _site
-docs_dir: .
-
 theme:
   name: material
   palette:

@@ -27,6 +27,15 @@ jobs:
         with:
           python-version: '3.x'
           
+      - name: Setup docs structure
+        run: |
+          # Copy all files to temp directory
+          cp -r . docs_temp
+          # Remove existing docs folder to avoid conflicts
+          rm -rf docs
+          # Move temp to docs directory for MkDocs
+          mv docs_temp docs
+          
       - name: Install dependencies
         run: |
           pip install "mkdocs-material<9.0"
@@ -34,11 +43,11 @@ jobs:
           
       - name: Build site
         run: mkdocs build
-        
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./_site
+          path: ./site
 
   deploy:
     if: github.ref == 'refs/heads/main'
