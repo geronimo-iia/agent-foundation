@@ -29,6 +29,11 @@ This guide provides minimal steps for bootstrapping the agent development worksp
 # macOS/Linux
 brew tap geronimo-iia/agent && brew install agentctl
 
+# or via asdf (version manager)
+asdf plugin add agentctl https://github.com/geronimo-iia/asdf-agentctl.git
+asdf install agentctl latest
+asdf global agentctl latest
+
 # or via cargo
 cargo install agent-ctl
 ```
