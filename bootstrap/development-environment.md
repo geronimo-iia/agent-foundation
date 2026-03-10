@@ -73,9 +73,25 @@ git clone https://github.com/geronimo-iia/agent-software.git agent-software
 4. Customize the templates for your workspace structure
 5. The `.amazonq/rules/` directory will automatically apply workspace standards
 
-### Step 4: Ready to Use
+### Step 4: Setup Agent Skills Hub (Optional)
+
+```bash
+# Add the agent-skills hub registry
+agentctl hub add --type skills agent-skills https://raw.githubusercontent.com/geronimo-iia/agent-skills/main/index.json --git-url https://github.com/geronimo-iia/agent-skills
+
+# List available skills
+agentctl skill list
+
+# Install useful development skills
+agentctl skill install agentctl          # agentctl management skill
+agentctl skill install python-scaffold  # Python project scaffolding
+agentctl skill install semantic-commit  # Semantic commit helpers
+```
+
+### Step 5: Ready to Use
 
 The workspace is now ready for development:
+
 - **agent-foundation/** - Reference stable specifications
 - **agent-skills/** - Available skills for agent use
 - **agent-software/** - Software development standards and engineering practices
