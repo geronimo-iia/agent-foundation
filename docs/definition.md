@@ -20,6 +20,7 @@ my-document.md
 ```
 
 Every document contains:
+
 - **YAML frontmatter** — Metadata for discovery and loading
 - **Markdown body** — The actual knowledge or specifications
 - **Cross-references** — Links to related documents, skills, or tasks

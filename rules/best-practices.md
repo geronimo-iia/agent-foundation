@@ -15,16 +15,19 @@ last_updated: "2025-01-16"
 ## Core Principles
 
 ### Single Responsibility Principle (SRP)
+
 - One rule = one concern
 - Each rule has a single reason to change
 - Avoid mixing unrelated requirements
 
 ### DRY (Don't Repeat Yourself)
+
 - Reference specifications instead of duplicating content
 - Maintain single source of truth for each requirement
 - Rules enforce, specifications educate
 
 ### Separation of Concerns
+
 - **Rules**: Enforce behavior and point to specifications
 - **Specifications**: Contain detailed knowledge and examples
 - **Prompts**: Provide task-specific assistance
@@ -68,24 +71,25 @@ Why this rule exists/consequences.
 
 ## Anti-Patterns
 
-❌ **Long explanatory content** (belongs in specifications)
-❌ **Duplicated examples** (creates sync issues)
-❌ **Vague requirements** ("should consider")
-❌ **Multiple unrelated rules** in one file
-❌ **Embedded specifications** (violates DRY)
+- ❌ **Long explanatory content** (belongs in specifications)
+- ❌ **Duplicated examples** (creates sync issues)
+- ❌ **Vague requirements** ("should consider")
+- ❌ **Multiple unrelated rules** in one file
+- ❌ **Embedded specifications** (violates DRY)
 
 ## Rule vs Prompt Decision Matrix
 
-| Use Rules When | Use Prompts When |
-|----------------|------------------|
-| Behavior must be enforced | Task-specific assistance needed |
-| Applies to all workspace interactions | User chooses when to apply |
-| Standards and constraints | Templates and examples |
-| Automatic compliance required | Optional guidance desired |
+| Use Rules When                        | Use Prompts When                |
+| ------------------------------------- | ------------------------------- |
+| Behavior must be enforced             | Task-specific assistance needed |
+| Applies to all workspace interactions | User chooses when to apply      |
+| Standards and constraints             | Templates and examples          |
+| Automatic compliance required         | Optional guidance desired       |
 
 ## Software Engineering Parallels
 
 Rules are essentially **configuration as code** for AI behavior:
+
 - **Interface Design**: Clean API for rule consumption
 - **Maintainability**: Low coupling, high cohesion
 - **Configuration Management**: Version-controlled standards

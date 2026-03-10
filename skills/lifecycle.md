@@ -101,6 +101,7 @@ stateDiagram-v2
 ```
 
 **Key properties**:
+
 - Composite key `hub_id:slug` allows same skill from different hubs
 - `commit` pins exact source state for reproducibility
 - `installed_path` supports custom directory names for conflict resolution
@@ -114,11 +115,13 @@ stateDiagram-v2
 **Trigger**: User installs skill from hub
 
 **Requirements**:
+
 - Skill exists in hub's `index.json`
 - No directory conflict at target path
 - Valid `SKILL.md` with required frontmatter
 
 **Actions**:
+
 1. Fetch skill directory from hub at pinned commit
 2. Copy to local skills directory (SKILL.md, lifecycle.yaml, scripts/, references/, assets/)
 3. Add entry to lock file
