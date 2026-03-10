@@ -1,13 +1,13 @@
 ---
 title: "Documentation Authoring"
-summary: "How to author documentation files with machine-readable YAML frontmatter for Agent Zero."
+summary: "How to author documentation files with machine-readable YAML frontmatter for our agent foundation."
 read_when:
   - Writing or reviewing a documentation file
   - Adding frontmatter to an existing doc
   - Designing the doc discovery or context-loading system
   - Understanding cross-reference fields between artifact types
 status: active
-last_updated: "2025-01-16"
+last_updated: "2026-03-10"
 ---
 
 # How to Write Docs — Machine-Readable YAML Frontmatter
@@ -17,7 +17,7 @@ not the skill runtime. It answers: what is this doc, and when should it be loade
 
 This convention is derived from OpenClaw's doc corpus (200+ files using `summary` + `read_when`
 consistently) but is not formally documented there. This guide is the canonical reference
-for Agent Zero.
+for our agent foundation.
 
 ---
 
