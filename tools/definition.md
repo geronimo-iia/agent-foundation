@@ -27,25 +27,25 @@ A tool is a **named function** with:
 
 ## Tool Categories
 
-**System Tools**: File operations, shell commands, process management
-**Network Tools**: HTTP requests, API calls, webhooks
-**Data Tools**: Database queries, data transformations, search
-**Integration Tools**: Third-party service interactions (GitHub, AWS, etc.)
+- **System Tools**: File operations, shell commands, process management
+- **Network Tools**: HTTP requests, API calls, webhooks
+- **Data Tools**: Database queries, data transformations, search
+- **Integration Tools**: Third-party service interactions (GitHub, AWS, etc.)
 
 ## Tool vs Skill
 
-**Tools**: Executable functions agents invoke
-**Skills**: Knowledge and instructions agents follow
+- **Tools**: Executable functions agents invoke
+- **Skills**: Knowledge and instructions agents follow
 
 Tools provide **capabilities**, skills provide **knowledge**.
 
 ## Design Principles
 
-**Explicit invocation**: Agents explicitly call tools by name
-**Type safety**: Strong input/output schemas
-**Sandboxing**: Execution isolation and permission controls
-**Observability**: Logging and monitoring of tool usage
-**Idempotency**: Safe to retry when possible
+- **Explicit invocation**: Agents explicitly call tools by name
+- **Type safety**: Strong input/output schemas
+- **Sandboxing**: Execution isolation and permission controls
+- **Observability**: Logging and monitoring of tool usage
+- **Idempotency**: Safe to retry when possible
 
 ## Related Specifications
 

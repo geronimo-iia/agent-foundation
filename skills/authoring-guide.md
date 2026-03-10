@@ -67,6 +67,7 @@ Combined priority (highest to lowest):
 ```
 
 **Use cases**:
+
 - Define global skills for personal use across all projects
 - Override them per-project when project-specific behavior is needed
 - Customize skills per mode (e.g., different code review rules for code vs architect mode)
@@ -116,6 +117,7 @@ compatibility: Requires ffmpeg, OPENAI_API_KEY environment variable, macOS 12+, 
 ```
 
 **Guidelines**:
+
 - Keep it 1-500 characters
 - List required binaries, environment variables, OS requirements, network access, etc.
 - Be specific but concise
@@ -173,11 +175,13 @@ uninstall:
 ```
 
 **Variables**:
+
 - `lifecycle.variables`: Define custom variables with default values
 - Variables can reference other variables and built-in variables
 - Evaluated in order of declaration
 
 **Built-in variables**:
+
 - `${SKILL_NAME}`: Skill name from frontmatter (e.g., `marker-pdf`)
 - `${SKILL_PATH}`: Absolute path to skill installation directory (set by agent)
 - `${HOME}`: User home directory
@@ -227,24 +231,28 @@ Variables are evaluated in this order:
    ```
 
 **Rules**:
+
 - Variables are case-sensitive
 - Forward references not allowed (variable must be defined before use)
 - Circular references cause error
 - Unknown variables left as-is (e.g., `${UNKNOWN}` stays `${UNKNOWN}`)
 
 **Structure**:
+
 - `variables`: Define custom variables with default values
 - `install`: Commands to install missing dependencies
 - `update`: Commands to update to newer versions
 - `uninstall`: Commands to clean up dependencies and caches
 
 **Command fields**:
+
 - `command`: Shell command to execute
 - `description`: Human-readable explanation
 - `platform`: `all`, `linux`, `macos`, `windows`
 - `requires_approval`: Always `true` (agent must ask user)
 
 **Security**:
+
 - All commands visible in SKILL.md (auditable)
 - User must approve each command individually
 - Agent explains what each command does
@@ -271,6 +279,7 @@ description: >
 ```
 
 **Writing tips**:
+
 - Write descriptions that match how users phrase requests
 - Be specific about capabilities and when to use the skill
 - Include **negative triggers**: explicitly state what the skill does NOT handle ("Do not use for…") — this prevents false activations

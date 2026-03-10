@@ -19,10 +19,10 @@ An agent manifest is the authoritative declaration of an agent's identity, capab
 
 ## Core Principles
 
-**Single Source of Truth**: The manifest contains all information needed to spawn and supervise an agent
-**Capability-Based Security**: Explicit declaration of what an agent can access and do
-**Cryptographic Integrity**: Manifests are Ed25519 signed to prevent tampering
-**Immutable Identity**: Agent identity and core capabilities cannot change without re-signing
+- **Single Source of Truth**: The manifest contains all information needed to spawn and supervise an agent
+- **Capability-Based Security**: Explicit declaration of what an agent can access and do
+- **Cryptographic Integrity**: Manifests are Ed25519 signed to prevent tampering
+- **Immutable Identity**: Agent identity and core capabilities cannot change without re-signing
 
 ## Manifest Schema
 
@@ -153,55 +153,57 @@ expires_at = "2026-01-16T00:00:00Z"    # Expiration timestamp (optional)
 
 ### Agent Identity (`[agent]`)
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | string | Yes | Unique agent identifier used for taint tracking, registry keys, and inter-agent messaging |
-| `name` | string | Yes | Human-readable display name |
-| `version` | string | No | Semantic version (e.g., "1.2.0") for upgrade tracking |
-| `description` | string | No | Brief description of agent purpose and capabilities |
+| Field         | Type   | Required | Description                                                                               |
+| ------------- | ------ | -------- | ----------------------------------------------------------------------------------------- |
+| `id`          | string | Yes      | Unique agent identifier used for taint tracking, registry keys, and inter-agent messaging |
+| `name`        | string | Yes      | Human-readable display name                                                               |
+| `version`     | string | No       | Semantic version (e.g., "1.2.0") for upgrade tracking                                     |
+| `description` | string | No       | Brief description of agent purpose and capabilities                                       |
 
 **Constraints**:
+
 - `id` must be unique within the agent system
 - `id` must be stable across restarts (used for session persistence)
 - `version` must follow semantic versioning if provided
 
 ### Runtime Configuration (`[runtime]`)
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `module` | string | Yes | Execution module type (see Module Types) |
-| `provider` | string | Conditional | LLM provider (required for `builtin:chat`) |
-| `model` | string | Conditional | Model identifier (required for `builtin:chat`) |
-| `max_tokens` | integer | No | Maximum tokens per LLM call |
-| `temperature` | float | No | Sampling temperature (0.0-2.0) |
-| `system_prompt.path` | string | No | Path to system prompt file |
-| `entry` | string | Conditional | Entry point for executable modules |
-| `endpoint` | string | Conditional | Remote endpoint URL (required for `remote:*`) |
+| Field                | Type    | Required    | Description                                    |
+| -------------------- | ------- | ----------- | ---------------------------------------------- |
+| `module`             | string  | Yes         | Execution module type (see Module Types)       |
+| `provider`           | string  | Conditional | LLM provider (required for `builtin:chat`)     |
+| `model`              | string  | Conditional | Model identifier (required for `builtin:chat`) |
+| `max_tokens`         | integer | No          | Maximum tokens per LLM call                    |
+| `temperature`        | float   | No          | Sampling temperature (0.0-2.0)                 |
+| `system_prompt.path` | string  | No          | Path to system prompt file                     |
+| `entry`              | string  | Conditional | Entry point for executable modules             |
+| `endpoint`           | string  | Conditional | Remote endpoint URL (required for `remote:*`)  |
 
 #### Module Types
 
-| Module | Description | Required Fields |
-|--------|-------------|-----------------|
-| `builtin:chat` | Conversational agent with LLM | `provider`, `model` |
-| `builtin:tool` | Stateless function agent | `entry` |
-| `builtin:reactive` | Event-driven agent | None |
-| `wasm:<path>` | WebAssembly sandboxed agent | `entry` |
-| `python:<path>` | Python subprocess agent | `entry` |
-| `remote:<url>` | Remote agent via network | `endpoint` |
-| `docker:<image>` | Containerized agent | `entry` |
+| Module             | Description                   | Required Fields     |
+| ------------------ | ----------------------------- | ------------------- |
+| `builtin:chat`     | Conversational agent with LLM | `provider`, `model` |
+| `builtin:tool`     | Stateless function agent      | `entry`             |
+| `builtin:reactive` | Event-driven agent            | None                |
+| `wasm:<path>`      | WebAssembly sandboxed agent   | `entry`             |
+| `python:<path>`    | Python subprocess agent       | `entry`             |
+| `remote:<url>`     | Remote agent via network      | `endpoint`          |
+| `docker:<image>`   | Containerized agent           | `entry`             |
 
 ### Capabilities (`[capabilities]`)
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `tools` | array[string] | Tool names the agent may invoke |
-| `memory_read` | array[glob] | Memory namespaces for read access |
-| `memory_write` | array[glob] | Memory namespaces for write access |
-| `network` | array[glob] | Network hosts the agent may access |
-| `agent_spawn` | boolean | Permission to spawn child agents |
-| `agent_message` | array[string] | Agent IDs this agent may message |
+| Field           | Type          | Description                        |
+| --------------- | ------------- | ---------------------------------- |
+| `tools`         | array[string] | Tool names the agent may invoke    |
+| `memory_read`   | array[glob]   | Memory namespaces for read access  |
+| `memory_write`  | array[glob]   | Memory namespaces for write access |
+| `network`       | array[glob]   | Network hosts the agent may access |
+| `agent_spawn`   | boolean       | Permission to spawn child agents   |
+| `agent_message` | array[string] | Agent IDs this agent may message   |
 
 **Glob Patterns**:
+
 - `self.*` - Agent's own namespace
 - `shared.*` - Shared system namespace  
 - `*.example.com` - Domain wildcards
@@ -209,31 +211,31 @@ expires_at = "2026-01-16T00:00:00Z"    # Expiration timestamp (optional)
 
 ### Resource Limits (`[limits]`)
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `max_continuations` | integer | Maximum conversation continuations |
-| `max_tool_calls` | integer | Maximum tool calls per session |
-| `tool_timeout_secs` | integer | Tool execution timeout in seconds |
-| `context_window_pct` | float | Context window usage threshold (0.0-1.0) |
-| `wasm_fuel` | integer | WASM execution fuel limit |
-| `wasm_epoch_deadline` | integer | WASM epoch timeout |
+| Field                 | Type    | Description                              |
+| --------------------- | ------- | ---------------------------------------- |
+| `max_continuations`   | integer | Maximum conversation continuations       |
+| `max_tool_calls`      | integer | Maximum tool calls per session           |
+| `tool_timeout_secs`   | integer | Tool execution timeout in seconds        |
+| `context_window_pct`  | float   | Context window usage threshold (0.0-1.0) |
+| `wasm_fuel`           | integer | WASM execution fuel limit                |
+| `wasm_epoch_deadline` | integer | WASM epoch timeout                       |
 
 ### Scheduling (`[schedule]`)
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `mode` | string | "reactive" (event-driven) or "proactive" (scheduled) |
-| `cron` | string | Cron expression for proactive scheduling |
-| `trigger` | string | Trigger condition for reactive mode |
+| Field     | Type   | Description                                          |
+| --------- | ------ | ---------------------------------------------------- |
+| `mode`    | string | "reactive" (event-driven) or "proactive" (scheduled) |
+| `cron`    | string | Cron expression for proactive scheduling             |
+| `trigger` | string | Trigger condition for reactive mode                  |
 
 ### Security Metadata (`[metadata]`)
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `author` | string | Manifest author identifier |
-| `tags` | array[string] | Classification tags |
-| `issued_at` | datetime | Manifest issuance timestamp (ISO 8601) |
-| `expires_at` | datetime | Expiration timestamp (ISO 8601, optional) |
+| Field        | Type          | Description                               |
+| ------------ | ------------- | ----------------------------------------- |
+| `author`     | string        | Manifest author identifier                |
+| `tags`       | array[string] | Classification tags                       |
+| `issued_at`  | datetime      | Manifest issuance timestamp (ISO 8601)    |
+| `expires_at` | datetime      | Expiration timestamp (ISO 8601, optional) |
 
 ## Signing Pipeline
 
@@ -364,22 +366,22 @@ This prevents privilege escalation through agent spawning.
 
 ## Module Field Requirements
 
-| Field | `builtin:chat` | `builtin:tool` | `wasm:*` | `python:*` | `remote:*` | `docker:*` | `mcp:*` |
-|-------|----------------|----------------|----------|------------|------------|------------|----------|
-| `provider`/`model` | Required | — | — | — | — | — | — |
-| `system_prompt` | Optional | — | — | — | — | — | — |
-| `max_tokens`/`temperature` | Optional | — | — | — | — | — | — |
-| `entry` | — | Required | Required | Required | — | Required | Required |
-| `endpoint` | — | — | — | — | Required | — | — |
-| `image` | — | — | — | — | — | Required | — |
+| Field                      | `builtin:chat` | `builtin:tool` | `wasm:*` | `python:*` | `remote:*` | `docker:*` | `mcp:*`  |
+| -------------------------- | -------------- | -------------- | -------- | ---------- | ---------- | ---------- | -------- |
+| `provider`/`model`         | Required       | —              | —        | —          | —          | —          | —        |
+| `system_prompt`            | Optional       | —              | —        | —          | —          | —          | —        |
+| `max_tokens`/`temperature` | Optional       | —              | —        | —          | —          | —          | —        |
+| `entry`                    | —              | Required       | Required | Required   | —          | Required   | Required |
+| `endpoint`                 | —              | —              | —        | —          | Required   | —          | —        |
+| `image`                    | —              | —              | —        | —          | —          | Required   | —        |
 
 ## Extended Module Types
 
-| Module | Description | Isolation | Stateful |
-|--------|-------------|-----------|----------|
-| `builtin:reactive` | Event-driven agent without LLM | In-process | Yes |
-| `composite:<manifest>` | Fixed pipeline of sub-agents | Inherited | Delegated |
-| `mcp:<server>` | Model Context Protocol server | Process/Network | Yes |
+| Module                 | Description                    | Isolation       | Stateful  |
+| ---------------------- | ------------------------------ | --------------- | --------- |
+| `builtin:reactive`     | Event-driven agent without LLM | In-process      | Yes       |
+| `composite:<manifest>` | Fixed pipeline of sub-agents   | Inherited       | Delegated |
+| `mcp:<server>`         | Model Context Protocol server  | Process/Network | Yes       |
 
 ## Validation Process
 
@@ -418,6 +420,7 @@ For complete details on manifest storage, versioning, and lifecycle operations, 
 ## JSON Schema
 
 The complete JSON schema for agent manifests is available at:
+
 - [agent-manifest.json](../schemas/agent-manifest.json) - Core agent manifest schema
 - [signed-manifest.json](../schemas/signed-manifest.json) - Signed manifest wrapper schema
 - [revocation-list.json](../schemas/revocation-list.json) - Revocation list schema
@@ -425,12 +428,14 @@ The complete JSON schema for agent manifests is available at:
 ## Security Considerations
 
 ### Threat Model
+
 - **Manifest Tampering**: Prevented by Ed25519 signatures
 - **Capability Escalation**: Prevented by inheritance validation
 - **Identity Spoofing**: Prevented by signed agent IDs
 - **Replay Attacks**: Prevented by expiration timestamps and revocation
 
 ### Best Practices
+
 - Use short expiration times (90 days maximum)
 - Implement comprehensive revocation mechanisms
 - Validate all manifests before signing

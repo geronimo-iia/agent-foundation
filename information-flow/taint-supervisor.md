@@ -40,11 +40,13 @@ Records every taint assignment and every sink check (pass or block) with full la
 ### Core Interface
 
 **Operations**:
+
 - `ingest(value, kind, source)` → Tainted value - Assign taint at data ingestion
 - `check_sink(taint_set, sink, context)` → Result - Enforce policy at output boundary
 - `update_policy(sink, blocked_kinds)` → void - Modify policy at runtime
 
 **State**:
+
 - `policy: SinkPolicy` - Mapping of sinks to blocked taint kinds
 - `audit: AuditLog` - Record of all taint operations
 
@@ -81,12 +83,14 @@ sequenceDiagram
 ```
 
 **Key interactions**:
+
 1. **Ingest**: Pipeline calls supervisor to tag data at entry points
 2. **Check**: Pipeline calls supervisor before outputting data
 3. **Audit**: Supervisor logs all operations automatically
 4. **Policy**: Supervisor manages policy centrally
 
 **Usage**:
+
 1. Inject supervisor into agent pipeline
 2. Call `supervisor.ingest()` at all data entry points
 3. Call `supervisor.check_sink()` at all output boundaries
@@ -138,16 +142,19 @@ Analyze audit logs to detect patterns, generate compliance reports, and identify
 ## Implementation Considerations
 
 ### Performance
+
 - **Audit overhead** - Logging every operation adds latency
 - **Policy lookup** - Cache frequently accessed policies
 - **Lock contention** - Use read-write locks for policy access
 
 ### Scalability
+
 - **Distributed systems** - Supervisor per agent vs. centralized supervisor
 - **Audit storage** - Structured logging vs. database storage
 - **Policy synchronization** - Consistent policy updates across agents
 
 ### Security
+
 - **Supervisor compromise** - If supervisor is compromised, entire taint system fails
 - **Audit integrity** - Protect audit logs from tampering
 - **Policy validation** - Ensure policy updates don't create security holes

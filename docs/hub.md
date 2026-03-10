@@ -38,6 +38,7 @@ Doc hubs are most valuable for **stable, reusable reference material** that is:
 Less useful for project-specific or rapidly-changing docs, which belong in the local workspace.
 
 Examples of good doc hub content:
+
 - REST API reference for an internal service
 - Compliance rules for a regulated domain (finance, healthcare)
 - Coding standards and architecture decisions for a team
@@ -159,11 +160,13 @@ and only fetches the full doc body when it decides to load it into context.
 maps directly to "find docs relevant to this situation". `summary` provides secondary signal.
 
 Scorer weights (analogous to skill scorer):
+
 - `read_when` match +3 (primary load signal)
 - `summary` match +2
 - `title` match +1
 
 When `requires_skills` is present, the agent annotates the result with the skill status:
+
 - All required skills installed → result is fully actionable
 - Some skills missing → result is flagged; agent can suggest installing them
 
@@ -172,6 +175,7 @@ Missing skills do not suppress the result — the doc may still be informational
 ### Loading
 
 When the agent decides a doc is relevant:
+
 1. Check `requires_skills` — if any are missing, surface a suggestion to install them
 2. Fetch the full `.md` file content (sparse clone or raw URL)
 3. Strip frontmatter, inject body into context

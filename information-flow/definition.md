@@ -29,6 +29,7 @@ Agents process data from multiple sources with different trust levels:
 | Memory store  | Mixed                           | Previously stored user data, cached results |
 
 Without tracking, sensitive data can silently flow to untrusted sinks:
+
 - User PII extracted from a document → logged to disk
 - Secret fetched from a vault → included in an LLM prompt
 - Untrusted web content → executed as a shell command (prompt injection)
@@ -76,6 +77,7 @@ reason: prevents prompt injection → command injection
 ### Conceptual Model
 
 **TaintKind** - Enumeration of taint categories:
+
 - `UserInput` - Data from user messages or interface input
 - `ExternalFetch` - Data from external APIs, web requests, or file reads
 - `LlmGenerated` - Content produced by language model inference
@@ -83,14 +85,17 @@ reason: prevents prompt injection → command injection
 - `PII` - Personally identifiable information
 
 **TaintLabel** - A label with kind and optional source identifier:
+
 - `kind: TaintKind` - The category of taint
 - `source: Optional<String>` - Unique identifier for the data origin (e.g., "user:alice", "url:https://...", "agent:coder")
 
 **TaintSet** - A set of TaintLabels:
+
 - Represents all taints carried by a value
 - Operations: `clean()`, `single(label)`, `merge(other)`, `contains_kind(kind)`, `sources_for(kind)`
 
 **Tainted<T>** - A value wrapped with its taint set:
+
 - `value: T` - The actual data
 - `taint: TaintSet` - The set of taint labels
 
@@ -168,6 +173,7 @@ flowchart TD
 ```
 
 **Flow explanation**:
+
 1. User message arrives → tagged with `UserInput` taint
 2. Tool fetches external data → tagged with `ExternalFetch` taint
 3. LLM processes both inputs → output carries merged taint: `{UserInput, ExternalFetch, LlmGenerated}`
@@ -182,13 +188,13 @@ flowchart TD
 
 Each sink defines which taint kinds are blocked:
 
-| Sink | Blocked Taints | Rationale |
-|------|----------------|----------|
-| `shell_execute` | UserInput, ExternalFetch, LlmGenerated | Prevent command injection |
-| `network_send` | Secret, PII | Prevent data exfiltration |
-| `llm_prompt` | Secret | Prevent secret leakage to model |
-| `disk_log` | Secret, PII | Prevent sensitive data in logs |
-| `memory_store` | (none) | All taints permitted in memory |
+| Sink            | Blocked Taints                         | Rationale                       |
+| --------------- | -------------------------------------- | ------------------------------- |
+| `shell_execute` | UserInput, ExternalFetch, LlmGenerated | Prevent command injection       |
+| `network_send`  | Secret, PII                            | Prevent data exfiltration       |
+| `llm_prompt`    | Secret                                 | Prevent secret leakage to model |
+| `disk_log`      | Secret, PII                            | Prevent sensitive data in logs  |
+| `memory_store`  | (none)                                 | All taints permitted in memory  |
 
 ### Enforcement Algorithm
 

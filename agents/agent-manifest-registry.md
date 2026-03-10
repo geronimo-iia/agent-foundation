@@ -45,6 +45,7 @@ registry/
 ### Versioning
 
 Each agent directory contains:
+
 - **Version files**: `v{semver}.signed.json` - Immutable signed manifests
 - **Current pointer**: `current` symlink pointing to active version
 - **Atomic updates**: Symlink updates ensure consistency
@@ -73,6 +74,7 @@ sequenceDiagram
 ```
 
 **Process**:
+
 1. Publish new signed manifest to registry
 2. Trigger reload operation on kernel
 3. Verify signature and capability constraints
@@ -98,6 +100,7 @@ sequenceDiagram
 ```
 
 **Process**:
+
 1. Add agent ID to revocation list
 2. Send revocation command to kernel
 3. Immediately terminate agent process
@@ -150,6 +153,7 @@ The `keys/revoked.json` file tracks revoked agents and keys:
 ### Publishing
 
 Store a new manifest version by:
+
 1. Creating version-specific file: `v{semver}.signed.json`
 2. Atomically updating `current` symlink
 3. Ensuring directory structure exists
@@ -165,6 +169,7 @@ All versions for an agent are stored as separate files, sorted by semantic versi
 ### Rollback
 
 Revert to previous version by updating the `current` symlink:
+
 - Verify target version exists
 - Remove current symlink
 - Create new symlink to target version
@@ -202,6 +207,7 @@ memory_read = ["self.*", "shared.*"]
 ### Template Resolution
 
 Templates are resolved before signing through:
+
 1. Loading base template if `_extends` field present
 2. Recursive resolution of template chains
 3. Deep merging of template hierarchy
@@ -213,13 +219,14 @@ Templates are resolved before signing through:
 
 In distributed systems, registries must be synchronized:
 
-**Push Model**: Registry publishes changes to all nodes
-**Pull Model**: Nodes periodically fetch updates
-**Gossip Model**: Changes propagate through peer-to-peer gossip
+- **Push Model**: Registry publishes changes to all nodes
+- **Pull Model**: Nodes periodically fetch updates
+- **Gossip Model**: Changes propagate through peer-to-peer gossip
 
 ### Conflict Resolution
 
 When multiple nodes modify the same agent:
+
 - **Last-writer-wins**: Based on `issued_at` timestamp
 - **Version-based**: Higher semantic version wins
 - **Manual resolution**: Operator intervention required
@@ -229,6 +236,7 @@ When multiple nodes modify the same agent:
 ### Expiry Monitoring
 
 Track manifests approaching expiration by:
+
 1. Scanning all `current` symlinks in registry
 2. Parsing `expires_at` timestamps from manifests
 3. Comparing against configurable threshold (e.g., 14 days)
@@ -254,6 +262,7 @@ Track all registry operations:
 ### Access Control
 
 Registry operations require appropriate permissions:
+
 - **Read**: List and retrieve manifests
 - **Write**: Publish new versions
 - **Admin**: Revoke agents and manage keys

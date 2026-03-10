@@ -29,6 +29,7 @@ An **agent** is an autonomous software entity with:
 
 ### Identity
 Every agent has a stable, unique identifier that persists across restarts and serves as the foundation for:
+
 - Taint tracking and data provenance
 - Inter-agent messaging and authorization
 - Registry management and versioning
@@ -36,6 +37,7 @@ Every agent has a stable, unique identifier that persists across restarts and se
 
 ### Capabilities
 Agents operate under explicit capability-based security where all permissions are declared upfront:
+
 - **Tools**: Functions the agent may invoke
 - **Memory**: Namespaces for read/write access
 - **Network**: Hosts the agent may connect to
@@ -44,6 +46,7 @@ Agents operate under explicit capability-based security where all permissions ar
 
 ### Autonomy
 Agents make independent decisions within their capability bounds:
+
 - Process inputs and generate responses
 - Invoke tools to gather information or take actions
 - Manage their own state and memory
@@ -52,6 +55,7 @@ Agents make independent decisions within their capability bounds:
 
 ### Security Boundary
 Each agent operates within enforced security constraints:
+
 - Capability checks on every operation
 - Resource limits (tokens, time, memory, fuel)
 - Cryptographic integrity of manifest

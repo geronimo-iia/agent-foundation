@@ -37,6 +37,7 @@ When creating a new specification, follow this decision process:
 1. **Does it fit an existing domain?** — Check if the specification naturally belongs with existing domain folders
 2. **Is it cross-cutting?** — If it spans multiple domains, create or use an appropriately named folder based on the content goal
 3. **Does it define a new domain?** — If it doesn't fit existing domains and isn't cross-cutting:
+  
    - Create a new domain folder
    - Write `definition.md` first to define the domain scope, see [authoring-guide](authoring-guide.md)
    - Then add the specification

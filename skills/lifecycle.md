@@ -131,10 +131,12 @@ stateDiagram-v2
 **Trigger**: User updates skill, newer version available
 
 **Requirements**:
+
 - Skill in lock file
 - Hub `index.json` shows higher version number
 
 **Actions**:
+
 1. Fetch new version from hub
 2. Replace directory contents
 3. If skill includes `lifecycle.yaml`, execute update commands with user approval
@@ -147,6 +149,7 @@ stateDiagram-v2
 **Trigger**: User uninstalls skill
 
 **Actions**:
+
 1. If skill includes `lifecycle.yaml`, execute uninstall commands with user approval
 2. Remove directory
 3. Remove lock file entry (if hub skill)
@@ -162,6 +165,7 @@ stateDiagram-v2
 **Problem**: Two hubs provide `python-developer`, both want `skills/python-developer/`
 
 **Resolution**: Second install must specify alternate path
+
 - Lock key remains `hub_id:slug`
 - `installed_path` differs: `skills/python-developer-alt/`
 
@@ -170,6 +174,7 @@ stateDiagram-v2
 **Problem**: Local skill exists at target path
 
 **Resolution**: Installation fails with error
+
 - User must rename or remove local skill first
 - System does not auto-merge or overwrite local skills
 
@@ -207,6 +212,7 @@ stateDiagram-v2
 ## 8. Versioning Semantics
 
 **Hub skills**: Semantic versioning (MAJOR.MINOR.PATCH)
+
 - MAJOR: Breaking changes to skill interface or behavior
 - MINOR: New capabilities, backward compatible
 - PATCH: Bug fixes, documentation updates
@@ -222,6 +228,7 @@ stateDiagram-v2
 ## 9. Portability and Reproducibility
 
 **Lock file enables**:
+
 - Exact skill versions recorded
 - Git commit hashes for immutability
 - Reproducible installs across machines
@@ -235,10 +242,12 @@ stateDiagram-v2
 ## 10. Security Considerations
 
 **Trust boundary**: Hub operator's CI validation
+
 - Lock file records hub source and commit
 - User trusts hub, not individual skill authors
 
 **Lifecycle commands**: If skill includes `lifecycle.yaml`
+
 - All install/update/uninstall commands require user approval
 - Commands are visible in lifecycle.yaml (auditable)
 - No hidden or obfuscated commands
@@ -262,20 +271,24 @@ python-dev-skill/
 ```
 
 **Installation behavior**:
+
 - If `lifecycle.yaml` exists, agent reads install commands
 - Agent presents commands to user for approval
 - User approves each command individually
 - Agent executes approved commands
 
 **Update behavior**:
+
 - Agent reads update commands from new version's `lifecycle.yaml`
 - User approval required for each command
 
 **Uninstallation behavior**:
+
 - Agent reads uninstall commands from `lifecycle.yaml`
 - User approval required for cleanup commands
 
 **See**: [lifecycle-format.md](lifecycle-format.md) for complete lifecycle.yaml specification including:
+
 - Built-in variables (`${SKILL_NAME}`, `${SKILL_PATH}`, `${HOME}`, `${PLATFORM}`)
 - Custom variable definitions
 - Command format and fields

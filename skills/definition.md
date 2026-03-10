@@ -75,18 +75,21 @@ The Markdown body contains the actual instructions and has no specific restricti
 This specification is compatible with the [Agent Skills](https://agentskills.io) format, with extensions:
 
 **Core compatibility** (shared with agentskills.io):
+
 - SKILL.md file with YAML frontmatter
 - Required fields: `name`, `description`
 - Optional fields: `license`, `compatibility`, `metadata`
 - Directory structure with optional `scripts/`, `references/`, `assets/`
 
 **Extensions** (this specification):
+
 - `lifecycle.yaml` file for agent-assisted install/update/uninstall
 - Mode-specific skills (`skills-{mode}/` directories) — from [Kilo](https://kilo.ai/docs/customize/skills)
 - Priority/override rules (project > global, mode-specific > generic) — from [Kilo](https://kilo.ai/docs/customize/skills)
 - Variable substitution in lifecycle commands
 
 **Authoring best practices** (incorporated from [mgechev/skills-best-practices](https://github.com/mgechev/skills-best-practices)):
+
 - Negative triggers in descriptions to prevent false activations
 - Third-person imperative tone in skill body
 - No human-oriented prose in skill body

@@ -162,6 +162,7 @@ For a unified local + hub search: local results (already installed) rank higher,
 ## 7. Install and lock file
 
 Installing a skill from a hub:
+
 1. Look up the entry in the cached index
 2. Sparse-clone the hub repo (or reuse existing clone), checkout `path` at `commit`
 3. Copy skill directory to the agent's local skills folder
@@ -208,6 +209,7 @@ Update = compare `version` in lock vs current `index.json`; re-install if newer.
 4. Publish `index.json` at a stable URL
 
 The CI validator should check:
+
 - Required frontmatter fields (`name`, `description`)
 - Directory name matches `name` field
 - Valid YAML frontmatter syntax

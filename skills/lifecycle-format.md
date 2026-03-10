@@ -77,6 +77,7 @@ variables:
 ```
 
 **Evaluation order**:
+
 1. Built-in variables initialized first
 2. Custom variables evaluated in declaration order
 3. Variables can reference previously defined variables

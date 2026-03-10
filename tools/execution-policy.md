@@ -30,12 +30,14 @@ last_updated: "2025-01-16"
 **Unrestricted execution**: Agent invokes tools directly with user privileges
 
 **Characteristics**:
+
 - No validation of tool calls
 - No process isolation
 - No capability restrictions
 - Full access to user resources
 
 **Security model**: Trust through transparency
+
 - All tool executions logged
 - Audit trail accessible to user
 - User consent for skill installation
@@ -47,6 +49,7 @@ last_updated: "2025-01-16"
 Implementations MUST log all tool executions:
 
 **Required fields**:
+
 - Timestamp
 - Tool name and arguments
 - Execution context (skill name, agent session)
@@ -62,11 +65,13 @@ Implementations MUST log all tool executions:
 ## 4. User Consent
 
 **Skill installation**: User explicitly installs skills
+
 - Skills declare dependencies in `compatibility` field
 - Skills may include `lifecycle.yaml` with install commands
 - User approves all lifecycle commands individually
 
 **Tool execution**: No per-execution approval required
+
 - Agent executes tools as needed
 - User trusts installed skills
 - Logging provides audit trail

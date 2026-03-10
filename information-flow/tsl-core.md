@@ -132,6 +132,7 @@ taint_kinds:
 ```
 
 **Rules**:
+
 - Taint kinds are flat (no hierarchies)
 - Each kind has a unique name and description
 - Names use snake_case
@@ -164,6 +165,7 @@ sources:
 ```
 
 **Fields**:
+
 - `taints` - Array of taint kinds assigned to data from this source
 - `pattern` - Glob pattern for source identifiers (optional)
 - `description` - Human-readable description
@@ -201,6 +203,7 @@ sinks:
 ```
 
 **Fields**:
+
 - `description` - Human-readable description
 - `blocked_taints` - Array of taint kinds blocked at this sink
 - `reason` - Rationale for the policy
@@ -293,15 +296,18 @@ Implementations MUST:
 ## Validation Rules
 
 **Taint Kinds**:
+
 - Names must be unique
 - Names must use snake_case
 - Description is required
 
 **Sources**:
+
 - Must reference defined taint kinds
 - Pattern is optional but must be valid glob if present
 
 **Sinks**:
+
 - Must reference defined taint kinds in blocked_taints
 - Empty blocked_taints array is valid (permits all taints)
 
@@ -316,6 +322,7 @@ Implementations MUST:
 ## Limitations
 
 TSL Core v1.0 does NOT support:
+
 - Hierarchical taint relationships
 - Automatic taint propagation
 - Pattern-based untainting

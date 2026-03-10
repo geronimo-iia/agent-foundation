@@ -58,6 +58,7 @@ Records taint assignment at data source:
 ```
 
 **Fields**:
+
 - `type` - Always "Ingest"
 - `timestamp` - ISO 8601 timestamp
 - `agent` - Agent that performed the ingestion
@@ -86,6 +87,7 @@ Records policy enforcement at output boundary:
 ```
 
 **Fields**:
+
 - `type` - Always "SinkCheck"
 - `timestamp` - ISO 8601 timestamp
 - `agent` - Agent that attempted the sink operation
@@ -111,6 +113,7 @@ Records taint combination operation:
 ```
 
 **Fields**:
+
 - `type` - Always "Merge"
 - `timestamp` - ISO 8601 timestamp
 - `agent` - Agent that performed the merge
@@ -133,6 +136,7 @@ Records runtime policy modification:
 ```
 
 **Fields**:
+
 - `type` - Always "PolicyChange"
 - `timestamp` - ISO 8601 timestamp
 - `sink` - Sink whose policy was modified
@@ -205,6 +209,7 @@ graph LR
 ### Compliance Auditing
 
 Audit logs provide evidence of:
+
 - What data was processed
 - Where data came from (source attribution)
 - What policies were enforced
@@ -213,6 +218,7 @@ Audit logs provide evidence of:
 ### Anomaly Detection
 
 Analyze logs to detect:
+
 - Unexpected agent communication patterns
 - New external data sources
 - Policy violation spikes
@@ -221,6 +227,7 @@ Analyze logs to detect:
 ### System Topology
 
 Reconstruct:
+
 - Agent communication graph
 - Data flow patterns
 - Source influence reach
@@ -236,11 +243,13 @@ Reconstruct:
 ## Privacy Considerations
 
 Audit logs may contain:
+
 - User identifiers in source fields
 - Sensitive context strings
 - Data provenance information
 
 Implementations SHOULD:
+
 - Encrypt audit logs at rest
 - Control access to audit logs
 - Redact sensitive information if required

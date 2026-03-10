@@ -67,6 +67,7 @@ last_updated: "2025-01-16"
 **Definition**: Data sources the model can read
 
 **Types**:
+
 - Files
 - Database records
 - API responses
@@ -120,10 +121,10 @@ last_updated: "2025-01-16"
 
 MCP provides security capabilities through its architecture:
 
-**Sandboxing**: Servers run in isolated processes
-**Permissions**: Host can control which servers run
-**User consent**: Host can require approval for tool invocations
-**Audit logging**: Protocol supports logging all tool calls
+- **Sandboxing**: Servers run in isolated processes
+- **Permissions**: Host can control which servers run
+- **User consent**: Host can require approval for tool invocations
+- **Audit logging**: Protocol supports logging all tool calls
 
 **Note**: These are MCP capabilities. The [execution policy](execution-policy.md) for this specification uses unrestricted execution with logging only
 
@@ -141,6 +142,7 @@ MCP provides security capabilities through its architecture:
 ### Hub Distribution
 
 MCP servers can be distributed via skill hubs:
+
 - Skill includes MCP server configuration
 - Installation sets up MCP server
 - Skill instructions reference MCP tools
@@ -149,20 +151,20 @@ MCP servers can be distributed via skill hubs:
 
 ## 7. Design Principles
 
-**Separation of concerns**: Tools separate from AI logic
-**Reusability**: One server, many applications
-**Security**: Process isolation and permission controls
-**Extensibility**: Easy to add new tools and resources
-**Interoperability**: Standard protocol across vendors
+- **Separation of concerns**: Tools separate from AI logic
+- **Reusability**: One server, many applications
+- **Security**: Process isolation and permission controls
+- **Extensibility**: Easy to add new tools and resources
+- **Interoperability**: Standard protocol across vendors
 
 ---
 
 ## 8. Use Cases
 
-**Development Tools**: Git, file operations, code execution
-**Data Access**: Database queries, API integrations
-**System Integration**: Cloud services (AWS, GitHub, Slack)
-**Custom Workflows**: Domain-specific tools and resources
+- **Development Tools**: Git, file operations, code execution
+- **Data Access**: Database queries, API integrations
+- **System Integration**: Cloud services (AWS, GitHub, Slack)
+- **Custom Workflows**: Domain-specific tools and resources
 
 ---
 

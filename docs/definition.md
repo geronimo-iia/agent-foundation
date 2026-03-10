@@ -57,6 +57,7 @@ The Payment API provides endpoints for...
 ```
 
 Required frontmatter fields:
+
 - `title`: Display name for the document
 - `summary`: One-line description of what the document covers
 - `read_when`: Specific conditions when this document is relevant
