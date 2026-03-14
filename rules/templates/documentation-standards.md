@@ -1,10 +1,17 @@
 # Documentation Standards
 
+## Activation Triggers
+
+When working with:
+- Documentation files (`*.md`) in `agent-foundation/docs/`, `agent-research/`, `agent-knowledge/`, `articles/`, `guides/`, `lessons/`
+- Roadmap or specification documents
+- NOT skill definitions, NOT code READMEs, NOT project configs
+
 ## Frontmatter Requirements
 
-All .md files must include complete YAML frontmatter following the specification in `agent-foundation/docs/authoring-guide.md`.
+All documentation .md files must include complete YAML frontmatter following the specification in `agent-foundation/docs/authoring-guide.md`.
 
-## References
+## Auto-Include Content
 
-For complete authoring standards, see `agent-foundation/docs/authoring-guide.md`
-For semantic commit standards, see `agent-software/version-control-release/git-commit-semantic.md`
+Include the following standards as context:
+- `agent-foundation/docs/authoring-guide.md`
