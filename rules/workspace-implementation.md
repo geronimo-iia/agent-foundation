@@ -66,6 +66,7 @@ Separate template files for easy copying:
 - [documentation-standards.md](templates/documentation-standards.md) - Frontmatter requirements
 - [project-organization.md](templates/project-organization.md) - Workspace structure
 - [workspace-maintenance.md](templates/workspace-maintenance.md) - Rule maintenance
+- [minimal-code.md](templates/minimal-code.md) - Minimal code implementation standards
 
 ## Integration
 
